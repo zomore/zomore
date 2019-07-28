@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="zomore_pay_web" />
+        <module name="zomore_domain" />
+        <module name="zomore_admin_web" />
+        <module name="zomore_shop" />
+        <module name="zomore_headShop-web" />
+        <module name="zomore_web" />
+        <module name="WaChat" />
+        <module name="zomore_dao" />
+        <module name="zomore_utils" />
+        <module name="zomore_service" />
+        <module name="zomore_WaChatSale" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="WaChat" target="1.8" />
+      <module name="zomore" target="1.5" />
+      <module name="zomore_admin_web" target="1.8" />
+      <module name="zomore_dao" target="1.8" />
+      <module name="zomore_domain" target="1.8" />
+      <module name="zomore_headShop-web" target="1.8" />
+      <module name="zomore_pay_web" target="1.8" />
+      <module name="zomore_service" target="1.8" />
+      <module name="zomore_shop" target="1.8" />
+      <module name="zomore_utils" target="1.8" />
+      <module name="zomore_WaChatSale" target="1.8" />
+      <module name="zomore_web" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

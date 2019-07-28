@@ -1,0 +1,19 @@
+<component name="libraryTable">
+  <library name="commons-codec-1.10">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/zomore_pay/src/main/webapp/lib/commons-codec-1.10.jar!/" />
+      <root url="jar://$PROJECT_DIR$/zomore_pay/src/main/webapp/lib/commons-httpclient.jar!/" />
+      <root url="jar://$PROJECT_DIR$/zomore_pay/src/main/webapp/lib/commons-logging-1.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/zomore_pay/src/main/webapp/lib/fastjson-1.1.31.jar!/" />
+      <root url="jar://$PROJECT_DIR$/zomore_pay/src/main/webapp/lib/httpclient-4.5.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/zomore_pay/src/main/webapp/lib/httpcore-4.4.6.jar!/" />
+      <root url="jar://$PROJECT_DIR$/zomore_pay/src/main/webapp/lib/httpmime-4.5.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/zomore_pay/src/main/webapp/lib/liantuo-ebill-front-client.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/zomore_pay/src/main/webapp/lib/liantuo-ebill-front-client.jar!/" />
+      <root url="jar://$PROJECT_DIR$/zomore_pay/src/main/webapp/lib/liantuo-ebill-front-client.jar!/com/liantuo/front/client/sign/util" />
+    </SOURCES>
+  </library>
+</component>

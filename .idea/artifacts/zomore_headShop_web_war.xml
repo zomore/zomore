@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="zomore_headShop-web:war">
+    <output-path>$PROJECT_DIR$/zomore_headShopweb/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>zomore_headShop-web</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="zomore_headShop-web-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="zomore_headShop-web:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/zomore_admin_web" />
+    <file type="web" url="file://$PROJECT_DIR$/zomore_headShopweb" />
+    <file type="web" url="file://$PROJECT_DIR$/zomore_pay" />
+    <file type="web" url="file://$PROJECT_DIR$/zomore_pay_web" />
+    <file type="web" url="file://$PROJECT_DIR$/zomore_shop" />
+    <file type="web" url="file://$PROJECT_DIR$/zomore_shop_web" />
+    <file type="web" url="file://$PROJECT_DIR$/zomore_web" />
+  </component>
+  <component name="Kotlin2JsCompilerArguments">
+    <option name="sourceMapEmbedSources" />
+    <option name="sourceMapPrefix" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/zomore_pay_web/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/comquartz/pom.xml" />
+        <option value="$PROJECT_DIR$/zomore_httpPost/pom.xml" />
+        <option value="$PROJECT_DIR$/zomore_pay/pom.xml" />
+        <option value="$PROJECT_DIR$/zomore_quarzt/pom.xml" />
+        <option value="$PROJECT_DIR$/zomore_shop/pom.xml" />
+        <option value="$PROJECT_DIR$/zomore_shop_web/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_9" default="false" project-jdk-name="9.0" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="mySupportsUserInfoFilter" value="true" />
+  </component>
+</project>

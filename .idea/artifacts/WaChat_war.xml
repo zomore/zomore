@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="WaChat:war">
+    <output-path>$PROJECT_DIR$/zomore_WaChat/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>WaChat</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="WaChat.war">
+      <element id="artifact" artifact-name="WaChat:war exploded" />
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="zomore_task:war">
+    <output-path>$PROJECT_DIR$/zomore_task/target</output-path>
+    <root id="archive" name="zomore_task-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="zomore_task:war exploded" />
+    </root>
+  </artifact>
+</component>

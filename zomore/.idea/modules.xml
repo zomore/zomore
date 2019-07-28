@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/zomore.iml" filepath="$PROJECT_DIR$/zomore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zomore_admin_web/zomore_admin_web.iml" filepath="$PROJECT_DIR$/zomore_admin_web/zomore_admin_web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zomore_dao/zomore_dao.iml" filepath="$PROJECT_DIR$/zomore_dao/zomore_dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zomore_domain/zomore_domain.iml" filepath="$PROJECT_DIR$/zomore_domain/zomore_domain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zomore_headShopweb/zomore_headShopweb.iml" filepath="$PROJECT_DIR$/zomore_headShopweb/zomore_headShopweb.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zomore_pay_web/zomore_pay_web.iml" filepath="$PROJECT_DIR$/zomore_pay_web/zomore_pay_web.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zomore_service/zomore_service.iml" filepath="$PROJECT_DIR$/zomore_service/zomore_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zomore_utils/zomore_utils.iml" filepath="$PROJECT_DIR$/zomore_utils/zomore_utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zomore_web/zomore_web.iml" filepath="$PROJECT_DIR$/zomore_web/zomore_web.iml" />
+    </modules>
+  </component>
+</project>
