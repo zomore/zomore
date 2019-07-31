@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.FenPingMapper">
+  <!-- List InsertToTable(String name,String num,String money,String code,String shopName,String cashiNumber);-->
+  <!--@Param("name") String name,@Param("num") String num,@Param("money") String money,@Param("code") String code,@Param("shopName") String shopName,@Param("cashiNumber")-->
+<insert id="InsertToTable" parameterType="string">
+  INSERT into zomore_fuping_target  (zomore_commodity_code,name,num,money,shopname,cashierNumber)
+  VALUES (#{code},#{name},#{num},#{money},#{shopName},#{cashierNumber})
+
+
+</insert>
+  <!-- void fenpingUpdate(@Param("name") String name,@Param("num") String num,@Param("money") String money,@Param("code") String code,
+                       @Param("shopName") String shopName,@Param("cashierNumber") String cashierNumber);-->
+  <update id="fenpingUpdate" parameterType="string">
+    update zomore_fuping_target  set name=#{name},num=#{num},money#{money}
+ where zomore_commodity_code=#{code}and shopname=#{shopName}and cashierNumber=#{cashierNumber}
+
+  </update>
+
+  <!--void fenpingOnlyForMoney(@Param("money") String money,@Param("code") String code);-->
+  <update id="fenpingOnlyForMoney" parameterType="string">
+    update zomore_fuping_target
+set money = money*(${zhekou}/100) where  shopname=#{shopName}and cashierNumber=#{cashierNumber}
+
+  </update>
+  <!--void fenpingMoneyAndNum(@Param("money")String money,@Param("num")String num,@Param("code")String code);-->
+  <update id="fenpingMoneyAndNum" parameterType="string">
+    update zomore_fuping_target
+    set num = #{num},money= #{money} where zomore_commodity_code = #{code} and shopname=#{shopName} and cashierNumber=#{cashierNumber}
+
+  </update>
+
+  <delete id="fenpingDelAll">
+  DELETE FROM zomore_fuping_target where shopname=#{shopName}
+  And cashierNumber=#{cashierNumber}
+
+  </delete>
+  <!--void fenpingDelOne(@Param("shopName") String shopName,@Param("cashierNumber") String cashierNumber,@Param("code") String code);-->
+  <delete id="fenpingDelOne" parameterType="string">
+    DELETE FROM  zomore_fuping_target where shopname=#{shopName}
+  And cashierNumber=#{cashierNumber}
+  and zomore_commodity_code = #{code}
+
+  </delete>
+  <!-- List<String> fenpingGetMsg(@Param("shopName") String shopName,@Param("cashierNumber") String cashierNumber);-->
+  <select id="fenpingGetMsg" parameterType="string" resultType="map">
+      select zomore_commodity_code as code, name as name, num as num,money as money from zomore_fuping_target
+where shopname=#{shopName} and cashierNumber=#{cashierNumber}
+
+
+  </select>
+
+</mapper>

@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.WaChatMapper">
+    <select id="selectOrderByCommoditySale"  resultType="java.lang.Integer">
+    select COUNT(zomore_commodity_sale_id) from zomore_commodity_sale
+where zomore_commodity_sale_time BETWEEN #{startime} AND #{endtime} AND zomore_commodity_state ="1"
+and zomore_commodity_shop =#{shop}
+
+  </select>
+    <!-- Integer selectOrderByServiceCommodity(String shop);-->
+    <select id="selectOrderByServiceCommodity"  resultType="java.lang.Integer">
+    select COUNT(zomore_commodity_sale_id) from zomore_service_commodityorder
+where zomore_commodity_sale_time BETWEEN #{startime} AND #{endtime} AND zomore_commodity_state ="1"
+and zomore_commodity_shop =#{shop}
+
+  </select>
+    <select id="selectUpMemberForDay" resultType="java.lang.Integer">
+    select count(member_number) from zomore_member where
+    member_dateOfOpeningCard BETWEEN #{date}AND #{date1}
+  and member_shop = #{shop}
+    </select>
+
+    <select id="countMember" resultType="java.lang.Integer">
+      SELECT count(member_number) from zomore_member where
+       member_shop = #{shop}
+
+    </select>
+    <!-- Integer SearchProfit(@Param("date")Date date,@Param("date1")Date date1,@Param("shop")String shop);-->
+    <select id="selectProfit" resultType="java.lang.Integer">
+    select SUM(zomore_commodity_sale_savemoney) as money from zomore_commodity_sale
+    where zomore_commodity_shop =#{shop} and zomore_commodity_sale_time BETWEEN
+    #{date}and #{date1} and zomore_commodity_state ="1"
+
+    </select>
+
+        <!-- List<String> selectSimple(@Param("shop")String shop);-->
+<select id="selectSimple" resultType="map">
+     select zomore_commodity_code as code,zomore_commodity_name as name ,zomore_commodity_store as store,
+     zc.zomore_commodity_type as type
+    from zomore_commodity zc,zomore_commodity_store zcs
+    where zc.zomore_commodity_id = zcs.zomore_commodity_id
+    and  zc.zomore_commodity_shop =#{shop}
+
+    </select>
+
+        <!-- List<Map<String, Objects>> selectSimpleAndNum(@Param("shop")String shop,@Param("code")String code);-->
+<select id="selectSimpleAndNum" resultType="map">
+     select zomore_commodity_code as code,zomore_commodity_name as name ,zomore_commodity_store as store,
+     zc.zomore_commodity_type as type
+    from zomore_commodity zc,zomore_commodity_store zcs
+    where zc.zomore_commodity_id = zcs.zomore_commodity_id
+    and  zc.zomore_commodity_shop =#{shop}
+    and  zc.zomore_commodity_code like '%${code}%'
+
+    </select>
+
+<select id="selectSimpleAndWord" resultType="map">
+     select zomore_commodity_code as code,zomore_commodity_name as name ,zomore_commodity_store as store,
+     zc.zomore_commodity_type as type
+    from zomore_commodity zc,zomore_commodity_store zcs
+    where zc.zomore_commodity_id = zcs.zomore_commodity_id
+    and  zc.zomore_commodity_shop =#{shop}
+    and zc.zomore_commodity_name like '%${code}%'
+
+    </select>
+
+<select id="selectAllStock" parameterType="string" resultType="map">
+    SELECT zcs.zomore_commodity_storeid as zomoreCommodityStoreid ,zcs.zomore_commodity_store as zomoreCommodityStore,
+    zcs.zomore_commodity_downlimit as zomoreCommodityDownlimit,zc.zomore_commodity_name as zomoreCommodityName
+    from zomore_commodity_store zcs,zomore_commodity zc
+    where zcs.zomore_commodity_id = zc.zomore_commodity_id
+    And zcs.zomore_commodity_store &lt;= zcs.zomore_commodity_downlimit
+
+    AND zc.zomore_commodity_shop =#{shop}
+  </select>
+
+
+
+        <!-- List<Map<String, Objects>> selectStockAndNum(@Param("shop")String shop,@Param("code")String code);-->
+<select id="selectStockAndWord" parameterType="string" resultType="map">
+    SELECT zcs.zomore_commodity_storeid as zomoreCommodityStoreid ,zcs.zomore_commodity_store as zomoreCommodityStore,
+    zcs.zomore_commodity_downlimit as zomoreCommodityDownlimit,zc.zomore_commodity_name as zomoreCommodityName
+    from zomore_commodity_store zcs,zomore_commodity zc
+    where zcs.zomore_commodity_id = zc.zomore_commodity_id
+    And zcs.zomore_commodity_store &lt;= zcs.zomore_commodity_downlimit
+    And zc.zomore_commodity_name like '%${code}%'
+    AND zc.zomore_commodity_shop =#{shop}
+  </select>
+        <!--List<Map<String, Objects>>selectBytype(@Param("shop")String shop,@Param("selectBytype")String selectBytype);-->
+<select id="selectBytype" resultType="map">
+    select zomore_commodity_code as code,zomore_commodity_name as name,zomore_commodity_store as store,zc.zomore_commodity_type as type
+    from zomore_commodity zc,zomore_commodity_store zcs
+    where zc.zomore_commodity_id = zcs.zomore_commodity_id
+    and  zc.zomore_commodity_shop =#{shop}
+    and  zc.zomore_commodity_type = #{selectBytype}
+
+    </select>
+
+</mapper>

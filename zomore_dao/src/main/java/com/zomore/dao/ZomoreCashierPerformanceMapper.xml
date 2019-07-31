@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreCashierPerformanceMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreCashierPerformance">
+    <id column="zomore_cashier_performance_id" jdbcType="VARCHAR" property="zomoreCashierPerformanceId" />
+    <result column="zomore_cashier_performance_date" jdbcType="TIMESTAMP" property="zomoreCashierPerformanceDate" />
+    <result column="zomore_cashier_performance_cashierid" jdbcType="VARCHAR" property="zomoreCashierPerformanceCashierid" />
+    <result column="zomore_cashier_performance_cashiername" jdbcType="VARCHAR" property="zomoreCashierPerformanceCashiername" />
+    <result column="zomore_cashier_performance_commodityid" jdbcType="VARCHAR" property="zomoreCashierPerformanceCommodityid" />
+    <result column="zomore_cashier_performance_commodityname" jdbcType="VARCHAR" property="zomoreCashierPerformanceCommodityname" />
+    <result column="zomore_cashier_performance_money" jdbcType="VARCHAR" property="zomoreCashierPerformanceMoney" />
+    <result column="zomore_cashier_performance_num" jdbcType="INTEGER" property="zomoreCashierPerformanceNum" />
+    <result column="zomore_cashier_performance_moneyall" jdbcType="VARCHAR" property="zomoreCashierPerformanceMoneyall" />
+    <result column="zomore_cashier_performance_moneyactual" jdbcType="VARCHAR" property="zomoreCashierPerformanceMoneyactual" />
+    <result column="zomore_cashier_performance_moneysave" jdbcType="VARCHAR" property="zomoreCashierPerformanceMoneysave" />
+    <result column="zomore_cashier_performance_type" jdbcType="VARCHAR" property="zomoreCashierPerformanceType" />
+    <result column="shop" jdbcType="VARCHAR" property="shop" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    zomore_cashier_performance_id, zomore_cashier_performance_date, zomore_cashier_performance_cashierid, 
+    zomore_cashier_performance_cashiername, zomore_cashier_performance_commodityid, zomore_cashier_performance_commodityname, 
+    zomore_cashier_performance_money, zomore_cashier_performance_num, zomore_cashier_performance_moneyall, 
+    zomore_cashier_performance_moneyactual, zomore_cashier_performance_moneysave, zomore_cashier_performance_type, 
+    shop
+  </sql>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreCashierPerformanceExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_cashier_performance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zomore_cashier_performance
+    where zomore_cashier_performance_id = #{zomoreCashierPerformanceId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zomore_cashier_performance
+    where zomore_cashier_performance_id = #{zomoreCashierPerformanceId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreCashierPerformanceExample">
+    delete from zomore_cashier_performance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreCashierPerformance">
+    insert into zomore_cashier_performance (zomore_cashier_performance_id, zomore_cashier_performance_date, 
+      zomore_cashier_performance_cashierid, zomore_cashier_performance_cashiername, 
+      zomore_cashier_performance_commodityid, zomore_cashier_performance_commodityname, 
+      zomore_cashier_performance_money, zomore_cashier_performance_num, 
+      zomore_cashier_performance_moneyall, zomore_cashier_performance_moneyactual, 
+      zomore_cashier_performance_moneysave, zomore_cashier_performance_type, 
+      shop)
+    values (#{zomoreCashierPerformanceId,jdbcType=VARCHAR}, #{zomoreCashierPerformanceDate,jdbcType=TIMESTAMP}, 
+      #{zomoreCashierPerformanceCashierid,jdbcType=VARCHAR}, #{zomoreCashierPerformanceCashiername,jdbcType=VARCHAR}, 
+      #{zomoreCashierPerformanceCommodityid,jdbcType=VARCHAR}, #{zomoreCashierPerformanceCommodityname,jdbcType=VARCHAR}, 
+      #{zomoreCashierPerformanceMoney,jdbcType=VARCHAR}, #{zomoreCashierPerformanceNum,jdbcType=INTEGER}, 
+      #{zomoreCashierPerformanceMoneyall,jdbcType=VARCHAR}, #{zomoreCashierPerformanceMoneyactual,jdbcType=VARCHAR}, 
+      #{zomoreCashierPerformanceMoneysave,jdbcType=VARCHAR}, #{zomoreCashierPerformanceType,jdbcType=VARCHAR}, 
+      #{shop,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreCashierPerformance">
+    insert into zomore_cashier_performance
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="zomoreCashierPerformanceId != null">
+        zomore_cashier_performance_id,
+      </if>
+      <if test="zomoreCashierPerformanceDate != null">
+        zomore_cashier_performance_date,
+      </if>
+      <if test="zomoreCashierPerformanceCashierid != null">
+        zomore_cashier_performance_cashierid,
+      </if>
+      <if test="zomoreCashierPerformanceCashiername != null">
+        zomore_cashier_performance_cashiername,
+      </if>
+      <if test="zomoreCashierPerformanceCommodityid != null">
+        zomore_cashier_performance_commodityid,
+      </if>
+      <if test="zomoreCashierPerformanceCommodityname != null">
+        zomore_cashier_performance_commodityname,
+      </if>
+      <if test="zomoreCashierPerformanceMoney != null">
+        zomore_cashier_performance_money,
+      </if>
+      <if test="zomoreCashierPerformanceNum != null">
+        zomore_cashier_performance_num,
+      </if>
+      <if test="zomoreCashierPerformanceMoneyall != null">
+        zomore_cashier_performance_moneyall,
+      </if>
+      <if test="zomoreCashierPerformanceMoneyactual != null">
+        zomore_cashier_performance_moneyactual,
+      </if>
+      <if test="zomoreCashierPerformanceMoneysave != null">
+        zomore_cashier_performance_moneysave,
+      </if>
+      <if test="zomoreCashierPerformanceType != null">
+        zomore_cashier_performance_type,
+      </if>
+      <if test="shop != null">
+        shop,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="zomoreCashierPerformanceId != null">
+        #{zomoreCashierPerformanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCashierPerformanceDate != null">
+        #{zomoreCashierPerformanceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zomoreCashierPerformanceCashierid != null">
+        #{zomoreCashierPerformanceCashierid,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCashierPerformanceCashiername != null">
+        #{zomoreCashierPerformanceCashiername,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCashierPerformanceCommodityid != null">
+        #{zomoreCashierPerformanceCommodityid,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCashierPerformanceCommodityname != null">
+        #{zomoreCashierPerformanceCommodityname,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCashierPerformanceMoney != null">
+        #{zomoreCashierPerformanceMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCashierPerformanceNum != null">
+        #{zomoreCashierPerformanceNum,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCashierPerformanceMoneyall != null">
+        #{zomoreCashierPerformanceMoneyall,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCashierPerformanceMoneyactual != null">
+        #{zomoreCashierPerformanceMoneyactual,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCashierPerformanceMoneysave != null">
+        #{zomoreCashierPerformanceMoneysave,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCashierPerformanceType != null">
+        #{zomoreCashierPerformanceType,jdbcType=VARCHAR},
+      </if>
+      <if test="shop != null">
+        #{shop,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreCashierPerformanceExample" resultType="java.lang.Long">
+    select count(*) from zomore_cashier_performance
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_cashier_performance
+    <set>
+      <if test="record.zomoreCashierPerformanceId != null">
+        zomore_cashier_performance_id = #{record.zomoreCashierPerformanceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCashierPerformanceDate != null">
+        zomore_cashier_performance_date = #{record.zomoreCashierPerformanceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zomoreCashierPerformanceCashierid != null">
+        zomore_cashier_performance_cashierid = #{record.zomoreCashierPerformanceCashierid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCashierPerformanceCashiername != null">
+        zomore_cashier_performance_cashiername = #{record.zomoreCashierPerformanceCashiername,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCashierPerformanceCommodityid != null">
+        zomore_cashier_performance_commodityid = #{record.zomoreCashierPerformanceCommodityid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCashierPerformanceCommodityname != null">
+        zomore_cashier_performance_commodityname = #{record.zomoreCashierPerformanceCommodityname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCashierPerformanceMoney != null">
+        zomore_cashier_performance_money = #{record.zomoreCashierPerformanceMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCashierPerformanceNum != null">
+        zomore_cashier_performance_num = #{record.zomoreCashierPerformanceNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCashierPerformanceMoneyall != null">
+        zomore_cashier_performance_moneyall = #{record.zomoreCashierPerformanceMoneyall,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCashierPerformanceMoneyactual != null">
+        zomore_cashier_performance_moneyactual = #{record.zomoreCashierPerformanceMoneyactual,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCashierPerformanceMoneysave != null">
+        zomore_cashier_performance_moneysave = #{record.zomoreCashierPerformanceMoneysave,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCashierPerformanceType != null">
+        zomore_cashier_performance_type = #{record.zomoreCashierPerformanceType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shop != null">
+        shop = #{record.shop,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_cashier_performance
+    set zomore_cashier_performance_id = #{record.zomoreCashierPerformanceId,jdbcType=VARCHAR},
+      zomore_cashier_performance_date = #{record.zomoreCashierPerformanceDate,jdbcType=TIMESTAMP},
+      zomore_cashier_performance_cashierid = #{record.zomoreCashierPerformanceCashierid,jdbcType=VARCHAR},
+      zomore_cashier_performance_cashiername = #{record.zomoreCashierPerformanceCashiername,jdbcType=VARCHAR},
+      zomore_cashier_performance_commodityid = #{record.zomoreCashierPerformanceCommodityid,jdbcType=VARCHAR},
+      zomore_cashier_performance_commodityname = #{record.zomoreCashierPerformanceCommodityname,jdbcType=VARCHAR},
+      zomore_cashier_performance_money = #{record.zomoreCashierPerformanceMoney,jdbcType=VARCHAR},
+      zomore_cashier_performance_num = #{record.zomoreCashierPerformanceNum,jdbcType=INTEGER},
+      zomore_cashier_performance_moneyall = #{record.zomoreCashierPerformanceMoneyall,jdbcType=VARCHAR},
+      zomore_cashier_performance_moneyactual = #{record.zomoreCashierPerformanceMoneyactual,jdbcType=VARCHAR},
+      zomore_cashier_performance_moneysave = #{record.zomoreCashierPerformanceMoneysave,jdbcType=VARCHAR},
+      zomore_cashier_performance_type = #{record.zomoreCashierPerformanceType,jdbcType=VARCHAR},
+      shop = #{record.shop,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreCashierPerformance">
+    update zomore_cashier_performance
+    <set>
+      <if test="zomoreCashierPerformanceDate != null">
+        zomore_cashier_performance_date = #{zomoreCashierPerformanceDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zomoreCashierPerformanceCashierid != null">
+        zomore_cashier_performance_cashierid = #{zomoreCashierPerformanceCashierid,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCashierPerformanceCashiername != null">
+        zomore_cashier_performance_cashiername = #{zomoreCashierPerformanceCashiername,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCashierPerformanceCommodityid != null">
+        zomore_cashier_performance_commodityid = #{zomoreCashierPerformanceCommodityid,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCashierPerformanceCommodityname != null">
+        zomore_cashier_performance_commodityname = #{zomoreCashierPerformanceCommodityname,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCashierPerformanceMoney != null">
+        zomore_cashier_performance_money = #{zomoreCashierPerformanceMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCashierPerformanceNum != null">
+        zomore_cashier_performance_num = #{zomoreCashierPerformanceNum,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCashierPerformanceMoneyall != null">
+        zomore_cashier_performance_moneyall = #{zomoreCashierPerformanceMoneyall,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCashierPerformanceMoneyactual != null">
+        zomore_cashier_performance_moneyactual = #{zomoreCashierPerformanceMoneyactual,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCashierPerformanceMoneysave != null">
+        zomore_cashier_performance_moneysave = #{zomoreCashierPerformanceMoneysave,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCashierPerformanceType != null">
+        zomore_cashier_performance_type = #{zomoreCashierPerformanceType,jdbcType=VARCHAR},
+      </if>
+      <if test="shop != null">
+        shop = #{shop,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where zomore_cashier_performance_id = #{zomoreCashierPerformanceId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreCashierPerformance">
+    update zomore_cashier_performance
+    set zomore_cashier_performance_date = #{zomoreCashierPerformanceDate,jdbcType=TIMESTAMP},
+      zomore_cashier_performance_cashierid = #{zomoreCashierPerformanceCashierid,jdbcType=VARCHAR},
+      zomore_cashier_performance_cashiername = #{zomoreCashierPerformanceCashiername,jdbcType=VARCHAR},
+      zomore_cashier_performance_commodityid = #{zomoreCashierPerformanceCommodityid,jdbcType=VARCHAR},
+      zomore_cashier_performance_commodityname = #{zomoreCashierPerformanceCommodityname,jdbcType=VARCHAR},
+      zomore_cashier_performance_money = #{zomoreCashierPerformanceMoney,jdbcType=VARCHAR},
+      zomore_cashier_performance_num = #{zomoreCashierPerformanceNum,jdbcType=INTEGER},
+      zomore_cashier_performance_moneyall = #{zomoreCashierPerformanceMoneyall,jdbcType=VARCHAR},
+      zomore_cashier_performance_moneyactual = #{zomoreCashierPerformanceMoneyactual,jdbcType=VARCHAR},
+      zomore_cashier_performance_moneysave = #{zomoreCashierPerformanceMoneysave,jdbcType=VARCHAR},
+      zomore_cashier_performance_type = #{zomoreCashierPerformanceType,jdbcType=VARCHAR},
+      shop = #{shop,jdbcType=VARCHAR}
+    where zomore_cashier_performance_id = #{zomoreCashierPerformanceId,jdbcType=VARCHAR}
+  </update>
+</mapper>

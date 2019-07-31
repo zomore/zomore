@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ClassificationDao">
+
+    <select id="selectClassify" parameterType="com.zomore.domain.ZomoreCommodityCategory" resultType="com.zomore.domain.ZomoreCommodityCategory">
+      select zomore_commodity_category_id as zomoreCommodityCategoryId,zomore_commodity_category_parentid as zomoreCommodityCategoryParentid,zomore_commodity_category_name as zomoreCommodityCategoryName,zomore_commodity_category_priority as zomoreCommodityCategoryPriority,
+      zomore_commodity_isparent as zomoreCommodityIsparent,zomore_commodity_createtime as zomoreCommodityCreatetime, zomore_commodity_updatetime as zomoreCommodityUpdatetime,shop as shop
+      from zomore_commodity_category where shop=#{shop} and zomore_commodity_isparent=#{zomoreCommodityIsparent}
+
+    </select>
+
+    <select id="findClassifyCommodityData" parameterType="com.zomore.utils.PageUtils"  resultType="com.zomore.domain.ZomoreCommodity">
+         select zomore_commodity_id as zomoreCommodityId,zomore_commodity_name as zomoreCommodityName,zomore_commodity_image as zomoreCommodityImage,zomore_commodity_code as zomoreCommodityCode ,zomore_commodity_num as zomoreCommodityNum,
+    zomore_commodity_specifications as zomoreCommoditySpecifications,zomore_commodity_pingyin as zomoreCommodityPingyin, zomore_commodity_type as zomoreCommodityType,zomore_commodity_main as zomoreCommodityMain ,
+    zomore_commodity_in as zomoreCommodityIn,zomore_commodity_out as zomoreCommodityOut,zomore_commodity_outall as zomoreCommodityOutall ,zomore_commodity_isdiscount as zomoreCommodityIsdiscount,
+    zomore_commodity_provide as  zomoreCommodityProvide from  zomore_commodity where zomore_commodity_shop=#{shopName} and zomore_commodity_type=#{classifyName} limit #{start},#{pageSize}
+    </select>
+
+  <!--  <select id="selectTotalCount" parameterType="com.zomore.domain.ZomoreCommodity" resultType="java.lang.Integer">
+          SELECT COUNT(zomore_commodity_id) from zomore_commodity  where zomore_commodity_shop=#{zomoreCommodityShop} and zomore_commodity_type=#{zomoreCommodityType}
+    </select>-->
+</mapper>

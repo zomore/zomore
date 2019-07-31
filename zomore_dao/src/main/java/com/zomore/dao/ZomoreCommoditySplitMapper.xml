@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreCommoditySplitMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreCommoditySplit">
+    <id column="zomore_commodity_split_id" jdbcType="INTEGER" property="zomoreCommoditySplitId" />
+    <result column="zomore_commodity_split_big" jdbcType="VARCHAR" property="zomoreCommoditySplitBig" />
+    <result column="zomore_commodity_split_min" jdbcType="VARCHAR" property="zomoreCommoditySplitMin" />
+    <result column="zomore_commodity_split_rule" jdbcType="VARCHAR" property="zomoreCommoditySplitRule" />
+    <result column="zomore_commodity_split_time" jdbcType="TIMESTAMP" property="zomoreCommoditySplitTime" />
+    <result column="shop" jdbcType="VARCHAR" property="shop" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    zomore_commodity_split_id, zomore_commodity_split_big, zomore_commodity_split_min, 
+    zomore_commodity_split_rule, zomore_commodity_split_time, shop
+  </sql>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreCommoditySplitExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_commodity_split
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zomore_commodity_split
+    where zomore_commodity_split_id = #{zomoreCommoditySplitId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from zomore_commodity_split
+    where zomore_commodity_split_id = #{zomoreCommoditySplitId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreCommoditySplitExample">
+    delete from zomore_commodity_split
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreCommoditySplit">
+    insert into zomore_commodity_split (zomore_commodity_split_id, zomore_commodity_split_big, 
+      zomore_commodity_split_min, zomore_commodity_split_rule, 
+      zomore_commodity_split_time, shop)
+    values (#{zomoreCommoditySplitId,jdbcType=INTEGER}, #{zomoreCommoditySplitBig,jdbcType=VARCHAR}, 
+      #{zomoreCommoditySplitMin,jdbcType=VARCHAR}, #{zomoreCommoditySplitRule,jdbcType=VARCHAR}, 
+      #{zomoreCommoditySplitTime,jdbcType=TIMESTAMP}, #{shop,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreCommoditySplit">
+    insert into zomore_commodity_split
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="zomoreCommoditySplitId != null">
+        zomore_commodity_split_id,
+      </if>
+      <if test="zomoreCommoditySplitBig != null">
+        zomore_commodity_split_big,
+      </if>
+      <if test="zomoreCommoditySplitMin != null">
+        zomore_commodity_split_min,
+      </if>
+      <if test="zomoreCommoditySplitRule != null">
+        zomore_commodity_split_rule,
+      </if>
+      <if test="zomoreCommoditySplitTime != null">
+        zomore_commodity_split_time,
+      </if>
+      <if test="shop != null">
+        shop,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="zomoreCommoditySplitId != null">
+        #{zomoreCommoditySplitId,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommoditySplitBig != null">
+        #{zomoreCommoditySplitBig,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySplitMin != null">
+        #{zomoreCommoditySplitMin,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySplitRule != null">
+        #{zomoreCommoditySplitRule,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySplitTime != null">
+        #{zomoreCommoditySplitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shop != null">
+        #{shop,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreCommoditySplitExample" resultType="java.lang.Long">
+    select count(*) from zomore_commodity_split
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_commodity_split
+    <set>
+      <if test="record.zomoreCommoditySplitId != null">
+        zomore_commodity_split_id = #{record.zomoreCommoditySplitId,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommoditySplitBig != null">
+        zomore_commodity_split_big = #{record.zomoreCommoditySplitBig,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommoditySplitMin != null">
+        zomore_commodity_split_min = #{record.zomoreCommoditySplitMin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommoditySplitRule != null">
+        zomore_commodity_split_rule = #{record.zomoreCommoditySplitRule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommoditySplitTime != null">
+        zomore_commodity_split_time = #{record.zomoreCommoditySplitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.shop != null">
+        shop = #{record.shop,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_commodity_split
+    set zomore_commodity_split_id = #{record.zomoreCommoditySplitId,jdbcType=INTEGER},
+      zomore_commodity_split_big = #{record.zomoreCommoditySplitBig,jdbcType=VARCHAR},
+      zomore_commodity_split_min = #{record.zomoreCommoditySplitMin,jdbcType=VARCHAR},
+      zomore_commodity_split_rule = #{record.zomoreCommoditySplitRule,jdbcType=VARCHAR},
+      zomore_commodity_split_time = #{record.zomoreCommoditySplitTime,jdbcType=TIMESTAMP},
+      shop = #{record.shop,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreCommoditySplit">
+    update zomore_commodity_split
+    <set>
+      <if test="zomoreCommoditySplitBig != null">
+        zomore_commodity_split_big = #{zomoreCommoditySplitBig,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySplitMin != null">
+        zomore_commodity_split_min = #{zomoreCommoditySplitMin,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySplitRule != null">
+        zomore_commodity_split_rule = #{zomoreCommoditySplitRule,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySplitTime != null">
+        zomore_commodity_split_time = #{zomoreCommoditySplitTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shop != null">
+        shop = #{shop,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where zomore_commodity_split_id = #{zomoreCommoditySplitId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreCommoditySplit">
+    update zomore_commodity_split
+    set zomore_commodity_split_big = #{zomoreCommoditySplitBig,jdbcType=VARCHAR},
+      zomore_commodity_split_min = #{zomoreCommoditySplitMin,jdbcType=VARCHAR},
+      zomore_commodity_split_rule = #{zomoreCommoditySplitRule,jdbcType=VARCHAR},
+      zomore_commodity_split_time = #{zomoreCommoditySplitTime,jdbcType=TIMESTAMP},
+      shop = #{shop,jdbcType=VARCHAR}
+    where zomore_commodity_split_id = #{zomoreCommoditySplitId,jdbcType=INTEGER}
+  </update>
+</mapper>

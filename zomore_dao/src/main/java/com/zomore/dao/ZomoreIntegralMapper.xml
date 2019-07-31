@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreIntegralMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreIntegral">
+    <id column="integral_rule_id" jdbcType="VARCHAR" property="integralRuleId" />
+    <result column="integral_rule_type" jdbcType="INTEGER" property="integralRuleType" />
+    <result column="integral_rule_type_rule" jdbcType="VARCHAR" property="integralRuleTypeRule" />
+    <result column="integral_rule_cycle" jdbcType="VARCHAR" property="integralRuleCycle" />
+    <result column="integral_rule_exchange" jdbcType="VARCHAR" property="integralRuleExchange" />
+    <result column="integral_rule_isempty" jdbcType="INTEGER" property="integralRuleIsempty" />
+    <result column="integral_rule_shop" jdbcType="VARCHAR" property="integralRuleShop" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    integral_rule_id, integral_rule_type, integral_rule_type_rule, integral_rule_cycle, 
+    integral_rule_exchange, integral_rule_isempty, integral_rule_shop
+  </sql>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreIntegralExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_integral
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zomore_integral
+    where integral_rule_id = #{integralRuleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zomore_integral
+    where integral_rule_id = #{integralRuleId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreIntegralExample">
+    delete from zomore_integral
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreIntegral">
+    insert into zomore_integral (integral_rule_id, integral_rule_type, 
+      integral_rule_type_rule, integral_rule_cycle, 
+      integral_rule_exchange, integral_rule_isempty, 
+      integral_rule_shop)
+    values (#{integralRuleId,jdbcType=VARCHAR}, #{integralRuleType,jdbcType=INTEGER}, 
+      #{integralRuleTypeRule,jdbcType=VARCHAR}, #{integralRuleCycle,jdbcType=VARCHAR}, 
+      #{integralRuleExchange,jdbcType=VARCHAR}, #{integralRuleIsempty,jdbcType=INTEGER}, 
+      #{integralRuleShop,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreIntegral">
+    insert into zomore_integral
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="integralRuleId != null">
+        integral_rule_id,
+      </if>
+      <if test="integralRuleType != null">
+        integral_rule_type,
+      </if>
+      <if test="integralRuleTypeRule != null">
+        integral_rule_type_rule,
+      </if>
+      <if test="integralRuleCycle != null">
+        integral_rule_cycle,
+      </if>
+      <if test="integralRuleExchange != null">
+        integral_rule_exchange,
+      </if>
+      <if test="integralRuleIsempty != null">
+        integral_rule_isempty,
+      </if>
+      <if test="integralRuleShop != null">
+        integral_rule_shop,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="integralRuleId != null">
+        #{integralRuleId,jdbcType=VARCHAR},
+      </if>
+      <if test="integralRuleType != null">
+        #{integralRuleType,jdbcType=INTEGER},
+      </if>
+      <if test="integralRuleTypeRule != null">
+        #{integralRuleTypeRule,jdbcType=VARCHAR},
+      </if>
+      <if test="integralRuleCycle != null">
+        #{integralRuleCycle,jdbcType=VARCHAR},
+      </if>
+      <if test="integralRuleExchange != null">
+        #{integralRuleExchange,jdbcType=VARCHAR},
+      </if>
+      <if test="integralRuleIsempty != null">
+        #{integralRuleIsempty,jdbcType=INTEGER},
+      </if>
+      <if test="integralRuleShop != null">
+        #{integralRuleShop,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreIntegralExample" resultType="java.lang.Long">
+    select count(*) from zomore_integral
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_integral
+    <set>
+      <if test="record.integralRuleId != null">
+        integral_rule_id = #{record.integralRuleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.integralRuleType != null">
+        integral_rule_type = #{record.integralRuleType,jdbcType=INTEGER},
+      </if>
+      <if test="record.integralRuleTypeRule != null">
+        integral_rule_type_rule = #{record.integralRuleTypeRule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.integralRuleCycle != null">
+        integral_rule_cycle = #{record.integralRuleCycle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.integralRuleExchange != null">
+        integral_rule_exchange = #{record.integralRuleExchange,jdbcType=VARCHAR},
+      </if>
+      <if test="record.integralRuleIsempty != null">
+        integral_rule_isempty = #{record.integralRuleIsempty,jdbcType=INTEGER},
+      </if>
+      <if test="record.integralRuleShop != null">
+        integral_rule_shop = #{record.integralRuleShop,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_integral
+    set integral_rule_id = #{record.integralRuleId,jdbcType=VARCHAR},
+      integral_rule_type = #{record.integralRuleType,jdbcType=INTEGER},
+      integral_rule_type_rule = #{record.integralRuleTypeRule,jdbcType=VARCHAR},
+      integral_rule_cycle = #{record.integralRuleCycle,jdbcType=VARCHAR},
+      integral_rule_exchange = #{record.integralRuleExchange,jdbcType=VARCHAR},
+      integral_rule_isempty = #{record.integralRuleIsempty,jdbcType=INTEGER},
+      integral_rule_shop = #{record.integralRuleShop,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreIntegral">
+    update zomore_integral
+    <set>
+      <if test="integralRuleType != null">
+        integral_rule_type = #{integralRuleType,jdbcType=INTEGER},
+      </if>
+      <if test="integralRuleTypeRule != null">
+        integral_rule_type_rule = #{integralRuleTypeRule,jdbcType=VARCHAR},
+      </if>
+      <if test="integralRuleCycle != null">
+        integral_rule_cycle = #{integralRuleCycle,jdbcType=VARCHAR},
+      </if>
+      <if test="integralRuleExchange != null">
+        integral_rule_exchange = #{integralRuleExchange,jdbcType=VARCHAR},
+      </if>
+      <if test="integralRuleIsempty != null">
+        integral_rule_isempty = #{integralRuleIsempty,jdbcType=INTEGER},
+      </if>
+      <if test="integralRuleShop != null">
+        integral_rule_shop = #{integralRuleShop,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where integral_rule_id = #{integralRuleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreIntegral">
+    update zomore_integral
+    set integral_rule_type = #{integralRuleType,jdbcType=INTEGER},
+      integral_rule_type_rule = #{integralRuleTypeRule,jdbcType=VARCHAR},
+      integral_rule_cycle = #{integralRuleCycle,jdbcType=VARCHAR},
+      integral_rule_exchange = #{integralRuleExchange,jdbcType=VARCHAR},
+      integral_rule_isempty = #{integralRuleIsempty,jdbcType=INTEGER},
+      integral_rule_shop = #{integralRuleShop,jdbcType=VARCHAR}
+    where integral_rule_id = #{integralRuleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

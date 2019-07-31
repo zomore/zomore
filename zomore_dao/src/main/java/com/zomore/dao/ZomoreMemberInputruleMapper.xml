@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreMemberInputruleMapper">
+    <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreMemberInputrule">
+        <id column="zomore_member_inputrule_id" jdbcType="VARCHAR" property="zomoreMemberInputruleId"/>
+        <result column="zomore_member_inputrule_name" jdbcType="VARCHAR" property="zomoreMemberInputruleName"/>
+        <result column="zomore_member_inputrule_grade" jdbcType="VARCHAR" property="zomoreMemberInputruleGrade"/>
+        <result column="zomore_member_inputrule_inmoney" jdbcType="DOUBLE" property="zomoreMemberInputruleInmoney"/>
+        <result column="zomore_member_inputrule_givemoney" jdbcType="DOUBLE" property="zomoreMemberInputruleGivemoney"/>
+        <result column="zomore_member_inputrule_starttime" jdbcType="TIMESTAMP"
+                property="zomoreMemberInputruleStarttime"/>
+        <result column="zomore_member_inputrule_endtime" jdbcType="TIMESTAMP" property="zomoreMemberInputruleEndtime"/>
+        <result column="shop" jdbcType="VARCHAR" property="shop"/>
+        <result column="zomore_member_inputrule_isuserone" jdbcType="INTEGER"
+                property="zomoreMemberInputruleIsuserone"/>
+        <result column="zomore_member_inputrule_num" jdbcType="INTEGER" property="zomoreMemberInputruleNum"/>
+    </resultMap>
+    <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zomore.domain.ZomoreMemberInputrule">
+        <result column="zomore_member_inputrule_meno" jdbcType="LONGVARCHAR" property="zomoreMemberInputruleMeno"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" prefixOverrides="and" suffix=")">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    zomore_member_inputrule_id, zomore_member_inputrule_name, zomore_member_inputrule_grade, 
+    zomore_member_inputrule_inmoney, zomore_member_inputrule_givemoney, zomore_member_inputrule_starttime, 
+    zomore_member_inputrule_endtime, shop, zomore_member_inputrule_isuserone, zomore_member_inputrule_num
+  </sql>
+    <sql id="Blob_Column_List">
+    zomore_member_inputrule_meno
+  </sql>
+    <select id="selectByExampleWithBLOBs" parameterType="com.zomore.domain.ZomoreMemberInputruleExample"
+            resultMap="ResultMapWithBLOBs">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from zomore_member_inputrule
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByExample" parameterType="com.zomore.domain.ZomoreMemberInputruleExample"
+            resultMap="BaseResultMap">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from zomore_member_inputrule
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from zomore_member_inputrule
+        where zomore_member_inputrule_id = #{zomoreMemberInputruleId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zomore_member_inputrule
+    where zomore_member_inputrule_id = #{zomoreMemberInputruleId,jdbcType=VARCHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreMemberInputruleExample">
+        delete from zomore_member_inputrule
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.zomore.domain.ZomoreMemberInputrule">
+    insert into zomore_member_inputrule (zomore_member_inputrule_id, zomore_member_inputrule_name, 
+      zomore_member_inputrule_grade, zomore_member_inputrule_inmoney, 
+      zomore_member_inputrule_givemoney, zomore_member_inputrule_starttime, 
+      zomore_member_inputrule_endtime, shop, zomore_member_inputrule_isuserone, 
+      zomore_member_inputrule_num, zomore_member_inputrule_meno
+      )
+    values (#{zomoreMemberInputruleId,jdbcType=VARCHAR}, #{zomoreMemberInputruleName,jdbcType=VARCHAR}, 
+      #{zomoreMemberInputruleGrade,jdbcType=VARCHAR}, #{zomoreMemberInputruleInmoney,jdbcType=DOUBLE}, 
+      #{zomoreMemberInputruleGivemoney,jdbcType=DOUBLE}, #{zomoreMemberInputruleStarttime,jdbcType=TIMESTAMP}, 
+      #{zomoreMemberInputruleEndtime,jdbcType=TIMESTAMP}, #{shop,jdbcType=VARCHAR}, #{zomoreMemberInputruleIsuserone,jdbcType=INTEGER}, 
+      #{zomoreMemberInputruleNum,jdbcType=INTEGER}, #{zomoreMemberInputruleMeno,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreMemberInputrule">
+        insert into zomore_member_inputrule
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="zomoreMemberInputruleId != null">
+                zomore_member_inputrule_id,
+            </if>
+            <if test="zomoreMemberInputruleName != null">
+                zomore_member_inputrule_name,
+            </if>
+            <if test="zomoreMemberInputruleGrade != null">
+                zomore_member_inputrule_grade,
+            </if>
+            <if test="zomoreMemberInputruleInmoney != null">
+                zomore_member_inputrule_inmoney,
+            </if>
+            <if test="zomoreMemberInputruleGivemoney != null">
+                zomore_member_inputrule_givemoney,
+            </if>
+            <if test="zomoreMemberInputruleStarttime != null">
+                zomore_member_inputrule_starttime,
+            </if>
+            <if test="zomoreMemberInputruleEndtime != null">
+                zomore_member_inputrule_endtime,
+            </if>
+            <if test="shop != null">
+                shop,
+            </if>
+            <if test="zomoreMemberInputruleIsuserone != null">
+                zomore_member_inputrule_isuserone,
+            </if>
+            <if test="zomoreMemberInputruleNum != null">
+                zomore_member_inputrule_num,
+            </if>
+            <if test="zomoreMemberInputruleMeno != null">
+                zomore_member_inputrule_meno,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="zomoreMemberInputruleId != null">
+                #{zomoreMemberInputruleId,jdbcType=VARCHAR},
+            </if>
+            <if test="zomoreMemberInputruleName != null">
+                #{zomoreMemberInputruleName,jdbcType=VARCHAR},
+            </if>
+            <if test="zomoreMemberInputruleGrade != null">
+                #{zomoreMemberInputruleGrade,jdbcType=VARCHAR},
+            </if>
+            <if test="zomoreMemberInputruleInmoney != null">
+                #{zomoreMemberInputruleInmoney,jdbcType=DOUBLE},
+            </if>
+            <if test="zomoreMemberInputruleGivemoney != null">
+                #{zomoreMemberInputruleGivemoney,jdbcType=DOUBLE},
+            </if>
+            <if test="zomoreMemberInputruleStarttime != null">
+                #{zomoreMemberInputruleStarttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="zomoreMemberInputruleEndtime != null">
+                #{zomoreMemberInputruleEndtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shop != null">
+                #{shop,jdbcType=VARCHAR},
+            </if>
+            <if test="zomoreMemberInputruleIsuserone != null">
+                #{zomoreMemberInputruleIsuserone,jdbcType=INTEGER},
+            </if>
+            <if test="zomoreMemberInputruleNum != null">
+                #{zomoreMemberInputruleNum,jdbcType=INTEGER},
+            </if>
+            <if test="zomoreMemberInputruleMeno != null">
+                #{zomoreMemberInputruleMeno,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.zomore.domain.ZomoreMemberInputruleExample"
+            resultType="java.lang.Long">
+        select count(*) from zomore_member_inputrule
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update zomore_member_inputrule
+        <set>
+            <if test="record.zomoreMemberInputruleId != null">
+                zomore_member_inputrule_id = #{record.zomoreMemberInputruleId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.zomoreMemberInputruleName != null">
+                zomore_member_inputrule_name = #{record.zomoreMemberInputruleName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.zomoreMemberInputruleGrade != null">
+                zomore_member_inputrule_grade = #{record.zomoreMemberInputruleGrade,jdbcType=VARCHAR},
+            </if>
+            <if test="record.zomoreMemberInputruleInmoney != null">
+                zomore_member_inputrule_inmoney = #{record.zomoreMemberInputruleInmoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.zomoreMemberInputruleGivemoney != null">
+                zomore_member_inputrule_givemoney = #{record.zomoreMemberInputruleGivemoney,jdbcType=DOUBLE},
+            </if>
+            <if test="record.zomoreMemberInputruleStarttime != null">
+                zomore_member_inputrule_starttime = #{record.zomoreMemberInputruleStarttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.zomoreMemberInputruleEndtime != null">
+                zomore_member_inputrule_endtime = #{record.zomoreMemberInputruleEndtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="record.shop != null">
+                shop = #{record.shop,jdbcType=VARCHAR},
+            </if>
+            <if test="record.zomoreMemberInputruleIsuserone != null">
+                zomore_member_inputrule_isuserone = #{record.zomoreMemberInputruleIsuserone,jdbcType=INTEGER},
+            </if>
+            <if test="record.zomoreMemberInputruleNum != null">
+                zomore_member_inputrule_num = #{record.zomoreMemberInputruleNum,jdbcType=INTEGER},
+            </if>
+            <if test="record.zomoreMemberInputruleMeno != null">
+                zomore_member_inputrule_meno = #{record.zomoreMemberInputruleMeno,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExampleWithBLOBs" parameterType="map">
+        update zomore_member_inputrule
+        set zomore_member_inputrule_id = #{record.zomoreMemberInputruleId,jdbcType=VARCHAR},
+        zomore_member_inputrule_name = #{record.zomoreMemberInputruleName,jdbcType=VARCHAR},
+        zomore_member_inputrule_grade = #{record.zomoreMemberInputruleGrade,jdbcType=VARCHAR},
+        zomore_member_inputrule_inmoney = #{record.zomoreMemberInputruleInmoney,jdbcType=DOUBLE},
+        zomore_member_inputrule_givemoney = #{record.zomoreMemberInputruleGivemoney,jdbcType=DOUBLE},
+        zomore_member_inputrule_starttime = #{record.zomoreMemberInputruleStarttime,jdbcType=TIMESTAMP},
+        zomore_member_inputrule_endtime = #{record.zomoreMemberInputruleEndtime,jdbcType=TIMESTAMP},
+        shop = #{record.shop,jdbcType=VARCHAR},
+        zomore_member_inputrule_isuserone = #{record.zomoreMemberInputruleIsuserone,jdbcType=INTEGER},
+        zomore_member_inputrule_num = #{record.zomoreMemberInputruleNum,jdbcType=INTEGER},
+        zomore_member_inputrule_meno = #{record.zomoreMemberInputruleMeno,jdbcType=LONGVARCHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update zomore_member_inputrule
+        set zomore_member_inputrule_id = #{record.zomoreMemberInputruleId,jdbcType=VARCHAR},
+        zomore_member_inputrule_name = #{record.zomoreMemberInputruleName,jdbcType=VARCHAR},
+        zomore_member_inputrule_grade = #{record.zomoreMemberInputruleGrade,jdbcType=VARCHAR},
+        zomore_member_inputrule_inmoney = #{record.zomoreMemberInputruleInmoney,jdbcType=DOUBLE},
+        zomore_member_inputrule_givemoney = #{record.zomoreMemberInputruleGivemoney,jdbcType=DOUBLE},
+        zomore_member_inputrule_starttime = #{record.zomoreMemberInputruleStarttime,jdbcType=TIMESTAMP},
+        zomore_member_inputrule_endtime = #{record.zomoreMemberInputruleEndtime,jdbcType=TIMESTAMP},
+        shop = #{record.shop,jdbcType=VARCHAR},
+        zomore_member_inputrule_isuserone = #{record.zomoreMemberInputruleIsuserone,jdbcType=INTEGER},
+        zomore_member_inputrule_num = #{record.zomoreMemberInputruleNum,jdbcType=INTEGER}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreMemberInputrule">
+        update zomore_member_inputrule
+        <set>
+            <if test="zomoreMemberInputruleName != null">
+                zomore_member_inputrule_name = #{zomoreMemberInputruleName,jdbcType=VARCHAR},
+            </if>
+            <if test="zomoreMemberInputruleGrade != null">
+                zomore_member_inputrule_grade = #{zomoreMemberInputruleGrade,jdbcType=VARCHAR},
+            </if>
+            <if test="zomoreMemberInputruleInmoney != null">
+                zomore_member_inputrule_inmoney = #{zomoreMemberInputruleInmoney,jdbcType=DOUBLE},
+            </if>
+            <if test="zomoreMemberInputruleGivemoney != null">
+                zomore_member_inputrule_givemoney = #{zomoreMemberInputruleGivemoney,jdbcType=DOUBLE},
+            </if>
+            <if test="zomoreMemberInputruleStarttime != null">
+                zomore_member_inputrule_starttime = #{zomoreMemberInputruleStarttime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="zomoreMemberInputruleEndtime != null">
+                zomore_member_inputrule_endtime = #{zomoreMemberInputruleEndtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="shop != null">
+                shop = #{shop,jdbcType=VARCHAR},
+            </if>
+            <if test="zomoreMemberInputruleIsuserone != null">
+                zomore_member_inputrule_isuserone = #{zomoreMemberInputruleIsuserone,jdbcType=INTEGER},
+            </if>
+            <if test="zomoreMemberInputruleNum != null">
+                zomore_member_inputrule_num = #{zomoreMemberInputruleNum,jdbcType=INTEGER},
+            </if>
+            <if test="zomoreMemberInputruleMeno != null">
+                zomore_member_inputrule_meno = #{zomoreMemberInputruleMeno,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where zomore_member_inputrule_id = #{zomoreMemberInputruleId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zomore.domain.ZomoreMemberInputrule">
+    update zomore_member_inputrule
+    set zomore_member_inputrule_name = #{zomoreMemberInputruleName,jdbcType=VARCHAR},
+      zomore_member_inputrule_grade = #{zomoreMemberInputruleGrade,jdbcType=VARCHAR},
+      zomore_member_inputrule_inmoney = #{zomoreMemberInputruleInmoney,jdbcType=DOUBLE},
+      zomore_member_inputrule_givemoney = #{zomoreMemberInputruleGivemoney,jdbcType=DOUBLE},
+      zomore_member_inputrule_starttime = #{zomoreMemberInputruleStarttime,jdbcType=TIMESTAMP},
+      zomore_member_inputrule_endtime = #{zomoreMemberInputruleEndtime,jdbcType=TIMESTAMP},
+      shop = #{shop,jdbcType=VARCHAR},
+      zomore_member_inputrule_isuserone = #{zomoreMemberInputruleIsuserone,jdbcType=INTEGER},
+      zomore_member_inputrule_num = #{zomoreMemberInputruleNum,jdbcType=INTEGER},
+      zomore_member_inputrule_meno = #{zomoreMemberInputruleMeno,jdbcType=LONGVARCHAR}
+    where zomore_member_inputrule_id = #{zomoreMemberInputruleId,jdbcType=VARCHAR}
+  </update>
+    <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreMemberInputrule">
+    update zomore_member_inputrule
+    set zomore_member_inputrule_name = #{zomoreMemberInputruleName,jdbcType=VARCHAR},
+      zomore_member_inputrule_grade = #{zomoreMemberInputruleGrade,jdbcType=VARCHAR},
+      zomore_member_inputrule_inmoney = #{zomoreMemberInputruleInmoney,jdbcType=DOUBLE},
+      zomore_member_inputrule_givemoney = #{zomoreMemberInputruleGivemoney,jdbcType=DOUBLE},
+      zomore_member_inputrule_starttime = #{zomoreMemberInputruleStarttime,jdbcType=TIMESTAMP},
+      zomore_member_inputrule_endtime = #{zomoreMemberInputruleEndtime,jdbcType=TIMESTAMP},
+      shop = #{shop,jdbcType=VARCHAR},
+      zomore_member_inputrule_isuserone = #{zomoreMemberInputruleIsuserone,jdbcType=INTEGER},
+      zomore_member_inputrule_num = #{zomoreMemberInputruleNum,jdbcType=INTEGER}
+    where zomore_member_inputrule_id = #{zomoreMemberInputruleId,jdbcType=VARCHAR}
+  </update>
+</mapper>

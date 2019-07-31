@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.SuperAdminDao">
+    <insert id="saveCommdityByExcel" parameterType="com.zomore.domain.CommodityDatabase">
+            insert into commoditydatabase
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="commodity_id != null">
+                    commodity_id,
+                </if>
+                <if test="commodity_code != null">
+                    commodity_code,
+                </if>
+                <if test="commodity_name != null">
+                    commodity_name,
+                </if>
+                <if test="commodity_type != null">
+                    commodity_type,
+                </if>
+                <if test="commodity_brand != null">
+                    commodity_brand,
+                </if>
+                <if test="commodity_retailPrice != null">
+                    commodity_retailPrice,
+                </if>
+                <if test="commodity_inPrice != null">
+                    commodity_inPrice,
+                </if>
+                <if test="commodity_unit != null">
+                    commodity_unit,
+                </if>
+                <if test="commodity_num != null">
+                    commodity_num,
+                </if>
+                <if test="commodity_color != null">
+                    commodity_color,
+                </if>
+                <if test="commodity_size != null">
+                    commodity_size,
+                </if>
+                <if test="commodity_specification != null">
+                    commodity_specification,
+                </if>
+                <if test="commodity_origin != null">
+                    commodity_origin,
+                </if>
+                <if test="commodity_pinyinCode != null">
+                    commodity_pinyinCode,
+                </if>
+                <if test="commodity_image != null">
+                    commodity_image,
+                </if>
+                <if test="commodity_details != null">
+                    commodity_details,
+                </if>
+            </trim>
+
+            <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="commodity_id != null">
+                    #{commodity_id,jdbcType=VARCHAR},
+                </if>
+                <if test="commodity_code != null">
+                    #{commodity_code,jdbcType=VARCHAR},
+                </if>
+                <if test="commodity_name != null">
+                    #{commodity_name,jdbcType=VARCHAR},
+                </if>
+                <if test="commodity_type != null">
+                    #{commodity_type,jdbcType=VARCHAR},
+                </if>
+                <if test="commodity_brand != null">
+                    #{commodity_brand,jdbcType=VARCHAR},
+                </if>
+                <if test="commodity_retailPrice != null">
+                    #{commodity_retailPrice,jdbcType=DECIMAL},
+                </if>
+                <if test="commodity_inPrice != null">
+                    #{commodity_inPrice,jdbcType=DECIMAL},
+                </if>
+                <if test="commodity_unit != null">
+                    #{commodity_unit,jdbcType=VARCHAR},
+                </if>
+                <if test="commodity_num != null">
+                    #{commodity_num,jdbcType=VARCHAR},
+                </if>
+                <if test="commodity_color != null">
+                    #{commodity_color,jdbcType=VARCHAR},
+                </if>
+                <if test="commodity_size != null">
+                    #{commodity_size,jdbcType=VARCHAR},
+                </if>
+                <if test="commodity_specification != null">
+                    #{commodity_specification,jdbcType=VARCHAR},
+                </if>
+                <if test="commodity_origin != null">
+                    #{commodity_origin,jdbcType=VARCHAR},
+                </if>
+                <if test="commodity_pinyinCode != null">
+                    #{commodity_pinyinCode,jdbcType=INTEGER},
+                </if>
+                <if test="commodity_image != null">
+                    #{commodity_image,jdbcType=VARCHAR},
+                </if>
+                <if test="commodity_details != null">
+                    #{commodity_details,jdbcType=TIMESTAMP},
+                </if>
+            </trim>
+        </insert>
+
+    <update id="updataCommodityByExcel" parameterType="com.zomore.domain.CommodityDatabase">
+         update commoditydatabase
+        <trim prefix="set" suffixOverrides=",">
+        <if test="commodity_name != null">
+                commodity_name=#{commodity_name},
+            </if>
+            <if test="commodity_type != null">
+                 commodity_type = #{commodity_type},
+            </if>
+            <if test="commodity_brand != null">
+                 commodity_brand=#{commodity_brand},
+            </if>
+            <if test="commodity_retailPrice != null">
+                  commodity_retailPrice= #{commodity_retailPrice},
+            </if>
+            <if test="commodity_inPrice != null">
+                  commodity_inPrice= #{commodity_inPrice},
+            </if>
+            <if test="commodity_unit != null">
+                  commodity_unit= #{commodity_unit},
+            </if>
+            <if test="commodity_num != null">
+                 commodity_num= #{commodity_num},
+            </if>
+            <if test="commodity_color != null">
+                 commodity_color=#{commodity_color},
+            </if>
+            <if test="commodity_size != null">
+               commodity_size= #{commodity_size},
+            </if>
+            <if test="commodity_specification != null">
+                 commodity_specification= #{commodity_specification},
+            </if>
+            <if test="commodity_origin != null">
+                  commodity_origin= #{commodity_origin},
+            </if>
+            <if test="commodity_pinyinCode != null">
+                 commodity_pinyinCode= #{commodity_pinyinCode},
+            </if>
+            <if test="commodity_image != null">
+                commodity_image= #{commodity_image},
+            </if>
+            <if test="commodity_details != null">
+               commodity_details= #{commodity_details},
+            </if>
+        </trim>
+            <if test="commodity_code != null">
+                where commodity_code = #{commodity_code}
+            </if>
+
+    </update>
+</mapper>

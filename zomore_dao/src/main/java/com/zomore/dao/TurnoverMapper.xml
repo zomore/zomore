@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.TurnoverMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.Turnover">
+    <id column="turnoverId" jdbcType="BIGINT" property="turnoverid" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="dueTime" jdbcType="TIMESTAMP" property="duetime" />
+    <result column="cashier" jdbcType="VARCHAR" property="cashier" />
+    <result column="totalmoney" jdbcType="VARCHAR" property="totalmoney" />
+    <result column="cash" jdbcType="VARCHAR" property="cash" />
+    <result column="unionpay" jdbcType="VARCHAR" property="unionpay" />
+    <result column="storagecard" jdbcType="VARCHAR" property="storagecard" />
+    <result column="subcard" jdbcType="VARCHAR" property="subcard" />
+    <result column="readycash" jdbcType="VARCHAR" property="readycash" />
+    <result column="paidamount" jdbcType="VARCHAR" property="paidamount" />
+    <result column="shop" jdbcType="VARCHAR" property="shop" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    turnoverId, createTime, dueTime, cashier, totalmoney, cash, unionpay, storagecard, 
+    subcard, readycash, paidamount, shop
+  </sql>
+  <select id="selectByExample" parameterType="com.zomore.domain.TurnoverExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from turnover
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause} desc
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from turnover
+    where turnoverId = #{turnoverid,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from turnover
+    where turnoverId = #{turnoverid,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.TurnoverExample">
+    delete from turnover
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.Turnover">
+    insert into turnover (turnoverId, createTime, dueTime, 
+      cashier, totalmoney, cash, 
+      unionpay, storagecard, subcard, 
+      readycash, paidamount, shop
+      )
+    values (#{turnoverid,jdbcType=BIGINT}, #{createtime,jdbcType=TIMESTAMP}, #{duetime,jdbcType=TIMESTAMP}, 
+      #{cashier,jdbcType=VARCHAR}, #{totalmoney,jdbcType=VARCHAR}, #{cash,jdbcType=VARCHAR}, 
+      #{unionpay,jdbcType=VARCHAR}, #{storagecard,jdbcType=VARCHAR}, #{subcard,jdbcType=VARCHAR}, 
+      #{readycash,jdbcType=VARCHAR}, #{paidamount,jdbcType=VARCHAR}, #{shop,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.Turnover">
+    insert into turnover
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="turnoverid != null">
+        turnoverId,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="duetime != null">
+        dueTime,
+      </if>
+      <if test="cashier != null">
+        cashier,
+      </if>
+      <if test="totalmoney != null">
+        totalmoney,
+      </if>
+      <if test="cash != null">
+        cash,
+      </if>
+      <if test="unionpay != null">
+        unionpay,
+      </if>
+      <if test="storagecard != null">
+        storagecard,
+      </if>
+      <if test="subcard != null">
+        subcard,
+      </if>
+      <if test="readycash != null">
+        readycash,
+      </if>
+      <if test="paidamount != null">
+        paidamount,
+      </if>
+      <if test="shop != null">
+        shop,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="turnoverid != null">
+        #{turnoverid,jdbcType=BIGINT},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duetime != null">
+        #{duetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cashier != null">
+        #{cashier,jdbcType=VARCHAR},
+      </if>
+      <if test="totalmoney != null">
+        #{totalmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="cash != null">
+        #{cash,jdbcType=VARCHAR},
+      </if>
+      <if test="unionpay != null">
+        #{unionpay,jdbcType=VARCHAR},
+      </if>
+      <if test="storagecard != null">
+        #{storagecard,jdbcType=VARCHAR},
+      </if>
+      <if test="subcard != null">
+        #{subcard,jdbcType=VARCHAR},
+      </if>
+      <if test="readycash != null">
+        #{readycash,jdbcType=VARCHAR},
+      </if>
+      <if test="paidamount != null">
+        #{paidamount,jdbcType=VARCHAR},
+      </if>
+      <if test="shop != null">
+        #{shop,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.TurnoverExample" resultType="java.lang.Long">
+    select count(*) from turnover
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update turnover
+    <set>
+      <if test="record.turnoverid != null">
+        turnoverId = #{record.turnoverid,jdbcType=BIGINT},
+      </if>
+      <if test="record.createtime != null">
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.duetime != null">
+        dueTime = #{record.duetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.cashier != null">
+        cashier = #{record.cashier,jdbcType=VARCHAR},
+      </if>
+      <if test="record.totalmoney != null">
+        totalmoney = #{record.totalmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cash != null">
+        cash = #{record.cash,jdbcType=VARCHAR},
+      </if>
+      <if test="record.unionpay != null">
+        unionpay = #{record.unionpay,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storagecard != null">
+        storagecard = #{record.storagecard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.subcard != null">
+        subcard = #{record.subcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.readycash != null">
+        readycash = #{record.readycash,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paidamount != null">
+        paidamount = #{record.paidamount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shop != null">
+        shop = #{record.shop,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update turnover
+    set turnoverId = #{record.turnoverid,jdbcType=BIGINT},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      dueTime = #{record.duetime,jdbcType=TIMESTAMP},
+      cashier = #{record.cashier,jdbcType=VARCHAR},
+      totalmoney = #{record.totalmoney,jdbcType=VARCHAR},
+      cash = #{record.cash,jdbcType=VARCHAR},
+      unionpay = #{record.unionpay,jdbcType=VARCHAR},
+      storagecard = #{record.storagecard,jdbcType=VARCHAR},
+      subcard = #{record.subcard,jdbcType=VARCHAR},
+      readycash = #{record.readycash,jdbcType=VARCHAR},
+      paidamount = #{record.paidamount,jdbcType=VARCHAR},
+      shop = #{record.shop,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.Turnover">
+    update turnover
+    <set>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duetime != null">
+        dueTime = #{duetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cashier != null">
+        cashier = #{cashier,jdbcType=VARCHAR},
+      </if>
+      <if test="totalmoney != null">
+        totalmoney = #{totalmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="cash != null">
+        cash = #{cash,jdbcType=VARCHAR},
+      </if>
+      <if test="unionpay != null">
+        unionpay = #{unionpay,jdbcType=VARCHAR},
+      </if>
+      <if test="storagecard != null">
+        storagecard = #{storagecard,jdbcType=VARCHAR},
+      </if>
+      <if test="subcard != null">
+        subcard = #{subcard,jdbcType=VARCHAR},
+      </if>
+      <if test="readycash != null">
+        readycash = #{readycash,jdbcType=VARCHAR},
+      </if>
+      <if test="paidamount != null">
+        paidamount = #{paidamount,jdbcType=VARCHAR},
+      </if>
+      <if test="shop != null">
+        shop = #{shop,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where turnoverId = #{turnoverid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.Turnover">
+    update turnover
+    set createTime = #{createtime,jdbcType=TIMESTAMP},
+      dueTime = #{duetime,jdbcType=TIMESTAMP},
+      cashier = #{cashier,jdbcType=VARCHAR},
+      totalmoney = #{totalmoney,jdbcType=VARCHAR},
+      cash = #{cash,jdbcType=VARCHAR},
+      unionpay = #{unionpay,jdbcType=VARCHAR},
+      storagecard = #{storagecard,jdbcType=VARCHAR},
+      subcard = #{subcard,jdbcType=VARCHAR},
+      readycash = #{readycash,jdbcType=VARCHAR},
+      paidamount = #{paidamount,jdbcType=VARCHAR},
+      shop = #{shop,jdbcType=VARCHAR}
+    where turnoverId = #{turnoverid,jdbcType=BIGINT}
+  </update>
+  <!--总部下所有店铺的交接班记录-->
+  <select id="selectAllshopTurnOver" parameterType="java.util.Map" resultType="com.zomore.domain.Turnover">
+    select  turnoverId, createTime, dueTime, cashier, totalmoney, cash, unionpay, storagecard,
+    subcard, readycash, paidamount, shop
+    from turnover
+    where shop in
+    <foreach collection="shoplist" index="index" item="item" open="("
+             separator="," close=")">
+      #{item}
+    </foreach>
+    <if test="startime!=null and endtime!=null">
+      and createTime between #{startime}and #{endtime}
+    </if>
+    <if test="name!=null">
+      and cashier LIKE concat(concat('%',#{name}),'%')
+    </if>
+    order by dueTime desc
+
+  </select>
+</mapper>

@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreMembershiplevelMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreMembershiplevel">
+    <id column="membershipLevel_id" jdbcType="VARCHAR" property="membershiplevelId" />
+    <result column="membershipLevel_Name" jdbcType="VARCHAR" property="membershiplevelName" />
+    <result column="membershipLevel_proportion" jdbcType="VARCHAR" property="membershiplevelProportion" />
+    <result column="membershipLevel_nearUpgrade" jdbcType="DOUBLE" property="membershiplevelNearupgrade" />
+    <result column="membershipLevel_discount" jdbcType="VARCHAR" property="membershiplevelDiscount" />
+    <result column="membershipLevel_integral" jdbcType="INTEGER" property="membershiplevelIntegral" />
+    <result column="membershipLevel_type" jdbcType="VARCHAR" property="membershiplevelType" />
+    <result column="membershipLevel_rule" jdbcType="VARCHAR" property="membershiplevelRule" />
+    <result column="membershipLevel_rule1" jdbcType="VARCHAR" property="membershiplevelRule1" />
+    <result column="membershipLevel_rule2" jdbcType="VARCHAR" property="membershiplevelRule2" />
+    <result column="membershipLevel_default" jdbcType="INTEGER" property="membershiplevelDefault" />
+    <result column="membershipLevel_upgradetype" jdbcType="INTEGER" property="membershiplevelUpgradetype" />
+    <result column="membershipLevel_upgradepayment" jdbcType="INTEGER" property="membershiplevelUpgradepayment" />
+    <result column="membershipLevel_time" jdbcType="TIMESTAMP" property="membershiplevelTime" />
+    <result column="membershipLevel_effective" jdbcType="INTEGER" property="membershiplevelEffective" />
+    <result column="shop" jdbcType="VARCHAR" property="shop" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    membershipLevel_id, membershipLevel_Name, membershipLevel_proportion, membershipLevel_nearUpgrade, 
+    membershipLevel_discount, membershipLevel_integral, membershipLevel_type, membershipLevel_rule, 
+    membershipLevel_rule1, membershipLevel_rule2, membershipLevel_default, membershipLevel_upgradetype, 
+    membershipLevel_upgradepayment, membershipLevel_time, membershipLevel_effective, 
+    shop
+  </sql>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreMembershiplevelExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_membershiplevel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zomore_membershiplevel
+    where membershipLevel_id = #{membershiplevelId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zomore_membershiplevel
+    where membershipLevel_id = #{membershiplevelId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreMembershiplevelExample">
+    delete from zomore_membershiplevel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreMembershiplevel">
+    insert into zomore_membershiplevel (membershipLevel_id, membershipLevel_Name, 
+      membershipLevel_proportion, membershipLevel_nearUpgrade, 
+      membershipLevel_discount, membershipLevel_integral, 
+      membershipLevel_type, membershipLevel_rule, 
+      membershipLevel_rule1, membershipLevel_rule2, 
+      membershipLevel_default, membershipLevel_upgradetype, 
+      membershipLevel_upgradepayment, membershipLevel_time, 
+      membershipLevel_effective, shop)
+    values (#{membershiplevelId,jdbcType=VARCHAR}, #{membershiplevelName,jdbcType=VARCHAR}, 
+      #{membershiplevelProportion,jdbcType=VARCHAR}, #{membershiplevelNearupgrade,jdbcType=DOUBLE}, 
+      #{membershiplevelDiscount,jdbcType=VARCHAR}, #{membershiplevelIntegral,jdbcType=INTEGER}, 
+      #{membershiplevelType,jdbcType=VARCHAR}, #{membershiplevelRule,jdbcType=VARCHAR}, 
+      #{membershiplevelRule1,jdbcType=VARCHAR}, #{membershiplevelRule2,jdbcType=VARCHAR}, 
+      #{membershiplevelDefault,jdbcType=INTEGER}, #{membershiplevelUpgradetype,jdbcType=INTEGER}, 
+      #{membershiplevelUpgradepayment,jdbcType=INTEGER}, #{membershiplevelTime,jdbcType=TIMESTAMP}, 
+      #{membershiplevelEffective,jdbcType=INTEGER}, #{shop,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreMembershiplevel">
+    insert into zomore_membershiplevel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="membershiplevelId != null">
+        membershipLevel_id,
+      </if>
+      <if test="membershiplevelName != null">
+        membershipLevel_Name,
+      </if>
+      <if test="membershiplevelProportion != null">
+        membershipLevel_proportion,
+      </if>
+      <if test="membershiplevelNearupgrade != null">
+        membershipLevel_nearUpgrade,
+      </if>
+      <if test="membershiplevelDiscount != null">
+        membershipLevel_discount,
+      </if>
+      <if test="membershiplevelIntegral != null">
+        membershipLevel_integral,
+      </if>
+      <if test="membershiplevelType != null">
+        membershipLevel_type,
+      </if>
+      <if test="membershiplevelRule != null">
+        membershipLevel_rule,
+      </if>
+      <if test="membershiplevelRule1 != null">
+        membershipLevel_rule1,
+      </if>
+      <if test="membershiplevelRule2 != null">
+        membershipLevel_rule2,
+      </if>
+      <if test="membershiplevelDefault != null">
+        membershipLevel_default,
+      </if>
+      <if test="membershiplevelUpgradetype != null">
+        membershipLevel_upgradetype,
+      </if>
+      <if test="membershiplevelUpgradepayment != null">
+        membershipLevel_upgradepayment,
+      </if>
+      <if test="membershiplevelTime != null">
+        membershipLevel_time,
+      </if>
+      <if test="membershiplevelEffective != null">
+        membershipLevel_effective,
+      </if>
+      <if test="shop != null">
+        shop,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="membershiplevelId != null">
+        #{membershiplevelId,jdbcType=VARCHAR},
+      </if>
+      <if test="membershiplevelName != null">
+        #{membershiplevelName,jdbcType=VARCHAR},
+      </if>
+      <if test="membershiplevelProportion != null">
+        #{membershiplevelProportion,jdbcType=VARCHAR},
+      </if>
+      <if test="membershiplevelNearupgrade != null">
+        #{membershiplevelNearupgrade,jdbcType=DOUBLE},
+      </if>
+      <if test="membershiplevelDiscount != null">
+        #{membershiplevelDiscount,jdbcType=VARCHAR},
+      </if>
+      <if test="membershiplevelIntegral != null">
+        #{membershiplevelIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="membershiplevelType != null">
+        #{membershiplevelType,jdbcType=VARCHAR},
+      </if>
+      <if test="membershiplevelRule != null">
+        #{membershiplevelRule,jdbcType=VARCHAR},
+      </if>
+      <if test="membershiplevelRule1 != null">
+        #{membershiplevelRule1,jdbcType=VARCHAR},
+      </if>
+      <if test="membershiplevelRule2 != null">
+        #{membershiplevelRule2,jdbcType=VARCHAR},
+      </if>
+      <if test="membershiplevelDefault != null">
+        #{membershiplevelDefault,jdbcType=INTEGER},
+      </if>
+      <if test="membershiplevelUpgradetype != null">
+        #{membershiplevelUpgradetype,jdbcType=INTEGER},
+      </if>
+      <if test="membershiplevelUpgradepayment != null">
+        #{membershiplevelUpgradepayment,jdbcType=INTEGER},
+      </if>
+      <if test="membershiplevelTime != null">
+        #{membershiplevelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="membershiplevelEffective != null">
+        #{membershiplevelEffective,jdbcType=INTEGER},
+      </if>
+      <if test="shop != null">
+        #{shop,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreMembershiplevelExample" resultType="java.lang.Long">
+    select count(*) from zomore_membershiplevel
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_membershiplevel
+    <set>
+      <if test="record.membershiplevelId != null">
+        membershipLevel_id = #{record.membershiplevelId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.membershiplevelName != null">
+        membershipLevel_Name = #{record.membershiplevelName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.membershiplevelProportion != null">
+        membershipLevel_proportion = #{record.membershiplevelProportion,jdbcType=VARCHAR},
+      </if>
+      <if test="record.membershiplevelNearupgrade != null">
+        membershipLevel_nearUpgrade = #{record.membershiplevelNearupgrade,jdbcType=DOUBLE},
+      </if>
+      <if test="record.membershiplevelDiscount != null">
+        membershipLevel_discount = #{record.membershiplevelDiscount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.membershiplevelIntegral != null">
+        membershipLevel_integral = #{record.membershiplevelIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="record.membershiplevelType != null">
+        membershipLevel_type = #{record.membershiplevelType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.membershiplevelRule != null">
+        membershipLevel_rule = #{record.membershiplevelRule,jdbcType=VARCHAR},
+      </if>
+      <if test="record.membershiplevelRule1 != null">
+        membershipLevel_rule1 = #{record.membershiplevelRule1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.membershiplevelRule2 != null">
+        membershipLevel_rule2 = #{record.membershiplevelRule2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.membershiplevelDefault != null">
+        membershipLevel_default = #{record.membershiplevelDefault,jdbcType=INTEGER},
+      </if>
+      <if test="record.membershiplevelUpgradetype != null">
+        membershipLevel_upgradetype = #{record.membershiplevelUpgradetype,jdbcType=INTEGER},
+      </if>
+      <if test="record.membershiplevelUpgradepayment != null">
+        membershipLevel_upgradepayment = #{record.membershiplevelUpgradepayment,jdbcType=INTEGER},
+      </if>
+      <if test="record.membershiplevelTime != null">
+        membershipLevel_time = #{record.membershiplevelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.membershiplevelEffective != null">
+        membershipLevel_effective = #{record.membershiplevelEffective,jdbcType=INTEGER},
+      </if>
+      <if test="record.shop != null">
+        shop = #{record.shop,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_membershiplevel
+    set membershipLevel_id = #{record.membershiplevelId,jdbcType=VARCHAR},
+      membershipLevel_Name = #{record.membershiplevelName,jdbcType=VARCHAR},
+      membershipLevel_proportion = #{record.membershiplevelProportion,jdbcType=VARCHAR},
+      membershipLevel_nearUpgrade = #{record.membershiplevelNearupgrade,jdbcType=DOUBLE},
+      membershipLevel_discount = #{record.membershiplevelDiscount,jdbcType=VARCHAR},
+      membershipLevel_integral = #{record.membershiplevelIntegral,jdbcType=INTEGER},
+      membershipLevel_type = #{record.membershiplevelType,jdbcType=VARCHAR},
+      membershipLevel_rule = #{record.membershiplevelRule,jdbcType=VARCHAR},
+      membershipLevel_rule1 = #{record.membershiplevelRule1,jdbcType=VARCHAR},
+      membershipLevel_rule2 = #{record.membershiplevelRule2,jdbcType=VARCHAR},
+      membershipLevel_default = #{record.membershiplevelDefault,jdbcType=INTEGER},
+      membershipLevel_upgradetype = #{record.membershiplevelUpgradetype,jdbcType=INTEGER},
+      membershipLevel_upgradepayment = #{record.membershiplevelUpgradepayment,jdbcType=INTEGER},
+      membershipLevel_time = #{record.membershiplevelTime,jdbcType=TIMESTAMP},
+      membershipLevel_effective = #{record.membershiplevelEffective,jdbcType=INTEGER},
+      shop = #{record.shop,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreMembershiplevel">
+    update zomore_membershiplevel
+    <set>
+      <if test="membershiplevelName != null">
+        membershipLevel_Name = #{membershiplevelName,jdbcType=VARCHAR},
+      </if>
+      <if test="membershiplevelProportion != null">
+        membershipLevel_proportion = #{membershiplevelProportion,jdbcType=VARCHAR},
+      </if>
+      <if test="membershiplevelNearupgrade != null">
+        membershipLevel_nearUpgrade = #{membershiplevelNearupgrade,jdbcType=DOUBLE},
+      </if>
+      <if test="membershiplevelDiscount != null">
+        membershipLevel_discount = #{membershiplevelDiscount,jdbcType=VARCHAR},
+      </if>
+      <if test="membershiplevelIntegral != null">
+        membershipLevel_integral = #{membershiplevelIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="membershiplevelType != null">
+        membershipLevel_type = #{membershiplevelType,jdbcType=VARCHAR},
+      </if>
+      <if test="membershiplevelRule != null">
+        membershipLevel_rule = #{membershiplevelRule,jdbcType=VARCHAR},
+      </if>
+      <if test="membershiplevelRule1 != null">
+        membershipLevel_rule1 = #{membershiplevelRule1,jdbcType=VARCHAR},
+      </if>
+      <if test="membershiplevelRule2 != null">
+        membershipLevel_rule2 = #{membershiplevelRule2,jdbcType=VARCHAR},
+      </if>
+      <if test="membershiplevelDefault != null">
+        membershipLevel_default = #{membershiplevelDefault,jdbcType=INTEGER},
+      </if>
+      <if test="membershiplevelUpgradetype != null">
+        membershipLevel_upgradetype = #{membershiplevelUpgradetype,jdbcType=INTEGER},
+      </if>
+      <if test="membershiplevelUpgradepayment != null">
+        membershipLevel_upgradepayment = #{membershiplevelUpgradepayment,jdbcType=INTEGER},
+      </if>
+      <if test="membershiplevelTime != null">
+        membershipLevel_time = #{membershiplevelTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="membershiplevelEffective != null">
+        membershipLevel_effective = #{membershiplevelEffective,jdbcType=INTEGER},
+      </if>
+      <if test="shop != null">
+        shop = #{shop,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where membershipLevel_id = #{membershiplevelId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreMembershiplevel">
+    update zomore_membershiplevel
+    set membershipLevel_Name = #{membershiplevelName,jdbcType=VARCHAR},
+      membershipLevel_proportion = #{membershiplevelProportion,jdbcType=VARCHAR},
+      membershipLevel_nearUpgrade = #{membershiplevelNearupgrade,jdbcType=DOUBLE},
+      membershipLevel_discount = #{membershiplevelDiscount,jdbcType=VARCHAR},
+      membershipLevel_integral = #{membershiplevelIntegral,jdbcType=INTEGER},
+      membershipLevel_type = #{membershiplevelType,jdbcType=VARCHAR},
+      membershipLevel_rule = #{membershiplevelRule,jdbcType=VARCHAR},
+      membershipLevel_rule1 = #{membershiplevelRule1,jdbcType=VARCHAR},
+      membershipLevel_rule2 = #{membershiplevelRule2,jdbcType=VARCHAR},
+      membershipLevel_default = #{membershiplevelDefault,jdbcType=INTEGER},
+      membershipLevel_upgradetype = #{membershiplevelUpgradetype,jdbcType=INTEGER},
+      membershipLevel_upgradepayment = #{membershiplevelUpgradepayment,jdbcType=INTEGER},
+      membershipLevel_time = #{membershiplevelTime,jdbcType=TIMESTAMP},
+      membershipLevel_effective = #{membershiplevelEffective,jdbcType=INTEGER},
+      shop = #{shop,jdbcType=VARCHAR}
+    where membershipLevel_id = #{membershiplevelId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectAllShopZomoreMemberlevel" parameterType="java.lang.String" resultType="java.lang.String">
+    select membershipLevel_Name  from zomore_membershiplevel where shop=#{shop} ORDER BY membershipLevel_discount asc
+  </select>
+</mapper>

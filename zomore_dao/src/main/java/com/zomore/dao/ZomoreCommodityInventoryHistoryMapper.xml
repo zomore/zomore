@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreCommodityInventoryHistoryMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreCommodityInventoryHistory">
+    <id column="zomore_commodity_Inventory_history_id" jdbcType="VARCHAR" property="zomoreCommodityInventoryHistoryId" />
+    <result column="zomore_commodity_Inventory_history_storenum" jdbcType="INTEGER" property="zomoreCommodityInventoryHistoryStorenum" />
+    <result column="zomore_commodity_Inventory_history_factnum" jdbcType="INTEGER" property="zomoreCommodityInventoryHistoryFactnum" />
+    <result column="zomore_commodity_Inventory_history_time" jdbcType="TIMESTAMP" property="zomoreCommodityInventoryHistoryTime" />
+    <result column="zomore_commodity_shop" jdbcType="VARCHAR" property="zomoreCommodityShop" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    zomore_commodity_Inventory_history_id, zomore_commodity_Inventory_history_storenum, 
+    zomore_commodity_Inventory_history_factnum, zomore_commodity_Inventory_history_time, 
+    zomore_commodity_shop
+  </sql>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreCommodityInventoryHistoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_commodity_inventory_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zomore_commodity_inventory_history
+    where zomore_commodity_Inventory_history_id = #{zomoreCommodityInventoryHistoryId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zomore_commodity_inventory_history
+    where zomore_commodity_Inventory_history_id = #{zomoreCommodityInventoryHistoryId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreCommodityInventoryHistoryExample">
+    delete from zomore_commodity_inventory_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreCommodityInventoryHistory">
+    insert into zomore_commodity_inventory_history (zomore_commodity_Inventory_history_id, zomore_commodity_Inventory_history_storenum, 
+      zomore_commodity_Inventory_history_factnum, zomore_commodity_Inventory_history_time, 
+      zomore_commodity_shop)
+    values (#{zomoreCommodityInventoryHistoryId,jdbcType=VARCHAR}, #{zomoreCommodityInventoryHistoryStorenum,jdbcType=INTEGER}, 
+      #{zomoreCommodityInventoryHistoryFactnum,jdbcType=INTEGER}, #{zomoreCommodityInventoryHistoryTime,jdbcType=TIMESTAMP}, 
+      #{zomoreCommodityShop,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreCommodityInventoryHistory">
+    insert into zomore_commodity_inventory_history
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="zomoreCommodityInventoryHistoryId != null">
+        zomore_commodity_Inventory_history_id,
+      </if>
+      <if test="zomoreCommodityInventoryHistoryStorenum != null">
+        zomore_commodity_Inventory_history_storenum,
+      </if>
+      <if test="zomoreCommodityInventoryHistoryFactnum != null">
+        zomore_commodity_Inventory_history_factnum,
+      </if>
+      <if test="zomoreCommodityInventoryHistoryTime != null">
+        zomore_commodity_Inventory_history_time,
+      </if>
+      <if test="zomoreCommodityShop != null">
+        zomore_commodity_shop,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="zomoreCommodityInventoryHistoryId != null">
+        #{zomoreCommodityInventoryHistoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityInventoryHistoryStorenum != null">
+        #{zomoreCommodityInventoryHistoryStorenum,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityInventoryHistoryFactnum != null">
+        #{zomoreCommodityInventoryHistoryFactnum,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityInventoryHistoryTime != null">
+        #{zomoreCommodityInventoryHistoryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zomoreCommodityShop != null">
+        #{zomoreCommodityShop,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreCommodityInventoryHistoryExample" resultType="java.lang.Long">
+    select count(*) from zomore_commodity_inventory_history
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_commodity_inventory_history
+    <set>
+      <if test="record.zomoreCommodityInventoryHistoryId != null">
+        zomore_commodity_Inventory_history_id = #{record.zomoreCommodityInventoryHistoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityInventoryHistoryStorenum != null">
+        zomore_commodity_Inventory_history_storenum = #{record.zomoreCommodityInventoryHistoryStorenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommodityInventoryHistoryFactnum != null">
+        zomore_commodity_Inventory_history_factnum = #{record.zomoreCommodityInventoryHistoryFactnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommodityInventoryHistoryTime != null">
+        zomore_commodity_Inventory_history_time = #{record.zomoreCommodityInventoryHistoryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zomoreCommodityShop != null">
+        zomore_commodity_shop = #{record.zomoreCommodityShop,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_commodity_inventory_history
+    set zomore_commodity_Inventory_history_id = #{record.zomoreCommodityInventoryHistoryId,jdbcType=VARCHAR},
+      zomore_commodity_Inventory_history_storenum = #{record.zomoreCommodityInventoryHistoryStorenum,jdbcType=INTEGER},
+      zomore_commodity_Inventory_history_factnum = #{record.zomoreCommodityInventoryHistoryFactnum,jdbcType=INTEGER},
+      zomore_commodity_Inventory_history_time = #{record.zomoreCommodityInventoryHistoryTime,jdbcType=TIMESTAMP},
+      zomore_commodity_shop = #{record.zomoreCommodityShop,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreCommodityInventoryHistory">
+    update zomore_commodity_inventory_history
+    <set>
+      <if test="zomoreCommodityInventoryHistoryStorenum != null">
+        zomore_commodity_Inventory_history_storenum = #{zomoreCommodityInventoryHistoryStorenum,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityInventoryHistoryFactnum != null">
+        zomore_commodity_Inventory_history_factnum = #{zomoreCommodityInventoryHistoryFactnum,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityInventoryHistoryTime != null">
+        zomore_commodity_Inventory_history_time = #{zomoreCommodityInventoryHistoryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zomoreCommodityShop != null">
+        zomore_commodity_shop = #{zomoreCommodityShop,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where zomore_commodity_Inventory_history_id = #{zomoreCommodityInventoryHistoryId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreCommodityInventoryHistory">
+    update zomore_commodity_inventory_history
+    set zomore_commodity_Inventory_history_storenum = #{zomoreCommodityInventoryHistoryStorenum,jdbcType=INTEGER},
+      zomore_commodity_Inventory_history_factnum = #{zomoreCommodityInventoryHistoryFactnum,jdbcType=INTEGER},
+      zomore_commodity_Inventory_history_time = #{zomoreCommodityInventoryHistoryTime,jdbcType=TIMESTAMP},
+      zomore_commodity_shop = #{zomoreCommodityShop,jdbcType=VARCHAR}
+    where zomore_commodity_Inventory_history_id = #{zomoreCommodityInventoryHistoryId,jdbcType=VARCHAR}
+  </update>
+</mapper>

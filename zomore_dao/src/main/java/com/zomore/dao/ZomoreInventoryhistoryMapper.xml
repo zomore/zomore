@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreInventoryhistoryMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreInventoryhistory">
+    <id column="InventoryHistory_id" jdbcType="VARCHAR" property="inventoryhistoryId" />
+    <result column="InventoryHistory_brand" jdbcType="VARCHAR" property="inventoryhistoryBrand" />
+    <result column="InventoryHistory_date" jdbcType="TIMESTAMP" property="inventoryhistoryDate" />
+    <result column="InventoryHistory_classification" jdbcType="VARCHAR" property="inventoryhistoryClassification" />
+    <result column="InventoryHistory_shop" jdbcType="VARCHAR" property="inventoryhistoryShop" />
+    <result column="InventoryHistory_personnel" jdbcType="VARCHAR" property="inventoryhistoryPersonnel" />
+    <result column="InventoryHistory_mode" jdbcType="VARCHAR" property="inventoryhistoryMode" />
+    <result column="InventoryHistory_Defect" jdbcType="VARCHAR" property="inventoryhistoryDefect" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zomore.domain.ZomoreInventoryhistory">
+    <result column="InventoryHistory_note" jdbcType="LONGVARCHAR" property="inventoryhistoryNote" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    InventoryHistory_id, InventoryHistory_brand, InventoryHistory_date, InventoryHistory_classification, 
+    InventoryHistory_shop, InventoryHistory_personnel, InventoryHistory_mode, InventoryHistory_Defect
+  </sql>
+  <sql id="Blob_Column_List">
+    InventoryHistory_note
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.zomore.domain.ZomoreInventoryhistoryExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zomore_inventoryhistory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreInventoryhistoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_inventoryhistory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zomore_inventoryhistory
+    where InventoryHistory_id = #{inventoryhistoryId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zomore_inventoryhistory
+    where InventoryHistory_id = #{inventoryhistoryId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreInventoryhistoryExample">
+    delete from zomore_inventoryhistory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreInventoryhistory">
+    insert into zomore_inventoryhistory (InventoryHistory_id, InventoryHistory_brand, 
+      InventoryHistory_date, InventoryHistory_classification, 
+      InventoryHistory_shop, InventoryHistory_personnel, 
+      InventoryHistory_mode, InventoryHistory_Defect, 
+      InventoryHistory_note)
+    values (#{inventoryhistoryId,jdbcType=VARCHAR}, #{inventoryhistoryBrand,jdbcType=VARCHAR}, 
+      #{inventoryhistoryDate,jdbcType=TIMESTAMP}, #{inventoryhistoryClassification,jdbcType=VARCHAR}, 
+      #{inventoryhistoryShop,jdbcType=VARCHAR}, #{inventoryhistoryPersonnel,jdbcType=VARCHAR}, 
+      #{inventoryhistoryMode,jdbcType=VARCHAR}, #{inventoryhistoryDefect,jdbcType=VARCHAR}, 
+      #{inventoryhistoryNote,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreInventoryhistory">
+    insert into zomore_inventoryhistory
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="inventoryhistoryId != null">
+        InventoryHistory_id,
+      </if>
+      <if test="inventoryhistoryBrand != null">
+        InventoryHistory_brand,
+      </if>
+      <if test="inventoryhistoryDate != null">
+        InventoryHistory_date,
+      </if>
+      <if test="inventoryhistoryClassification != null">
+        InventoryHistory_classification,
+      </if>
+      <if test="inventoryhistoryShop != null">
+        InventoryHistory_shop,
+      </if>
+      <if test="inventoryhistoryPersonnel != null">
+        InventoryHistory_personnel,
+      </if>
+      <if test="inventoryhistoryMode != null">
+        InventoryHistory_mode,
+      </if>
+      <if test="inventoryhistoryDefect != null">
+        InventoryHistory_Defect,
+      </if>
+      <if test="inventoryhistoryNote != null">
+        InventoryHistory_note,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="inventoryhistoryId != null">
+        #{inventoryhistoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryhistoryBrand != null">
+        #{inventoryhistoryBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryhistoryDate != null">
+        #{inventoryhistoryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inventoryhistoryClassification != null">
+        #{inventoryhistoryClassification,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryhistoryShop != null">
+        #{inventoryhistoryShop,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryhistoryPersonnel != null">
+        #{inventoryhistoryPersonnel,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryhistoryMode != null">
+        #{inventoryhistoryMode,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryhistoryDefect != null">
+        #{inventoryhistoryDefect,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryhistoryNote != null">
+        #{inventoryhistoryNote,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreInventoryhistoryExample" resultType="java.lang.String">
+    select count(*) from zomore_inventoryhistory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_inventoryhistory
+    <set>
+      <if test="record.inventoryhistoryId != null">
+        InventoryHistory_id = #{record.inventoryhistoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inventoryhistoryBrand != null">
+        InventoryHistory_brand = #{record.inventoryhistoryBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inventoryhistoryDate != null">
+        InventoryHistory_date = #{record.inventoryhistoryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.inventoryhistoryClassification != null">
+        InventoryHistory_classification = #{record.inventoryhistoryClassification,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inventoryhistoryShop != null">
+        InventoryHistory_shop = #{record.inventoryhistoryShop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inventoryhistoryPersonnel != null">
+        InventoryHistory_personnel = #{record.inventoryhistoryPersonnel,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inventoryhistoryMode != null">
+        InventoryHistory_mode = #{record.inventoryhistoryMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inventoryhistoryDefect != null">
+        InventoryHistory_Defect = #{record.inventoryhistoryDefect,jdbcType=VARCHAR},
+      </if>
+      <if test="record.inventoryhistoryNote != null">
+        InventoryHistory_note = #{record.inventoryhistoryNote,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update zomore_inventoryhistory
+    set InventoryHistory_id = #{record.inventoryhistoryId,jdbcType=VARCHAR},
+      InventoryHistory_brand = #{record.inventoryhistoryBrand,jdbcType=VARCHAR},
+      InventoryHistory_date = #{record.inventoryhistoryDate,jdbcType=TIMESTAMP},
+      InventoryHistory_classification = #{record.inventoryhistoryClassification,jdbcType=VARCHAR},
+      InventoryHistory_shop = #{record.inventoryhistoryShop,jdbcType=VARCHAR},
+      InventoryHistory_personnel = #{record.inventoryhistoryPersonnel,jdbcType=VARCHAR},
+      InventoryHistory_mode = #{record.inventoryhistoryMode,jdbcType=VARCHAR},
+      InventoryHistory_Defect = #{record.inventoryhistoryDefect,jdbcType=VARCHAR},
+      InventoryHistory_note = #{record.inventoryhistoryNote,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_inventoryhistory
+    set InventoryHistory_id = #{record.inventoryhistoryId,jdbcType=VARCHAR},
+      InventoryHistory_brand = #{record.inventoryhistoryBrand,jdbcType=VARCHAR},
+      InventoryHistory_date = #{record.inventoryhistoryDate,jdbcType=TIMESTAMP},
+      InventoryHistory_classification = #{record.inventoryhistoryClassification,jdbcType=VARCHAR},
+      InventoryHistory_shop = #{record.inventoryhistoryShop,jdbcType=VARCHAR},
+      InventoryHistory_personnel = #{record.inventoryhistoryPersonnel,jdbcType=VARCHAR},
+      InventoryHistory_mode = #{record.inventoryhistoryMode,jdbcType=VARCHAR},
+      InventoryHistory_Defect = #{record.inventoryhistoryDefect,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreInventoryhistory">
+    update zomore_inventoryhistory
+    <set>
+      <if test="inventoryhistoryBrand != null">
+        InventoryHistory_brand = #{inventoryhistoryBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryhistoryDate != null">
+        InventoryHistory_date = #{inventoryhistoryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="inventoryhistoryClassification != null">
+        InventoryHistory_classification = #{inventoryhistoryClassification,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryhistoryShop != null">
+        InventoryHistory_shop = #{inventoryhistoryShop,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryhistoryPersonnel != null">
+        InventoryHistory_personnel = #{inventoryhistoryPersonnel,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryhistoryMode != null">
+        InventoryHistory_mode = #{inventoryhistoryMode,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryhistoryDefect != null">
+        InventoryHistory_Defect = #{inventoryhistoryDefect,jdbcType=VARCHAR},
+      </if>
+      <if test="inventoryhistoryNote != null">
+        InventoryHistory_note = #{inventoryhistoryNote,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where InventoryHistory_id = #{inventoryhistoryId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zomore.domain.ZomoreInventoryhistory">
+    update zomore_inventoryhistory
+    set InventoryHistory_brand = #{inventoryhistoryBrand,jdbcType=VARCHAR},
+      InventoryHistory_date = #{inventoryhistoryDate,jdbcType=TIMESTAMP},
+      InventoryHistory_classification = #{inventoryhistoryClassification,jdbcType=VARCHAR},
+      InventoryHistory_shop = #{inventoryhistoryShop,jdbcType=VARCHAR},
+      InventoryHistory_personnel = #{inventoryhistoryPersonnel,jdbcType=VARCHAR},
+      InventoryHistory_mode = #{inventoryhistoryMode,jdbcType=VARCHAR},
+      InventoryHistory_Defect = #{inventoryhistoryDefect,jdbcType=VARCHAR},
+      InventoryHistory_note = #{inventoryhistoryNote,jdbcType=LONGVARCHAR}
+    where InventoryHistory_id = #{inventoryhistoryId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreInventoryhistory">
+    update zomore_inventoryhistory
+    set InventoryHistory_brand = #{inventoryhistoryBrand,jdbcType=VARCHAR},
+      InventoryHistory_date = #{inventoryhistoryDate,jdbcType=TIMESTAMP},
+      InventoryHistory_classification = #{inventoryhistoryClassification,jdbcType=VARCHAR},
+      InventoryHistory_shop = #{inventoryhistoryShop,jdbcType=VARCHAR},
+      InventoryHistory_personnel = #{inventoryhistoryPersonnel,jdbcType=VARCHAR},
+      InventoryHistory_mode = #{inventoryhistoryMode,jdbcType=VARCHAR},
+      InventoryHistory_Defect = #{inventoryhistoryDefect,jdbcType=VARCHAR}
+    where InventoryHistory_id = #{inventoryhistoryId,jdbcType=VARCHAR}
+  </update>
+</mapper>

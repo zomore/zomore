@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreIntegralExchangeMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreIntegralExchange">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="integral_rule_id" jdbcType="VARCHAR" property="integralRuleId" />
+    <result column="echange" jdbcType="VARCHAR" property="echange" />
+    <result column="echange_integral" jdbcType="INTEGER" property="echangeIntegral" />
+    <result column="starttime" jdbcType="TIMESTAMP" property="starttime" />
+    <result column="endtime" jdbcType="TIMESTAMP" property="endtime" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, integral_rule_id, echange, echange_integral, starttime, endtime, state
+  </sql>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreIntegralExchangeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_integral_exchange
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zomore_integral_exchange
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zomore_integral_exchange
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreIntegralExchangeExample">
+    delete from zomore_integral_exchange
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreIntegralExchange">
+    insert into zomore_integral_exchange (id, integral_rule_id, echange, 
+      echange_integral, starttime, endtime, 
+      state)
+    values (#{id,jdbcType=VARCHAR}, #{integralRuleId,jdbcType=VARCHAR}, #{echange,jdbcType=VARCHAR}, 
+      #{echangeIntegral,jdbcType=INTEGER}, #{starttime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreIntegralExchange">
+    insert into zomore_integral_exchange
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="integralRuleId != null">
+        integral_rule_id,
+      </if>
+      <if test="echange != null">
+        echange,
+      </if>
+      <if test="echangeIntegral != null">
+        echange_integral,
+      </if>
+      <if test="starttime != null">
+        starttime,
+      </if>
+      <if test="endtime != null">
+        endtime,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="integralRuleId != null">
+        #{integralRuleId,jdbcType=VARCHAR},
+      </if>
+      <if test="echange != null">
+        #{echange,jdbcType=VARCHAR},
+      </if>
+      <if test="echangeIntegral != null">
+        #{echangeIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null">
+        #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreIntegralExchangeExample" resultType="java.lang.Long">
+    select count(*) from zomore_integral_exchange
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_integral_exchange
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.integralRuleId != null">
+        integral_rule_id = #{record.integralRuleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.echange != null">
+        echange = #{record.echange,jdbcType=VARCHAR},
+      </if>
+      <if test="record.echangeIntegral != null">
+        echange_integral = #{record.echangeIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="record.starttime != null">
+        starttime = #{record.starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null">
+        endtime = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_integral_exchange
+    set id = #{record.id,jdbcType=VARCHAR},
+      integral_rule_id = #{record.integralRuleId,jdbcType=VARCHAR},
+      echange = #{record.echange,jdbcType=VARCHAR},
+      echange_integral = #{record.echangeIntegral,jdbcType=INTEGER},
+      starttime = #{record.starttime,jdbcType=TIMESTAMP},
+      endtime = #{record.endtime,jdbcType=TIMESTAMP},
+      state = #{record.state,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreIntegralExchange">
+    update zomore_integral_exchange
+    <set>
+      <if test="integralRuleId != null">
+        integral_rule_id = #{integralRuleId,jdbcType=VARCHAR},
+      </if>
+      <if test="echange != null">
+        echange = #{echange,jdbcType=VARCHAR},
+      </if>
+      <if test="echangeIntegral != null">
+        echange_integral = #{echangeIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="starttime != null">
+        starttime = #{starttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        endtime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreIntegralExchange">
+    update zomore_integral_exchange
+    set integral_rule_id = #{integralRuleId,jdbcType=VARCHAR},
+      echange = #{echange,jdbcType=VARCHAR},
+      echange_integral = #{echangeIntegral,jdbcType=INTEGER},
+      starttime = #{starttime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

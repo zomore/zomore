@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreMemberPointMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreMemberPoint">
+    <id column="zomore_member_point_id" jdbcType="INTEGER" property="zomoreMemberPointId" />
+    <result column="zomore_member_point_code" jdbcType="VARCHAR" property="zomoreMemberPointCode" />
+    <result column="zomore_member_point_people" jdbcType="VARCHAR" property="zomoreMemberPointPeople" />
+    <result column="zomore_member_point_rule" jdbcType="DOUBLE" property="zomoreMemberPointRule" />
+    <result column="zomore_member_point_num" jdbcType="DOUBLE" property="zomoreMemberPointNum" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+    <result column="shop" jdbcType="VARCHAR" property="shop" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zomore.domain.ZomoreMemberPoint">
+    <result column="meno" jdbcType="LONGVARCHAR" property="meno" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    zomore_member_point_id, zomore_member_point_code, zomore_member_point_people, zomore_member_point_rule, 
+    zomore_member_point_num, time, shop
+  </sql>
+  <sql id="Blob_Column_List">
+    meno
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.zomore.domain.ZomoreMemberPointExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zomore_member_point
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreMemberPointExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_member_point
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zomore_member_point
+    where zomore_member_point_id = #{zomoreMemberPointId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from zomore_member_point
+    where zomore_member_point_id = #{zomoreMemberPointId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreMemberPointExample">
+    delete from zomore_member_point
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreMemberPoint">
+    insert into zomore_member_point (zomore_member_point_id, zomore_member_point_code, 
+      zomore_member_point_people, zomore_member_point_rule, 
+      zomore_member_point_num, time, shop, 
+      meno)
+    values (#{zomoreMemberPointId,jdbcType=INTEGER}, #{zomoreMemberPointCode,jdbcType=VARCHAR}, 
+      #{zomoreMemberPointPeople,jdbcType=VARCHAR}, #{zomoreMemberPointRule,jdbcType=DOUBLE}, 
+      #{zomoreMemberPointNum,jdbcType=DOUBLE}, #{time,jdbcType=TIMESTAMP}, #{shop,jdbcType=VARCHAR}, 
+      #{meno,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreMemberPoint">
+    insert into zomore_member_point
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="zomoreMemberPointId != null">
+        zomore_member_point_id,
+      </if>
+      <if test="zomoreMemberPointCode != null">
+        zomore_member_point_code,
+      </if>
+      <if test="zomoreMemberPointPeople != null">
+        zomore_member_point_people,
+      </if>
+      <if test="zomoreMemberPointRule != null">
+        zomore_member_point_rule,
+      </if>
+      <if test="zomoreMemberPointNum != null">
+        zomore_member_point_num,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+      <if test="shop != null">
+        shop,
+      </if>
+      <if test="meno != null">
+        meno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="zomoreMemberPointId != null">
+        #{zomoreMemberPointId,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreMemberPointCode != null">
+        #{zomoreMemberPointCode,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreMemberPointPeople != null">
+        #{zomoreMemberPointPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreMemberPointRule != null">
+        #{zomoreMemberPointRule,jdbcType=DOUBLE},
+      </if>
+      <if test="zomoreMemberPointNum != null">
+        #{zomoreMemberPointNum,jdbcType=DOUBLE},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shop != null">
+        #{shop,jdbcType=VARCHAR},
+      </if>
+      <if test="meno != null">
+        #{meno,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreMemberPointExample" resultType="java.lang.Long">
+    select count(*) from zomore_member_point
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+
+  <select id="selsectMemberPoitNumber" resultType="java.lang.Double" parameterType="java.lang.String">
+      select SUM(zomore_member_point_num) as number from zomore_member_point where zomore_member_point_code=#{zomoreMemberPointCode}
+  </select>
+
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_member_point
+    <set>
+      <if test="record.zomoreMemberPointId != null">
+        zomore_member_point_id = #{record.zomoreMemberPointId,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreMemberPointCode != null">
+        zomore_member_point_code = #{record.zomoreMemberPointCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreMemberPointPeople != null">
+        zomore_member_point_people = #{record.zomoreMemberPointPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreMemberPointRule != null">
+        zomore_member_point_rule = #{record.zomoreMemberPointRule,jdbcType=DOUBLE},
+      </if>
+      <if test="record.zomoreMemberPointNum != null">
+        zomore_member_point_num = #{record.zomoreMemberPointNum,jdbcType=DOUBLE},
+      </if>
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.shop != null">
+        shop = #{record.shop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.meno != null">
+        meno = #{record.meno,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update zomore_member_point
+    set zomore_member_point_id = #{record.zomoreMemberPointId,jdbcType=INTEGER},
+      zomore_member_point_code = #{record.zomoreMemberPointCode,jdbcType=VARCHAR},
+      zomore_member_point_people = #{record.zomoreMemberPointPeople,jdbcType=VARCHAR},
+      zomore_member_point_rule = #{record.zomoreMemberPointRule,jdbcType=DOUBLE},
+      zomore_member_point_num = #{record.zomoreMemberPointNum,jdbcType=DOUBLE},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      shop = #{record.shop,jdbcType=VARCHAR},
+      meno = #{record.meno,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_member_point
+    set zomore_member_point_id = #{record.zomoreMemberPointId,jdbcType=INTEGER},
+      zomore_member_point_code = #{record.zomoreMemberPointCode,jdbcType=VARCHAR},
+      zomore_member_point_people = #{record.zomoreMemberPointPeople,jdbcType=VARCHAR},
+      zomore_member_point_rule = #{record.zomoreMemberPointRule,jdbcType=DOUBLE},
+      zomore_member_point_num = #{record.zomoreMemberPointNum,jdbcType=DOUBLE},
+      time = #{record.time,jdbcType=TIMESTAMP},
+      shop = #{record.shop,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreMemberPoint">
+    update zomore_member_point
+    <set>
+      <if test="zomoreMemberPointCode != null">
+        zomore_member_point_code = #{zomoreMemberPointCode,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreMemberPointPeople != null">
+        zomore_member_point_people = #{zomoreMemberPointPeople,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreMemberPointRule != null">
+        zomore_member_point_rule = #{zomoreMemberPointRule,jdbcType=DOUBLE},
+      </if>
+      <if test="zomoreMemberPointNum != null">
+        zomore_member_point_num = #{zomoreMemberPointNum,jdbcType=DOUBLE},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shop != null">
+        shop = #{shop,jdbcType=VARCHAR},
+      </if>
+      <if test="meno != null">
+        meno = #{meno,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where zomore_member_point_id = #{zomoreMemberPointId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zomore.domain.ZomoreMemberPoint">
+    update zomore_member_point
+    set zomore_member_point_code = #{zomoreMemberPointCode,jdbcType=VARCHAR},
+      zomore_member_point_people = #{zomoreMemberPointPeople,jdbcType=VARCHAR},
+      zomore_member_point_rule = #{zomoreMemberPointRule,jdbcType=DOUBLE},
+      zomore_member_point_num = #{zomoreMemberPointNum,jdbcType=DOUBLE},
+      time = #{time,jdbcType=TIMESTAMP},
+      shop = #{shop,jdbcType=VARCHAR},
+      meno = #{meno,jdbcType=LONGVARCHAR}
+    where zomore_member_point_id = #{zomoreMemberPointId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreMemberPoint">
+    update zomore_member_point
+    set zomore_member_point_code = #{zomoreMemberPointCode,jdbcType=VARCHAR},
+      zomore_member_point_people = #{zomoreMemberPointPeople,jdbcType=VARCHAR},
+      zomore_member_point_rule = #{zomoreMemberPointRule,jdbcType=DOUBLE},
+      zomore_member_point_num = #{zomoreMemberPointNum,jdbcType=DOUBLE},
+      time = #{time,jdbcType=TIMESTAMP},
+      shop = #{shop,jdbcType=VARCHAR}
+    where zomore_member_point_id = #{zomoreMemberPointId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreServiceCommodityorderMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreServiceCommodityorder">
+    <id column="zomore_commodity_sale_id" jdbcType="VARCHAR" property="zomoreCommoditySaleId" />
+    <result column="zomore_commodity_sale_time" jdbcType="TIMESTAMP" property="zomoreCommoditySaleTime" />
+    <result column="zomore_commodity_sale_type" jdbcType="VARCHAR" property="zomoreCommoditySaleType" />
+    <result column="zomore_commodity_sale_name" jdbcType="VARCHAR" property="zomoreCommoditySaleName" />
+    <result column="zomore_commodity_sale_member" jdbcType="VARCHAR" property="zomoreCommoditySaleMember" />
+    <result column="zomore_commodity_sale_num" jdbcType="INTEGER" property="zomoreCommoditySaleNum" />
+    <result column="zomore_commodity_sale_money" jdbcType="VARCHAR" property="zomoreCommoditySaleMoney" />
+    <result column="zomore_commodity_sale_inmoney" jdbcType="VARCHAR" property="zomoreCommoditySaleInmoney" />
+    <result column="zomore_commodity_sale_letmoney" jdbcType="VARCHAR" property="zomoreCommoditySaleLetmoney" />
+    <result column="zomore_commodity_sale_savemoney" jdbcType="VARCHAR" property="zomoreCommoditySaleSavemoney" />
+    <result column="zomore_commodity_sale_guide" jdbcType="VARCHAR" property="zomoreCommoditySaleGuide" />
+    <result column="zomore_commodity_shop" jdbcType="VARCHAR" property="zomoreCommodityShop" />
+    <result column="zomore_commodity_state" jdbcType="INTEGER" property="zomoreCommodityState" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    zomore_commodity_sale_id, zomore_commodity_sale_time, zomore_commodity_sale_type, 
+    zomore_commodity_sale_name, zomore_commodity_sale_member, zomore_commodity_sale_num, 
+    zomore_commodity_sale_money, zomore_commodity_sale_inmoney, zomore_commodity_sale_letmoney, 
+    zomore_commodity_sale_savemoney, zomore_commodity_sale_guide, zomore_commodity_shop, 
+    zomore_commodity_state
+  </sql>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreServiceCommodityorderExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_service_commodityorder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zomore_service_commodityorder
+    where zomore_commodity_sale_id = #{zomoreCommoditySaleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zomore_service_commodityorder
+    where zomore_commodity_sale_id = #{zomoreCommoditySaleId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreServiceCommodityorderExample">
+    delete from zomore_service_commodityorder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreServiceCommodityorder">
+    insert into zomore_service_commodityorder (zomore_commodity_sale_id, zomore_commodity_sale_time, 
+      zomore_commodity_sale_type, zomore_commodity_sale_name, 
+      zomore_commodity_sale_member, zomore_commodity_sale_num, 
+      zomore_commodity_sale_money, zomore_commodity_sale_inmoney, 
+      zomore_commodity_sale_letmoney, zomore_commodity_sale_savemoney, 
+      zomore_commodity_sale_guide, zomore_commodity_shop, 
+      zomore_commodity_state)
+    values (#{zomoreCommoditySaleId,jdbcType=VARCHAR}, #{zomoreCommoditySaleTime,jdbcType=TIMESTAMP}, 
+      #{zomoreCommoditySaleType,jdbcType=VARCHAR}, #{zomoreCommoditySaleName,jdbcType=VARCHAR}, 
+      #{zomoreCommoditySaleMember,jdbcType=VARCHAR}, #{zomoreCommoditySaleNum,jdbcType=INTEGER}, 
+      #{zomoreCommoditySaleMoney,jdbcType=VARCHAR}, #{zomoreCommoditySaleInmoney,jdbcType=VARCHAR}, 
+      #{zomoreCommoditySaleLetmoney,jdbcType=VARCHAR}, #{zomoreCommoditySaleSavemoney,jdbcType=VARCHAR}, 
+      #{zomoreCommoditySaleGuide,jdbcType=VARCHAR}, #{zomoreCommodityShop,jdbcType=VARCHAR}, 
+      #{zomoreCommodityState,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreServiceCommodityorder">
+    insert into zomore_service_commodityorder
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="zomoreCommoditySaleId != null">
+        zomore_commodity_sale_id,
+      </if>
+      <if test="zomoreCommoditySaleTime != null">
+        zomore_commodity_sale_time,
+      </if>
+      <if test="zomoreCommoditySaleType != null">
+        zomore_commodity_sale_type,
+      </if>
+      <if test="zomoreCommoditySaleName != null">
+        zomore_commodity_sale_name,
+      </if>
+      <if test="zomoreCommoditySaleMember != null">
+        zomore_commodity_sale_member,
+      </if>
+      <if test="zomoreCommoditySaleNum != null">
+        zomore_commodity_sale_num,
+      </if>
+      <if test="zomoreCommoditySaleMoney != null">
+        zomore_commodity_sale_money,
+      </if>
+      <if test="zomoreCommoditySaleInmoney != null">
+        zomore_commodity_sale_inmoney,
+      </if>
+      <if test="zomoreCommoditySaleLetmoney != null">
+        zomore_commodity_sale_letmoney,
+      </if>
+      <if test="zomoreCommoditySaleSavemoney != null">
+        zomore_commodity_sale_savemoney,
+      </if>
+      <if test="zomoreCommoditySaleGuide != null">
+        zomore_commodity_sale_guide,
+      </if>
+      <if test="zomoreCommodityShop != null">
+        zomore_commodity_shop,
+      </if>
+      <if test="zomoreCommodityState != null">
+        zomore_commodity_state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="zomoreCommoditySaleId != null">
+        #{zomoreCommoditySaleId,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleTime != null">
+        #{zomoreCommoditySaleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zomoreCommoditySaleType != null">
+        #{zomoreCommoditySaleType,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleName != null">
+        #{zomoreCommoditySaleName,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleMember != null">
+        #{zomoreCommoditySaleMember,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleNum != null">
+        #{zomoreCommoditySaleNum,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommoditySaleMoney != null">
+        #{zomoreCommoditySaleMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleInmoney != null">
+        #{zomoreCommoditySaleInmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleLetmoney != null">
+        #{zomoreCommoditySaleLetmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleSavemoney != null">
+        #{zomoreCommoditySaleSavemoney,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleGuide != null">
+        #{zomoreCommoditySaleGuide,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityShop != null">
+        #{zomoreCommodityShop,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityState != null">
+        #{zomoreCommodityState,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreServiceCommodityorderExample" resultType="java.lang.Long">
+    select count(*) from zomore_service_commodityorder
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_service_commodityorder
+    <set>
+      <if test="record.zomoreCommoditySaleId != null">
+        zomore_commodity_sale_id = #{record.zomoreCommoditySaleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommoditySaleTime != null">
+        zomore_commodity_sale_time = #{record.zomoreCommoditySaleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zomoreCommoditySaleType != null">
+        zomore_commodity_sale_type = #{record.zomoreCommoditySaleType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommoditySaleName != null">
+        zomore_commodity_sale_name = #{record.zomoreCommoditySaleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommoditySaleMember != null">
+        zomore_commodity_sale_member = #{record.zomoreCommoditySaleMember,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommoditySaleNum != null">
+        zomore_commodity_sale_num = #{record.zomoreCommoditySaleNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommoditySaleMoney != null">
+        zomore_commodity_sale_money = #{record.zomoreCommoditySaleMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommoditySaleInmoney != null">
+        zomore_commodity_sale_inmoney = #{record.zomoreCommoditySaleInmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommoditySaleLetmoney != null">
+        zomore_commodity_sale_letmoney = #{record.zomoreCommoditySaleLetmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommoditySaleSavemoney != null">
+        zomore_commodity_sale_savemoney = #{record.zomoreCommoditySaleSavemoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommoditySaleGuide != null">
+        zomore_commodity_sale_guide = #{record.zomoreCommoditySaleGuide,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityShop != null">
+        zomore_commodity_shop = #{record.zomoreCommodityShop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityState != null">
+        zomore_commodity_state = #{record.zomoreCommodityState,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_service_commodityorder
+    set zomore_commodity_sale_id = #{record.zomoreCommoditySaleId,jdbcType=VARCHAR},
+      zomore_commodity_sale_time = #{record.zomoreCommoditySaleTime,jdbcType=TIMESTAMP},
+      zomore_commodity_sale_type = #{record.zomoreCommoditySaleType,jdbcType=VARCHAR},
+      zomore_commodity_sale_name = #{record.zomoreCommoditySaleName,jdbcType=VARCHAR},
+      zomore_commodity_sale_member = #{record.zomoreCommoditySaleMember,jdbcType=VARCHAR},
+      zomore_commodity_sale_num = #{record.zomoreCommoditySaleNum,jdbcType=INTEGER},
+      zomore_commodity_sale_money = #{record.zomoreCommoditySaleMoney,jdbcType=VARCHAR},
+      zomore_commodity_sale_inmoney = #{record.zomoreCommoditySaleInmoney,jdbcType=VARCHAR},
+      zomore_commodity_sale_letmoney = #{record.zomoreCommoditySaleLetmoney,jdbcType=VARCHAR},
+      zomore_commodity_sale_savemoney = #{record.zomoreCommoditySaleSavemoney,jdbcType=VARCHAR},
+      zomore_commodity_sale_guide = #{record.zomoreCommoditySaleGuide,jdbcType=VARCHAR},
+      zomore_commodity_shop = #{record.zomoreCommodityShop,jdbcType=VARCHAR},
+      zomore_commodity_state = #{record.zomoreCommodityState,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreServiceCommodityorder">
+    update zomore_service_commodityorder
+    <set>
+      <if test="zomoreCommoditySaleTime != null">
+        zomore_commodity_sale_time = #{zomoreCommoditySaleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zomoreCommoditySaleType != null">
+        zomore_commodity_sale_type = #{zomoreCommoditySaleType,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleName != null">
+        zomore_commodity_sale_name = #{zomoreCommoditySaleName,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleMember != null">
+        zomore_commodity_sale_member = #{zomoreCommoditySaleMember,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleNum != null">
+        zomore_commodity_sale_num = #{zomoreCommoditySaleNum,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommoditySaleMoney != null">
+        zomore_commodity_sale_money = #{zomoreCommoditySaleMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleInmoney != null">
+        zomore_commodity_sale_inmoney = #{zomoreCommoditySaleInmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleLetmoney != null">
+        zomore_commodity_sale_letmoney = #{zomoreCommoditySaleLetmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleSavemoney != null">
+        zomore_commodity_sale_savemoney = #{zomoreCommoditySaleSavemoney,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleGuide != null">
+        zomore_commodity_sale_guide = #{zomoreCommoditySaleGuide,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityShop != null">
+        zomore_commodity_shop = #{zomoreCommodityShop,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityState != null">
+        zomore_commodity_state = #{zomoreCommodityState,jdbcType=INTEGER},
+      </if>
+    </set>
+    where zomore_commodity_sale_id = #{zomoreCommoditySaleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreServiceCommodityorder">
+    update zomore_service_commodityorder
+    set zomore_commodity_sale_time = #{zomoreCommoditySaleTime,jdbcType=TIMESTAMP},
+      zomore_commodity_sale_type = #{zomoreCommoditySaleType,jdbcType=VARCHAR},
+      zomore_commodity_sale_name = #{zomoreCommoditySaleName,jdbcType=VARCHAR},
+      zomore_commodity_sale_member = #{zomoreCommoditySaleMember,jdbcType=VARCHAR},
+      zomore_commodity_sale_num = #{zomoreCommoditySaleNum,jdbcType=INTEGER},
+      zomore_commodity_sale_money = #{zomoreCommoditySaleMoney,jdbcType=VARCHAR},
+      zomore_commodity_sale_inmoney = #{zomoreCommoditySaleInmoney,jdbcType=VARCHAR},
+      zomore_commodity_sale_letmoney = #{zomoreCommoditySaleLetmoney,jdbcType=VARCHAR},
+      zomore_commodity_sale_savemoney = #{zomoreCommoditySaleSavemoney,jdbcType=VARCHAR},
+      zomore_commodity_sale_guide = #{zomoreCommoditySaleGuide,jdbcType=VARCHAR},
+      zomore_commodity_shop = #{zomoreCommodityShop,jdbcType=VARCHAR},
+      zomore_commodity_state = #{zomoreCommodityState,jdbcType=INTEGER}
+    where zomore_commodity_sale_id = #{zomoreCommoditySaleId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="searchCommoditySale" parameterType="com.zomore.utils.ServiceCountCommodityOrder" resultType="com.zomore.utils.ServiceCountCommodityOrder">
+
+    select c.commodityName as commodityName,c.commodityType as commodityType,c.commodityMoney as commodityMoney,SUM(c.saleNum) as saleNum,SUM(c.inmoney) as commodityOutprice
+    from (select t.zomore_commodity_sale_id as id,d.zomore_commodity_state as saleStatus,t.zomore_commodity_name as commodityName,t.zomore_commodity_type as commodityType,t.zomore_commodity_num
+    as saleNum, d.zomore_commodity_sale_inmoney as inmoney ,d.zomore_commodity_sale_money as commodityMoney, d.zomore_commodity_sale_time as createTime
+    from zomore_service_commodity_salecommodit t LEFT JOIN zomore_service_commodityorder d on t.zomore_commodity_sale_id=d.zomore_commodity_sale_id
+    ) c where c.saleStatus=1
+    <if test="commodityCode!=null">
+      and c.commodityCode  LIKE concat(concat('%',#{commodityName}),'%')
+    </if>
+    <if test="commodityName!=null">
+      and c.commodityName LIKE concat(concat('%',#{commodityName}),'%')
+    </if>
+    <if test="commodityType!=null">
+      and c.commodityType =#{commodityType}
+    </if>
+    <if test="commodityStartTime!=null and commodityEndTime!=null">
+      and c.createTime BETWEEN #{commodityStartTime} and #{commodityEndTime}
+    </if>
+    GROUP BY commodityName
+  </select>
+
+</mapper>

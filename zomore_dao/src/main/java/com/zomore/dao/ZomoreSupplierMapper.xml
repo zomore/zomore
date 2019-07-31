@@ -1,0 +1,527 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreSupplierMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreSupplier">
+    <id column="zomore_supplier_id" jdbcType="VARCHAR" property="zomoreSupplierId" />
+    <result column="zomore_supplier_name" jdbcType="VARCHAR" property="zomoreSupplierName" />
+    <result column="zomore_supplier_namepingyin" jdbcType="VARCHAR" property="zomoreSupplierNamepingyin" />
+    <result column="zomore_supplier_connect_name" jdbcType="VARCHAR" property="zomoreSupplierConnectName" />
+    <result column="zomore_supplier_connect_phone" jdbcType="VARCHAR" property="zomoreSupplierConnectPhone" />
+    <result column="zomore_supplier_connect_email" jdbcType="VARCHAR" property="zomoreSupplierConnectEmail" />
+    <result column="zomore_supplier_bank" jdbcType="VARCHAR" property="zomoreSupplierBank" />
+    <result column="zomore_supplier_bank_name" jdbcType="VARCHAR" property="zomoreSupplierBankName" />
+    <result column="zomore_supplier_bank_num" jdbcType="VARCHAR" property="zomoreSupplierBankNum" />
+    <result column="zomore_supplier_ratepaying_namenum" jdbcType="VARCHAR" property="zomoreSupplierRatepayingNamenum" />
+    <result column="zomore_supplier_invoice" jdbcType="VARCHAR" property="zomoreSupplierInvoice" />
+    <result column="zomore_supplier_settlement_type" jdbcType="VARCHAR" property="zomoreSupplierSettlementType" />
+    <result column="zomore_supplier_settlement_detailed" jdbcType="VARCHAR" property="zomoreSupplierSettlementDetailed" />
+    <result column="zomore_supplier_returnpoint_delivery" jdbcType="VARCHAR" property="zomoreSupplierReturnpointDelivery" />
+    <result column="zomore_supplier_returnpoint_fixed" jdbcType="VARCHAR" property="zomoreSupplierReturnpointFixed" />
+    <result column="zomore_supplier_address" jdbcType="VARCHAR" property="zomoreSupplierAddress" />
+    <result column="zomore_supplier_privilegetype" jdbcType="INTEGER" property="zomoreSupplierPrivilegetype" />
+    <result column="zomore_supplier_usertype" jdbcType="INTEGER" property="zomoreSupplierUsertype" />
+    <result column="shop" jdbcType="VARCHAR" property="shop" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zomore.domain.ZomoreSupplier">
+    <result column="zomore_supplier_meno" jdbcType="LONGVARCHAR" property="zomoreSupplierMeno" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    zomore_supplier_id, zomore_supplier_name, zomore_supplier_namepingyin, zomore_supplier_connect_name, 
+    zomore_supplier_connect_phone, zomore_supplier_connect_email, zomore_supplier_bank, 
+    zomore_supplier_bank_name, zomore_supplier_bank_num, zomore_supplier_ratepaying_namenum, 
+    zomore_supplier_invoice, zomore_supplier_settlement_type, zomore_supplier_settlement_detailed, 
+    zomore_supplier_returnpoint_delivery, zomore_supplier_returnpoint_fixed, zomore_supplier_address, 
+    zomore_supplier_privilegetype, zomore_supplier_usertype, shop
+  </sql>
+  <sql id="Blob_Column_List">
+    zomore_supplier_meno
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.zomore.domain.ZomoreSupplierExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zomore_supplier
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreSupplierExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_supplier
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zomore_supplier
+    where zomore_supplier_id = #{zomoreSupplierId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zomore_supplier
+    where zomore_supplier_id = #{zomoreSupplierId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreSupplierExample">
+    delete from zomore_supplier
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreSupplier">
+    insert into zomore_supplier (zomore_supplier_id, zomore_supplier_name, 
+      zomore_supplier_namepingyin, zomore_supplier_connect_name, 
+      zomore_supplier_connect_phone, zomore_supplier_connect_email, 
+      zomore_supplier_bank, zomore_supplier_bank_name, 
+      zomore_supplier_bank_num, zomore_supplier_ratepaying_namenum, 
+      zomore_supplier_invoice, zomore_supplier_settlement_type, 
+      zomore_supplier_settlement_detailed, zomore_supplier_returnpoint_delivery, 
+      zomore_supplier_returnpoint_fixed, zomore_supplier_address, 
+      zomore_supplier_privilegetype, zomore_supplier_usertype, 
+      shop, zomore_supplier_meno)
+    values (#{zomoreSupplierId,jdbcType=VARCHAR}, #{zomoreSupplierName,jdbcType=VARCHAR}, 
+      #{zomoreSupplierNamepingyin,jdbcType=VARCHAR}, #{zomoreSupplierConnectName,jdbcType=VARCHAR}, 
+      #{zomoreSupplierConnectPhone,jdbcType=VARCHAR}, #{zomoreSupplierConnectEmail,jdbcType=VARCHAR}, 
+      #{zomoreSupplierBank,jdbcType=VARCHAR}, #{zomoreSupplierBankName,jdbcType=VARCHAR}, 
+      #{zomoreSupplierBankNum,jdbcType=VARCHAR}, #{zomoreSupplierRatepayingNamenum,jdbcType=VARCHAR}, 
+      #{zomoreSupplierInvoice,jdbcType=VARCHAR}, #{zomoreSupplierSettlementType,jdbcType=VARCHAR}, 
+      #{zomoreSupplierSettlementDetailed,jdbcType=VARCHAR}, #{zomoreSupplierReturnpointDelivery,jdbcType=VARCHAR}, 
+      #{zomoreSupplierReturnpointFixed,jdbcType=VARCHAR}, #{zomoreSupplierAddress,jdbcType=VARCHAR}, 
+      #{zomoreSupplierPrivilegetype,jdbcType=INTEGER}, #{zomoreSupplierUsertype,jdbcType=INTEGER}, 
+      #{shop,jdbcType=VARCHAR}, #{zomoreSupplierMeno,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreSupplier">
+    insert into zomore_supplier
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="zomoreSupplierId != null">
+        zomore_supplier_id,
+      </if>
+      <if test="zomoreSupplierName != null">
+        zomore_supplier_name,
+      </if>
+      <if test="zomoreSupplierNamepingyin != null">
+        zomore_supplier_namepingyin,
+      </if>
+      <if test="zomoreSupplierConnectName != null">
+        zomore_supplier_connect_name,
+      </if>
+      <if test="zomoreSupplierConnectPhone != null">
+        zomore_supplier_connect_phone,
+      </if>
+      <if test="zomoreSupplierConnectEmail != null">
+        zomore_supplier_connect_email,
+      </if>
+      <if test="zomoreSupplierBank != null">
+        zomore_supplier_bank,
+      </if>
+      <if test="zomoreSupplierBankName != null">
+        zomore_supplier_bank_name,
+      </if>
+      <if test="zomoreSupplierBankNum != null">
+        zomore_supplier_bank_num,
+      </if>
+      <if test="zomoreSupplierRatepayingNamenum != null">
+        zomore_supplier_ratepaying_namenum,
+      </if>
+      <if test="zomoreSupplierInvoice != null">
+        zomore_supplier_invoice,
+      </if>
+      <if test="zomoreSupplierSettlementType != null">
+        zomore_supplier_settlement_type,
+      </if>
+      <if test="zomoreSupplierSettlementDetailed != null">
+        zomore_supplier_settlement_detailed,
+      </if>
+      <if test="zomoreSupplierReturnpointDelivery != null">
+        zomore_supplier_returnpoint_delivery,
+      </if>
+      <if test="zomoreSupplierReturnpointFixed != null">
+        zomore_supplier_returnpoint_fixed,
+      </if>
+      <if test="zomoreSupplierAddress != null">
+        zomore_supplier_address,
+      </if>
+      <if test="zomoreSupplierPrivilegetype != null">
+        zomore_supplier_privilegetype,
+      </if>
+      <if test="zomoreSupplierUsertype != null">
+        zomore_supplier_usertype,
+      </if>
+      <if test="shop != null">
+        shop,
+      </if>
+      <if test="zomoreSupplierMeno != null">
+        zomore_supplier_meno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="zomoreSupplierId != null">
+        #{zomoreSupplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierName != null">
+        #{zomoreSupplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierNamepingyin != null">
+        #{zomoreSupplierNamepingyin,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierConnectName != null">
+        #{zomoreSupplierConnectName,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierConnectPhone != null">
+        #{zomoreSupplierConnectPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierConnectEmail != null">
+        #{zomoreSupplierConnectEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierBank != null">
+        #{zomoreSupplierBank,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierBankName != null">
+        #{zomoreSupplierBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierBankNum != null">
+        #{zomoreSupplierBankNum,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierRatepayingNamenum != null">
+        #{zomoreSupplierRatepayingNamenum,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierInvoice != null">
+        #{zomoreSupplierInvoice,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierSettlementType != null">
+        #{zomoreSupplierSettlementType,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierSettlementDetailed != null">
+        #{zomoreSupplierSettlementDetailed,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierReturnpointDelivery != null">
+        #{zomoreSupplierReturnpointDelivery,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierReturnpointFixed != null">
+        #{zomoreSupplierReturnpointFixed,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierAddress != null">
+        #{zomoreSupplierAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierPrivilegetype != null">
+        #{zomoreSupplierPrivilegetype,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreSupplierUsertype != null">
+        #{zomoreSupplierUsertype,jdbcType=INTEGER},
+      </if>
+      <if test="shop != null">
+        #{shop,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierMeno != null">
+        #{zomoreSupplierMeno,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreSupplierExample" resultType="java.lang.Long">
+    select count(*) from zomore_supplier
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_supplier
+    <set>
+      <if test="record.zomoreSupplierId != null">
+        zomore_supplier_id = #{record.zomoreSupplierId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreSupplierName != null">
+        zomore_supplier_name = #{record.zomoreSupplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreSupplierNamepingyin != null">
+        zomore_supplier_namepingyin = #{record.zomoreSupplierNamepingyin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreSupplierConnectName != null">
+        zomore_supplier_connect_name = #{record.zomoreSupplierConnectName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreSupplierConnectPhone != null">
+        zomore_supplier_connect_phone = #{record.zomoreSupplierConnectPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreSupplierConnectEmail != null">
+        zomore_supplier_connect_email = #{record.zomoreSupplierConnectEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreSupplierBank != null">
+        zomore_supplier_bank = #{record.zomoreSupplierBank,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreSupplierBankName != null">
+        zomore_supplier_bank_name = #{record.zomoreSupplierBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreSupplierBankNum != null">
+        zomore_supplier_bank_num = #{record.zomoreSupplierBankNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreSupplierRatepayingNamenum != null">
+        zomore_supplier_ratepaying_namenum = #{record.zomoreSupplierRatepayingNamenum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreSupplierInvoice != null">
+        zomore_supplier_invoice = #{record.zomoreSupplierInvoice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreSupplierSettlementType != null">
+        zomore_supplier_settlement_type = #{record.zomoreSupplierSettlementType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreSupplierSettlementDetailed != null">
+        zomore_supplier_settlement_detailed = #{record.zomoreSupplierSettlementDetailed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreSupplierReturnpointDelivery != null">
+        zomore_supplier_returnpoint_delivery = #{record.zomoreSupplierReturnpointDelivery,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreSupplierReturnpointFixed != null">
+        zomore_supplier_returnpoint_fixed = #{record.zomoreSupplierReturnpointFixed,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreSupplierAddress != null">
+        zomore_supplier_address = #{record.zomoreSupplierAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreSupplierPrivilegetype != null">
+        zomore_supplier_privilegetype = #{record.zomoreSupplierPrivilegetype,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreSupplierUsertype != null">
+        zomore_supplier_usertype = #{record.zomoreSupplierUsertype,jdbcType=INTEGER},
+      </if>
+      <if test="record.shop != null">
+        shop = #{record.shop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreSupplierMeno != null">
+        zomore_supplier_meno = #{record.zomoreSupplierMeno,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update zomore_supplier
+    set zomore_supplier_id = #{record.zomoreSupplierId,jdbcType=VARCHAR},
+      zomore_supplier_name = #{record.zomoreSupplierName,jdbcType=VARCHAR},
+      zomore_supplier_namepingyin = #{record.zomoreSupplierNamepingyin,jdbcType=VARCHAR},
+      zomore_supplier_connect_name = #{record.zomoreSupplierConnectName,jdbcType=VARCHAR},
+      zomore_supplier_connect_phone = #{record.zomoreSupplierConnectPhone,jdbcType=VARCHAR},
+      zomore_supplier_connect_email = #{record.zomoreSupplierConnectEmail,jdbcType=VARCHAR},
+      zomore_supplier_bank = #{record.zomoreSupplierBank,jdbcType=VARCHAR},
+      zomore_supplier_bank_name = #{record.zomoreSupplierBankName,jdbcType=VARCHAR},
+      zomore_supplier_bank_num = #{record.zomoreSupplierBankNum,jdbcType=VARCHAR},
+      zomore_supplier_ratepaying_namenum = #{record.zomoreSupplierRatepayingNamenum,jdbcType=VARCHAR},
+      zomore_supplier_invoice = #{record.zomoreSupplierInvoice,jdbcType=VARCHAR},
+      zomore_supplier_settlement_type = #{record.zomoreSupplierSettlementType,jdbcType=VARCHAR},
+      zomore_supplier_settlement_detailed = #{record.zomoreSupplierSettlementDetailed,jdbcType=VARCHAR},
+      zomore_supplier_returnpoint_delivery = #{record.zomoreSupplierReturnpointDelivery,jdbcType=VARCHAR},
+      zomore_supplier_returnpoint_fixed = #{record.zomoreSupplierReturnpointFixed,jdbcType=VARCHAR},
+      zomore_supplier_address = #{record.zomoreSupplierAddress,jdbcType=VARCHAR},
+      zomore_supplier_privilegetype = #{record.zomoreSupplierPrivilegetype,jdbcType=INTEGER},
+      zomore_supplier_usertype = #{record.zomoreSupplierUsertype,jdbcType=INTEGER},
+      shop = #{record.shop,jdbcType=VARCHAR},
+      zomore_supplier_meno = #{record.zomoreSupplierMeno,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_supplier
+    set zomore_supplier_id = #{record.zomoreSupplierId,jdbcType=VARCHAR},
+      zomore_supplier_name = #{record.zomoreSupplierName,jdbcType=VARCHAR},
+      zomore_supplier_namepingyin = #{record.zomoreSupplierNamepingyin,jdbcType=VARCHAR},
+      zomore_supplier_connect_name = #{record.zomoreSupplierConnectName,jdbcType=VARCHAR},
+      zomore_supplier_connect_phone = #{record.zomoreSupplierConnectPhone,jdbcType=VARCHAR},
+      zomore_supplier_connect_email = #{record.zomoreSupplierConnectEmail,jdbcType=VARCHAR},
+      zomore_supplier_bank = #{record.zomoreSupplierBank,jdbcType=VARCHAR},
+      zomore_supplier_bank_name = #{record.zomoreSupplierBankName,jdbcType=VARCHAR},
+      zomore_supplier_bank_num = #{record.zomoreSupplierBankNum,jdbcType=VARCHAR},
+      zomore_supplier_ratepaying_namenum = #{record.zomoreSupplierRatepayingNamenum,jdbcType=VARCHAR},
+      zomore_supplier_invoice = #{record.zomoreSupplierInvoice,jdbcType=VARCHAR},
+      zomore_supplier_settlement_type = #{record.zomoreSupplierSettlementType,jdbcType=VARCHAR},
+      zomore_supplier_settlement_detailed = #{record.zomoreSupplierSettlementDetailed,jdbcType=VARCHAR},
+      zomore_supplier_returnpoint_delivery = #{record.zomoreSupplierReturnpointDelivery,jdbcType=VARCHAR},
+      zomore_supplier_returnpoint_fixed = #{record.zomoreSupplierReturnpointFixed,jdbcType=VARCHAR},
+      zomore_supplier_address = #{record.zomoreSupplierAddress,jdbcType=VARCHAR},
+      zomore_supplier_privilegetype = #{record.zomoreSupplierPrivilegetype,jdbcType=INTEGER},
+      zomore_supplier_usertype = #{record.zomoreSupplierUsertype,jdbcType=INTEGER},
+      shop = #{record.shop,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreSupplier">
+    update zomore_supplier
+    <set>
+      <if test="zomoreSupplierName != null">
+        zomore_supplier_name = #{zomoreSupplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierNamepingyin != null">
+        zomore_supplier_namepingyin = #{zomoreSupplierNamepingyin,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierConnectName != null">
+        zomore_supplier_connect_name = #{zomoreSupplierConnectName,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierConnectPhone != null">
+        zomore_supplier_connect_phone = #{zomoreSupplierConnectPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierConnectEmail != null">
+        zomore_supplier_connect_email = #{zomoreSupplierConnectEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierBank != null">
+        zomore_supplier_bank = #{zomoreSupplierBank,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierBankName != null">
+        zomore_supplier_bank_name = #{zomoreSupplierBankName,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierBankNum != null">
+        zomore_supplier_bank_num = #{zomoreSupplierBankNum,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierRatepayingNamenum != null">
+        zomore_supplier_ratepaying_namenum = #{zomoreSupplierRatepayingNamenum,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierInvoice != null">
+        zomore_supplier_invoice = #{zomoreSupplierInvoice,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierSettlementType != null">
+        zomore_supplier_settlement_type = #{zomoreSupplierSettlementType,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierSettlementDetailed != null">
+        zomore_supplier_settlement_detailed = #{zomoreSupplierSettlementDetailed,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierReturnpointDelivery != null">
+        zomore_supplier_returnpoint_delivery = #{zomoreSupplierReturnpointDelivery,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierReturnpointFixed != null">
+        zomore_supplier_returnpoint_fixed = #{zomoreSupplierReturnpointFixed,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierAddress != null">
+        zomore_supplier_address = #{zomoreSupplierAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierPrivilegetype != null">
+        zomore_supplier_privilegetype = #{zomoreSupplierPrivilegetype,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreSupplierUsertype != null">
+        zomore_supplier_usertype = #{zomoreSupplierUsertype,jdbcType=INTEGER},
+      </if>
+      <if test="shop != null">
+        shop = #{shop,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreSupplierMeno != null">
+        zomore_supplier_meno = #{zomoreSupplierMeno,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where zomore_supplier_id = #{zomoreSupplierId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zomore.domain.ZomoreSupplier">
+    update zomore_supplier
+    set zomore_supplier_name = #{zomoreSupplierName,jdbcType=VARCHAR},
+      zomore_supplier_namepingyin = #{zomoreSupplierNamepingyin,jdbcType=VARCHAR},
+      zomore_supplier_connect_name = #{zomoreSupplierConnectName,jdbcType=VARCHAR},
+      zomore_supplier_connect_phone = #{zomoreSupplierConnectPhone,jdbcType=VARCHAR},
+      zomore_supplier_connect_email = #{zomoreSupplierConnectEmail,jdbcType=VARCHAR},
+      zomore_supplier_bank = #{zomoreSupplierBank,jdbcType=VARCHAR},
+      zomore_supplier_bank_name = #{zomoreSupplierBankName,jdbcType=VARCHAR},
+      zomore_supplier_bank_num = #{zomoreSupplierBankNum,jdbcType=VARCHAR},
+      zomore_supplier_ratepaying_namenum = #{zomoreSupplierRatepayingNamenum,jdbcType=VARCHAR},
+      zomore_supplier_invoice = #{zomoreSupplierInvoice,jdbcType=VARCHAR},
+      zomore_supplier_settlement_type = #{zomoreSupplierSettlementType,jdbcType=VARCHAR},
+      zomore_supplier_settlement_detailed = #{zomoreSupplierSettlementDetailed,jdbcType=VARCHAR},
+      zomore_supplier_returnpoint_delivery = #{zomoreSupplierReturnpointDelivery,jdbcType=VARCHAR},
+      zomore_supplier_returnpoint_fixed = #{zomoreSupplierReturnpointFixed,jdbcType=VARCHAR},
+      zomore_supplier_address = #{zomoreSupplierAddress,jdbcType=VARCHAR},
+      zomore_supplier_privilegetype = #{zomoreSupplierPrivilegetype,jdbcType=INTEGER},
+      zomore_supplier_usertype = #{zomoreSupplierUsertype,jdbcType=INTEGER},
+      shop = #{shop,jdbcType=VARCHAR},
+      zomore_supplier_meno = #{zomoreSupplierMeno,jdbcType=LONGVARCHAR}
+    where zomore_supplier_id = #{zomoreSupplierId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreSupplier">
+    update zomore_supplier
+    set zomore_supplier_name = #{zomoreSupplierName,jdbcType=VARCHAR},
+      zomore_supplier_namepingyin = #{zomoreSupplierNamepingyin,jdbcType=VARCHAR},
+      zomore_supplier_connect_name = #{zomoreSupplierConnectName,jdbcType=VARCHAR},
+      zomore_supplier_connect_phone = #{zomoreSupplierConnectPhone,jdbcType=VARCHAR},
+      zomore_supplier_connect_email = #{zomoreSupplierConnectEmail,jdbcType=VARCHAR},
+      zomore_supplier_bank = #{zomoreSupplierBank,jdbcType=VARCHAR},
+      zomore_supplier_bank_name = #{zomoreSupplierBankName,jdbcType=VARCHAR},
+      zomore_supplier_bank_num = #{zomoreSupplierBankNum,jdbcType=VARCHAR},
+      zomore_supplier_ratepaying_namenum = #{zomoreSupplierRatepayingNamenum,jdbcType=VARCHAR},
+      zomore_supplier_invoice = #{zomoreSupplierInvoice,jdbcType=VARCHAR},
+      zomore_supplier_settlement_type = #{zomoreSupplierSettlementType,jdbcType=VARCHAR},
+      zomore_supplier_settlement_detailed = #{zomoreSupplierSettlementDetailed,jdbcType=VARCHAR},
+      zomore_supplier_returnpoint_delivery = #{zomoreSupplierReturnpointDelivery,jdbcType=VARCHAR},
+      zomore_supplier_returnpoint_fixed = #{zomoreSupplierReturnpointFixed,jdbcType=VARCHAR},
+      zomore_supplier_address = #{zomoreSupplierAddress,jdbcType=VARCHAR},
+      zomore_supplier_privilegetype = #{zomoreSupplierPrivilegetype,jdbcType=INTEGER},
+      zomore_supplier_usertype = #{zomoreSupplierUsertype,jdbcType=INTEGER},
+      shop = #{shop,jdbcType=VARCHAR}
+    where zomore_supplier_id = #{zomoreSupplierId,jdbcType=VARCHAR}
+  </update>
+</mapper>

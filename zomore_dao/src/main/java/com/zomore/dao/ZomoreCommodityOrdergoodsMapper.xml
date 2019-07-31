@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreCommodityOrdergoodsMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreCommodityOrdergoods">
+    <id column="zomore_commodity_ordergoods_id" jdbcType="VARCHAR" property="zomoreCommodityOrdergoodsId" />
+    <result column="zomore_commodity_ordergoods_outname" jdbcType="VARCHAR" property="zomoreCommodityOrdergoodsOutname" />
+    <result column="zomore_commodity_ordergoods_time" jdbcType="TIMESTAMP" property="zomoreCommodityOrdergoodsTime" />
+    <result column="zomore_commodity_ordergoods_inname" jdbcType="VARCHAR" property="zomoreCommodityOrdergoodsInname" />
+    <result column="zomore_commodity_ordergoods_name" jdbcType="VARCHAR" property="zomoreCommodityOrdergoodsName" />
+    <result column="zomore_commodity_ordergoods_num" jdbcType="VARCHAR" property="zomoreCommodityOrdergoodsNum" />
+    <result column="zomore_commodity_ordergoods_expecttime" jdbcType="TIMESTAMP" property="zomoreCommodityOrdergoodsExpecttime" />
+    <result column="zomore_commodity_ordergoods_money" jdbcType="VARCHAR" property="zomoreCommodityOrdergoodsMoney" />
+    <result column="zomore_commodity_ordergoods_state" jdbcType="INTEGER" property="zomoreCommodityOrdergoodsState" />
+    <result column="zomore_commodity_ordergoods_printingnum" jdbcType="INTEGER" property="zomoreCommodityOrdergoodsPrintingnum" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zomore.domain.ZomoreCommodityOrdergoods">
+    <result column="zomore_commodity_ordergoods_meno" jdbcType="LONGVARCHAR" property="zomoreCommodityOrdergoodsMeno" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    zomore_commodity_ordergoods_id, zomore_commodity_ordergoods_outname, zomore_commodity_ordergoods_time, 
+    zomore_commodity_ordergoods_inname, zomore_commodity_ordergoods_name, zomore_commodity_ordergoods_num, 
+    zomore_commodity_ordergoods_expecttime, zomore_commodity_ordergoods_money, zomore_commodity_ordergoods_state, 
+    zomore_commodity_ordergoods_printingnum
+  </sql>
+  <sql id="Blob_Column_List">
+    zomore_commodity_ordergoods_meno
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.zomore.domain.ZomoreCommodityOrdergoodsExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zomore_commodity_ordergoods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreCommodityOrdergoodsExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_commodity_ordergoods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zomore_commodity_ordergoods
+    where zomore_commodity_ordergoods_id = #{zomoreCommodityOrdergoodsId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zomore_commodity_ordergoods
+    where zomore_commodity_ordergoods_id = #{zomoreCommodityOrdergoodsId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreCommodityOrdergoodsExample">
+    delete from zomore_commodity_ordergoods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreCommodityOrdergoods">
+    insert into zomore_commodity_ordergoods (zomore_commodity_ordergoods_id, zomore_commodity_ordergoods_outname, 
+      zomore_commodity_ordergoods_time, zomore_commodity_ordergoods_inname, 
+      zomore_commodity_ordergoods_name, zomore_commodity_ordergoods_num, 
+      zomore_commodity_ordergoods_expecttime, zomore_commodity_ordergoods_money, 
+      zomore_commodity_ordergoods_state, zomore_commodity_ordergoods_printingnum, 
+      zomore_commodity_ordergoods_meno)
+    values (#{zomoreCommodityOrdergoodsId,jdbcType=VARCHAR}, #{zomoreCommodityOrdergoodsOutname,jdbcType=VARCHAR}, 
+      #{zomoreCommodityOrdergoodsTime,jdbcType=TIMESTAMP}, #{zomoreCommodityOrdergoodsInname,jdbcType=VARCHAR}, 
+      #{zomoreCommodityOrdergoodsName,jdbcType=VARCHAR}, #{zomoreCommodityOrdergoodsNum,jdbcType=VARCHAR}, 
+      #{zomoreCommodityOrdergoodsExpecttime,jdbcType=TIMESTAMP}, #{zomoreCommodityOrdergoodsMoney,jdbcType=VARCHAR}, 
+      #{zomoreCommodityOrdergoodsState,jdbcType=INTEGER}, #{zomoreCommodityOrdergoodsPrintingnum,jdbcType=INTEGER}, 
+      #{zomoreCommodityOrdergoodsMeno,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreCommodityOrdergoods">
+    insert into zomore_commodity_ordergoods
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="zomoreCommodityOrdergoodsId != null">
+        zomore_commodity_ordergoods_id,
+      </if>
+      <if test="zomoreCommodityOrdergoodsOutname != null">
+        zomore_commodity_ordergoods_outname,
+      </if>
+      <if test="zomoreCommodityOrdergoodsTime != null">
+        zomore_commodity_ordergoods_time,
+      </if>
+      <if test="zomoreCommodityOrdergoodsInname != null">
+        zomore_commodity_ordergoods_inname,
+      </if>
+      <if test="zomoreCommodityOrdergoodsName != null">
+        zomore_commodity_ordergoods_name,
+      </if>
+      <if test="zomoreCommodityOrdergoodsNum != null">
+        zomore_commodity_ordergoods_num,
+      </if>
+      <if test="zomoreCommodityOrdergoodsExpecttime != null">
+        zomore_commodity_ordergoods_expecttime,
+      </if>
+      <if test="zomoreCommodityOrdergoodsMoney != null">
+        zomore_commodity_ordergoods_money,
+      </if>
+      <if test="zomoreCommodityOrdergoodsState != null">
+        zomore_commodity_ordergoods_state,
+      </if>
+      <if test="zomoreCommodityOrdergoodsPrintingnum != null">
+        zomore_commodity_ordergoods_printingnum,
+      </if>
+      <if test="zomoreCommodityOrdergoodsMeno != null">
+        zomore_commodity_ordergoods_meno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="zomoreCommodityOrdergoodsId != null">
+        #{zomoreCommodityOrdergoodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityOrdergoodsOutname != null">
+        #{zomoreCommodityOrdergoodsOutname,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityOrdergoodsTime != null">
+        #{zomoreCommodityOrdergoodsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zomoreCommodityOrdergoodsInname != null">
+        #{zomoreCommodityOrdergoodsInname,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityOrdergoodsName != null">
+        #{zomoreCommodityOrdergoodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityOrdergoodsNum != null">
+        #{zomoreCommodityOrdergoodsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityOrdergoodsExpecttime != null">
+        #{zomoreCommodityOrdergoodsExpecttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zomoreCommodityOrdergoodsMoney != null">
+        #{zomoreCommodityOrdergoodsMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityOrdergoodsState != null">
+        #{zomoreCommodityOrdergoodsState,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityOrdergoodsPrintingnum != null">
+        #{zomoreCommodityOrdergoodsPrintingnum,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityOrdergoodsMeno != null">
+        #{zomoreCommodityOrdergoodsMeno,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreCommodityOrdergoodsExample" resultType="java.lang.Long">
+    select count(*) from zomore_commodity_ordergoods
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_commodity_ordergoods
+    <set>
+      <if test="record.zomoreCommodityOrdergoodsId != null">
+        zomore_commodity_ordergoods_id = #{record.zomoreCommodityOrdergoodsId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityOrdergoodsOutname != null">
+        zomore_commodity_ordergoods_outname = #{record.zomoreCommodityOrdergoodsOutname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityOrdergoodsTime != null">
+        zomore_commodity_ordergoods_time = #{record.zomoreCommodityOrdergoodsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zomoreCommodityOrdergoodsInname != null">
+        zomore_commodity_ordergoods_inname = #{record.zomoreCommodityOrdergoodsInname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityOrdergoodsName != null">
+        zomore_commodity_ordergoods_name = #{record.zomoreCommodityOrdergoodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityOrdergoodsNum != null">
+        zomore_commodity_ordergoods_num = #{record.zomoreCommodityOrdergoodsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityOrdergoodsExpecttime != null">
+        zomore_commodity_ordergoods_expecttime = #{record.zomoreCommodityOrdergoodsExpecttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zomoreCommodityOrdergoodsMoney != null">
+        zomore_commodity_ordergoods_money = #{record.zomoreCommodityOrdergoodsMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityOrdergoodsState != null">
+        zomore_commodity_ordergoods_state = #{record.zomoreCommodityOrdergoodsState,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommodityOrdergoodsPrintingnum != null">
+        zomore_commodity_ordergoods_printingnum = #{record.zomoreCommodityOrdergoodsPrintingnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommodityOrdergoodsMeno != null">
+        zomore_commodity_ordergoods_meno = #{record.zomoreCommodityOrdergoodsMeno,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update zomore_commodity_ordergoods
+    set zomore_commodity_ordergoods_id = #{record.zomoreCommodityOrdergoodsId,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_outname = #{record.zomoreCommodityOrdergoodsOutname,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_time = #{record.zomoreCommodityOrdergoodsTime,jdbcType=TIMESTAMP},
+      zomore_commodity_ordergoods_inname = #{record.zomoreCommodityOrdergoodsInname,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_name = #{record.zomoreCommodityOrdergoodsName,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_num = #{record.zomoreCommodityOrdergoodsNum,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_expecttime = #{record.zomoreCommodityOrdergoodsExpecttime,jdbcType=TIMESTAMP},
+      zomore_commodity_ordergoods_money = #{record.zomoreCommodityOrdergoodsMoney,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_state = #{record.zomoreCommodityOrdergoodsState,jdbcType=INTEGER},
+      zomore_commodity_ordergoods_printingnum = #{record.zomoreCommodityOrdergoodsPrintingnum,jdbcType=INTEGER},
+      zomore_commodity_ordergoods_meno = #{record.zomoreCommodityOrdergoodsMeno,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_commodity_ordergoods
+    set zomore_commodity_ordergoods_id = #{record.zomoreCommodityOrdergoodsId,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_outname = #{record.zomoreCommodityOrdergoodsOutname,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_time = #{record.zomoreCommodityOrdergoodsTime,jdbcType=TIMESTAMP},
+      zomore_commodity_ordergoods_inname = #{record.zomoreCommodityOrdergoodsInname,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_name = #{record.zomoreCommodityOrdergoodsName,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_num = #{record.zomoreCommodityOrdergoodsNum,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_expecttime = #{record.zomoreCommodityOrdergoodsExpecttime,jdbcType=TIMESTAMP},
+      zomore_commodity_ordergoods_money = #{record.zomoreCommodityOrdergoodsMoney,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_state = #{record.zomoreCommodityOrdergoodsState,jdbcType=INTEGER},
+      zomore_commodity_ordergoods_printingnum = #{record.zomoreCommodityOrdergoodsPrintingnum,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreCommodityOrdergoods">
+    update zomore_commodity_ordergoods
+    <set>
+      <if test="zomoreCommodityOrdergoodsOutname != null">
+        zomore_commodity_ordergoods_outname = #{zomoreCommodityOrdergoodsOutname,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityOrdergoodsTime != null">
+        zomore_commodity_ordergoods_time = #{zomoreCommodityOrdergoodsTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zomoreCommodityOrdergoodsInname != null">
+        zomore_commodity_ordergoods_inname = #{zomoreCommodityOrdergoodsInname,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityOrdergoodsName != null">
+        zomore_commodity_ordergoods_name = #{zomoreCommodityOrdergoodsName,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityOrdergoodsNum != null">
+        zomore_commodity_ordergoods_num = #{zomoreCommodityOrdergoodsNum,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityOrdergoodsExpecttime != null">
+        zomore_commodity_ordergoods_expecttime = #{zomoreCommodityOrdergoodsExpecttime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zomoreCommodityOrdergoodsMoney != null">
+        zomore_commodity_ordergoods_money = #{zomoreCommodityOrdergoodsMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityOrdergoodsState != null">
+        zomore_commodity_ordergoods_state = #{zomoreCommodityOrdergoodsState,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityOrdergoodsPrintingnum != null">
+        zomore_commodity_ordergoods_printingnum = #{zomoreCommodityOrdergoodsPrintingnum,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityOrdergoodsMeno != null">
+        zomore_commodity_ordergoods_meno = #{zomoreCommodityOrdergoodsMeno,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where zomore_commodity_ordergoods_id = #{zomoreCommodityOrdergoodsId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zomore.domain.ZomoreCommodityOrdergoods">
+    update zomore_commodity_ordergoods
+    set zomore_commodity_ordergoods_outname = #{zomoreCommodityOrdergoodsOutname,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_time = #{zomoreCommodityOrdergoodsTime,jdbcType=TIMESTAMP},
+      zomore_commodity_ordergoods_inname = #{zomoreCommodityOrdergoodsInname,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_name = #{zomoreCommodityOrdergoodsName,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_num = #{zomoreCommodityOrdergoodsNum,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_expecttime = #{zomoreCommodityOrdergoodsExpecttime,jdbcType=TIMESTAMP},
+      zomore_commodity_ordergoods_money = #{zomoreCommodityOrdergoodsMoney,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_state = #{zomoreCommodityOrdergoodsState,jdbcType=INTEGER},
+      zomore_commodity_ordergoods_printingnum = #{zomoreCommodityOrdergoodsPrintingnum,jdbcType=INTEGER},
+      zomore_commodity_ordergoods_meno = #{zomoreCommodityOrdergoodsMeno,jdbcType=LONGVARCHAR}
+    where zomore_commodity_ordergoods_id = #{zomoreCommodityOrdergoodsId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreCommodityOrdergoods">
+    update zomore_commodity_ordergoods
+    set zomore_commodity_ordergoods_outname = #{zomoreCommodityOrdergoodsOutname,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_time = #{zomoreCommodityOrdergoodsTime,jdbcType=TIMESTAMP},
+      zomore_commodity_ordergoods_inname = #{zomoreCommodityOrdergoodsInname,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_name = #{zomoreCommodityOrdergoodsName,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_num = #{zomoreCommodityOrdergoodsNum,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_expecttime = #{zomoreCommodityOrdergoodsExpecttime,jdbcType=TIMESTAMP},
+      zomore_commodity_ordergoods_money = #{zomoreCommodityOrdergoodsMoney,jdbcType=VARCHAR},
+      zomore_commodity_ordergoods_state = #{zomoreCommodityOrdergoodsState,jdbcType=INTEGER},
+      zomore_commodity_ordergoods_printingnum = #{zomoreCommodityOrdergoodsPrintingnum,jdbcType=INTEGER}
+    where zomore_commodity_ordergoods_id = #{zomoreCommodityOrdergoodsId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectAllshopOrderGoods" parameterType="java.util.Map" resultType="com.zomore.domain.ZomoreCommodityOrdergoods">
+   select zomore_commodity_ordergoods_id as zomoreCommodityOrdergoodsId, zomore_commodity_ordergoods_outname as zomoreCommodityOrdergoodsOutname, zomore_commodity_ordergoods_time as zomoreCommodityOrdergoodsTime,
+    zomore_commodity_ordergoods_inname as zomoreCommodityOrdergoodsInname, zomore_commodity_ordergoods_name as zomoreCommodityOrdergoodsName, zomore_commodity_ordergoods_num as zomoreCommodityOrdergoodsNum,
+    zomore_commodity_ordergoods_expecttime as zomoreCommodityOrdergoodsExpecttime, zomore_commodity_ordergoods_money as zomoreCommodityOrdergoodsMoney, zomore_commodity_ordergoods_state as zomoreCommodityOrdergoodsState,
+    zomore_commodity_ordergoods_printingnum as zomoreCommodityOrdergoodsPrintingnum,zomore_commodity_ordergoods_meno  as zomoreCommodityOrdergoodsMeno
+    from zomore_commodity_ordergoods
+    where zomore_commodity_ordergoods_inname in
+    <foreach collection="shoplist" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+    <if test="orderGoodsId!=null">
+      and  zomore_commodity_ordergoods_id like concat(concat('%',#{orderGoodsId}),'%')
+    </if>
+    <if test="state!=null">
+      and  zomore_commodity_ordergoods_state =#{state}
+    </if>
+    order by zomoreCommodityOrdergoodsTime desc
+  </select>
+</mapper>

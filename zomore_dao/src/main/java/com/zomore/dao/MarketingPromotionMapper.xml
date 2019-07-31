@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.MarketingPromotionMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.MarketingPromotion">
+    <id column="promotionId" jdbcType="VARCHAR" property="promotionid" />
+    <result column="promotionName" jdbcType="VARCHAR" property="promotionname" />
+    <result column="createShop" jdbcType="VARCHAR" property="createshop" />
+    <result column="promotionType" jdbcType="INTEGER" property="promotiontype" />
+    <result column="promotionshop" jdbcType="VARCHAR" property="promotionshop" />
+    <result column="promotionScope" jdbcType="VARCHAR" property="promotionscope" />
+    <result column="promotionnum" jdbcType="INTEGER" property="promotionnum" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="dueTime" jdbcType="TIMESTAMP" property="duetime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="shopId" jdbcType="VARCHAR" property="shopid" />
+    <result column="multipleId" jdbcType="VARCHAR" property="multipleid" />
+    <result column="isMember" jdbcType="INTEGER" property="ismember" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    promotionId, promotionName, createShop, promotionType, promotionshop, promotionScope, 
+    promotionnum, createTime, dueTime, status, shopId, multipleId, isMember
+  </sql>
+  <select id="selectByExample" parameterType="com.zomore.domain.MarketingPromotionExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from marketing_promotion
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from marketing_promotion
+    where promotionId = #{promotionid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from marketing_promotion
+    where promotionId = #{promotionid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.MarketingPromotionExample">
+    delete from marketing_promotion
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.MarketingPromotion">
+    insert into marketing_promotion (promotionId, promotionName, createShop, 
+      promotionType, promotionshop, promotionScope, 
+      promotionnum, createTime, dueTime, 
+      status, shopId, multipleId, 
+      isMember)
+    values (#{promotionid,jdbcType=VARCHAR}, #{promotionname,jdbcType=VARCHAR}, #{createshop,jdbcType=VARCHAR}, 
+      #{promotiontype,jdbcType=INTEGER}, #{promotionshop,jdbcType=VARCHAR}, #{promotionscope,jdbcType=VARCHAR}, 
+      #{promotionnum,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{duetime,jdbcType=TIMESTAMP}, 
+      #{status,jdbcType=INTEGER}, #{shopid,jdbcType=VARCHAR}, #{multipleid,jdbcType=VARCHAR}, 
+      #{ismember,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.MarketingPromotion">
+    insert into marketing_promotion
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="promotionid != null">
+        promotionId,
+      </if>
+      <if test="promotionname != null">
+        promotionName,
+      </if>
+      <if test="createshop != null">
+        createShop,
+      </if>
+      <if test="promotiontype != null">
+        promotionType,
+      </if>
+      <if test="promotionshop != null">
+        promotionshop,
+      </if>
+      <if test="promotionscope != null">
+        promotionScope,
+      </if>
+      <if test="promotionnum != null">
+        promotionnum,
+      </if>
+      <if test="createtime != null">
+        createTime,
+      </if>
+      <if test="duetime != null">
+        dueTime,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="shopid != null">
+        shopId,
+      </if>
+      <if test="multipleid != null">
+        multipleId,
+      </if>
+      <if test="ismember != null">
+        isMember,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="promotionid != null">
+        #{promotionid,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionname != null">
+        #{promotionname,jdbcType=VARCHAR},
+      </if>
+      <if test="createshop != null">
+        #{createshop,jdbcType=VARCHAR},
+      </if>
+      <if test="promotiontype != null">
+        #{promotiontype,jdbcType=INTEGER},
+      </if>
+      <if test="promotionshop != null">
+        #{promotionshop,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionscope != null">
+        #{promotionscope,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionnum != null">
+        #{promotionnum,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duetime != null">
+        #{duetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="shopid != null">
+        #{shopid,jdbcType=VARCHAR},
+      </if>
+      <if test="multipleid != null">
+        #{multipleid,jdbcType=VARCHAR},
+      </if>
+      <if test="ismember != null">
+        #{ismember,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.MarketingPromotionExample" resultType="java.lang.Long">
+    select count(*) from marketing_promotion
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update marketing_promotion
+    <set>
+      <if test="record.promotionid != null">
+        promotionId = #{record.promotionid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.promotionname != null">
+        promotionName = #{record.promotionname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createshop != null">
+        createShop = #{record.createshop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.promotiontype != null">
+        promotionType = #{record.promotiontype,jdbcType=INTEGER},
+      </if>
+      <if test="record.promotionshop != null">
+        promotionshop = #{record.promotionshop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.promotionscope != null">
+        promotionScope = #{record.promotionscope,jdbcType=VARCHAR},
+      </if>
+      <if test="record.promotionnum != null">
+        promotionnum = #{record.promotionnum,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null">
+        createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.duetime != null">
+        dueTime = #{record.duetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=INTEGER},
+      </if>
+      <if test="record.shopid != null">
+        shopId = #{record.shopid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.multipleid != null">
+        multipleId = #{record.multipleid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ismember != null">
+        isMember = #{record.ismember,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update marketing_promotion
+    set promotionId = #{record.promotionid,jdbcType=VARCHAR},
+      promotionName = #{record.promotionname,jdbcType=VARCHAR},
+      createShop = #{record.createshop,jdbcType=VARCHAR},
+      promotionType = #{record.promotiontype,jdbcType=INTEGER},
+      promotionshop = #{record.promotionshop,jdbcType=VARCHAR},
+      promotionScope = #{record.promotionscope,jdbcType=VARCHAR},
+      promotionnum = #{record.promotionnum,jdbcType=INTEGER},
+      createTime = #{record.createtime,jdbcType=TIMESTAMP},
+      dueTime = #{record.duetime,jdbcType=TIMESTAMP},
+      status = #{record.status,jdbcType=INTEGER},
+      shopId = #{record.shopid,jdbcType=VARCHAR},
+      multipleId = #{record.multipleid,jdbcType=VARCHAR},
+      isMember = #{record.ismember,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.MarketingPromotion">
+    update marketing_promotion
+    <set>
+      <if test="promotionname != null">
+        promotionName = #{promotionname,jdbcType=VARCHAR},
+      </if>
+      <if test="createshop != null">
+        createShop = #{createshop,jdbcType=VARCHAR},
+      </if>
+      <if test="promotiontype != null">
+        promotionType = #{promotiontype,jdbcType=INTEGER},
+      </if>
+      <if test="promotionshop != null">
+        promotionshop = #{promotionshop,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionscope != null">
+        promotionScope = #{promotionscope,jdbcType=VARCHAR},
+      </if>
+      <if test="promotionnum != null">
+        promotionnum = #{promotionnum,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createTime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="duetime != null">
+        dueTime = #{duetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="shopid != null">
+        shopId = #{shopid,jdbcType=VARCHAR},
+      </if>
+      <if test="multipleid != null">
+        multipleId = #{multipleid,jdbcType=VARCHAR},
+      </if>
+      <if test="ismember != null">
+        isMember = #{ismember,jdbcType=INTEGER},
+      </if>
+    </set>
+    where promotionId = #{promotionid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.MarketingPromotion">
+    update marketing_promotion
+    set promotionName = #{promotionname,jdbcType=VARCHAR},
+      createShop = #{createshop,jdbcType=VARCHAR},
+      promotionType = #{promotiontype,jdbcType=INTEGER},
+      promotionshop = #{promotionshop,jdbcType=VARCHAR},
+      promotionScope = #{promotionscope,jdbcType=VARCHAR},
+      promotionnum = #{promotionnum,jdbcType=INTEGER},
+      createTime = #{createtime,jdbcType=TIMESTAMP},
+      dueTime = #{duetime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      shopId = #{shopid,jdbcType=VARCHAR},
+      multipleId = #{multipleid,jdbcType=VARCHAR},
+      isMember = #{ismember,jdbcType=INTEGER}
+    where promotionId = #{promotionid,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectPromotionByCreateShop">
+    select
+
+  </select>
+
+</mapper>

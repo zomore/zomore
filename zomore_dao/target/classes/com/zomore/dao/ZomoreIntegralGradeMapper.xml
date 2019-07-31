@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreIntegralGradeMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreIntegralGrade">
+    <id column="id" jdbcType="VARCHAR" property="id" />
+    <result column="integral_rule_id" jdbcType="VARCHAR" property="integralRuleId" />
+    <result column="multiple_grade" jdbcType="INTEGER" property="multipleGrade" />
+    <result column="member_grade" jdbcType="VARCHAR" property="memberGrade" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, integral_rule_id, multiple_grade, member_grade
+  </sql>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreIntegralGradeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_integral_grade
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zomore_integral_grade
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zomore_integral_grade
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreIntegralGradeExample">
+    delete from zomore_integral_grade
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreIntegralGrade">
+    insert into zomore_integral_grade (id, integral_rule_id, multiple_grade, 
+      member_grade)
+    values (#{id,jdbcType=VARCHAR}, #{integralRuleId,jdbcType=VARCHAR}, #{multipleGrade,jdbcType=INTEGER}, 
+      #{memberGrade,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreIntegralGrade">
+    insert into zomore_integral_grade
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="integralRuleId != null">
+        integral_rule_id,
+      </if>
+      <if test="multipleGrade != null">
+        multiple_grade,
+      </if>
+      <if test="memberGrade != null">
+        member_grade,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="integralRuleId != null">
+        #{integralRuleId,jdbcType=VARCHAR},
+      </if>
+      <if test="multipleGrade != null">
+        #{multipleGrade,jdbcType=INTEGER},
+      </if>
+      <if test="memberGrade != null">
+        #{memberGrade,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreIntegralGradeExample" resultType="java.lang.Long">
+    select count(*) from zomore_integral_grade
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_integral_grade
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.integralRuleId != null">
+        integral_rule_id = #{record.integralRuleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.multipleGrade != null">
+        multiple_grade = #{record.multipleGrade,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberGrade != null">
+        member_grade = #{record.memberGrade,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_integral_grade
+    set id = #{record.id,jdbcType=VARCHAR},
+      integral_rule_id = #{record.integralRuleId,jdbcType=VARCHAR},
+      multiple_grade = #{record.multipleGrade,jdbcType=INTEGER},
+      member_grade = #{record.memberGrade,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreIntegralGrade">
+    update zomore_integral_grade
+    <set>
+      <if test="integralRuleId != null">
+        integral_rule_id = #{integralRuleId,jdbcType=VARCHAR},
+      </if>
+      <if test="multipleGrade != null">
+        multiple_grade = #{multipleGrade,jdbcType=INTEGER},
+      </if>
+      <if test="memberGrade != null">
+        member_grade = #{memberGrade,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreIntegralGrade">
+    update zomore_integral_grade
+    set integral_rule_id = #{integralRuleId,jdbcType=VARCHAR},
+      multiple_grade = #{multipleGrade,jdbcType=INTEGER},
+      member_grade = #{memberGrade,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

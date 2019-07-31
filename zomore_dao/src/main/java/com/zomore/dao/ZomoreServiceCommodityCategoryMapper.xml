@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreServiceCommodityCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreServiceCommodityCategory">
+    <id column="zomore_commodity_category_id" jdbcType="VARCHAR" property="zomoreCommodityCategoryId" />
+    <result column="zomore_commodity_category_parentid" jdbcType="VARCHAR" property="zomoreCommodityCategoryParentid" />
+    <result column="zomore_commodity_category_name" jdbcType="VARCHAR" property="zomoreCommodityCategoryName" />
+    <result column="zomore_commodity_category_priority" jdbcType="INTEGER" property="zomoreCommodityCategoryPriority" />
+    <result column="zomore_commodity_isparent" jdbcType="INTEGER" property="zomoreCommodityIsparent" />
+    <result column="zomore_commodity_createtime" jdbcType="TIMESTAMP" property="zomoreCommodityCreatetime" />
+    <result column="zomore_commodity_updatetime" jdbcType="TIMESTAMP" property="zomoreCommodityUpdatetime" />
+    <result column="zomore_commodity_shop" jdbcType="VARCHAR" property="zomoreCommodityShop" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    zomore_commodity_category_id, zomore_commodity_category_parentid, zomore_commodity_category_name, 
+    zomore_commodity_category_priority, zomore_commodity_isparent, zomore_commodity_createtime, 
+    zomore_commodity_updatetime, zomore_commodity_shop
+  </sql>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreServiceCommodityCategoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_service_commodity_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zomore_service_commodity_category
+    where zomore_commodity_category_id = #{zomoreCommodityCategoryId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zomore_service_commodity_category
+    where zomore_commodity_category_id = #{zomoreCommodityCategoryId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreServiceCommodityCategoryExample">
+    delete from zomore_service_commodity_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreServiceCommodityCategory">
+    insert into zomore_service_commodity_category (zomore_commodity_category_id, zomore_commodity_category_parentid, 
+      zomore_commodity_category_name, zomore_commodity_category_priority, 
+      zomore_commodity_isparent, zomore_commodity_createtime, 
+      zomore_commodity_updatetime, zomore_commodity_shop
+      )
+    values (#{zomoreCommodityCategoryId,jdbcType=VARCHAR}, #{zomoreCommodityCategoryParentid,jdbcType=VARCHAR}, 
+      #{zomoreCommodityCategoryName,jdbcType=VARCHAR}, #{zomoreCommodityCategoryPriority,jdbcType=INTEGER}, 
+      #{zomoreCommodityIsparent,jdbcType=INTEGER}, #{zomoreCommodityCreatetime,jdbcType=TIMESTAMP}, 
+      #{zomoreCommodityUpdatetime,jdbcType=TIMESTAMP}, #{zomoreCommodityShop,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreServiceCommodityCategory">
+    insert into zomore_service_commodity_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="zomoreCommodityCategoryId != null">
+        zomore_commodity_category_id,
+      </if>
+      <if test="zomoreCommodityCategoryParentid != null">
+        zomore_commodity_category_parentid,
+      </if>
+      <if test="zomoreCommodityCategoryName != null">
+        zomore_commodity_category_name,
+      </if>
+      <if test="zomoreCommodityCategoryPriority != null">
+        zomore_commodity_category_priority,
+      </if>
+      <if test="zomoreCommodityIsparent != null">
+        zomore_commodity_isparent,
+      </if>
+      <if test="zomoreCommodityCreatetime != null">
+        zomore_commodity_createtime,
+      </if>
+      <if test="zomoreCommodityUpdatetime != null">
+        zomore_commodity_updatetime,
+      </if>
+      <if test="zomoreCommodityShop != null">
+        zomore_commodity_shop,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="zomoreCommodityCategoryId != null">
+        #{zomoreCommodityCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityCategoryParentid != null">
+        #{zomoreCommodityCategoryParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityCategoryName != null">
+        #{zomoreCommodityCategoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityCategoryPriority != null">
+        #{zomoreCommodityCategoryPriority,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityIsparent != null">
+        #{zomoreCommodityIsparent,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityCreatetime != null">
+        #{zomoreCommodityCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zomoreCommodityUpdatetime != null">
+        #{zomoreCommodityUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zomoreCommodityShop != null">
+        #{zomoreCommodityShop,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreServiceCommodityCategoryExample" resultType="java.lang.Long">
+    select count(*) from zomore_service_commodity_category
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_service_commodity_category
+    <set>
+      <if test="record.zomoreCommodityCategoryId != null">
+        zomore_commodity_category_id = #{record.zomoreCommodityCategoryId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityCategoryParentid != null">
+        zomore_commodity_category_parentid = #{record.zomoreCommodityCategoryParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityCategoryName != null">
+        zomore_commodity_category_name = #{record.zomoreCommodityCategoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityCategoryPriority != null">
+        zomore_commodity_category_priority = #{record.zomoreCommodityCategoryPriority,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommodityIsparent != null">
+        zomore_commodity_isparent = #{record.zomoreCommodityIsparent,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommodityCreatetime != null">
+        zomore_commodity_createtime = #{record.zomoreCommodityCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zomoreCommodityUpdatetime != null">
+        zomore_commodity_updatetime = #{record.zomoreCommodityUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zomoreCommodityShop != null">
+        zomore_commodity_shop = #{record.zomoreCommodityShop,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_service_commodity_category
+    set zomore_commodity_category_id = #{record.zomoreCommodityCategoryId,jdbcType=VARCHAR},
+      zomore_commodity_category_parentid = #{record.zomoreCommodityCategoryParentid,jdbcType=VARCHAR},
+      zomore_commodity_category_name = #{record.zomoreCommodityCategoryName,jdbcType=VARCHAR},
+      zomore_commodity_category_priority = #{record.zomoreCommodityCategoryPriority,jdbcType=INTEGER},
+      zomore_commodity_isparent = #{record.zomoreCommodityIsparent,jdbcType=INTEGER},
+      zomore_commodity_createtime = #{record.zomoreCommodityCreatetime,jdbcType=TIMESTAMP},
+      zomore_commodity_updatetime = #{record.zomoreCommodityUpdatetime,jdbcType=TIMESTAMP},
+      zomore_commodity_shop = #{record.zomoreCommodityShop,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreServiceCommodityCategory">
+    update zomore_service_commodity_category
+    <set>
+      <if test="zomoreCommodityCategoryParentid != null">
+        zomore_commodity_category_parentid = #{zomoreCommodityCategoryParentid,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityCategoryName != null">
+        zomore_commodity_category_name = #{zomoreCommodityCategoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityCategoryPriority != null">
+        zomore_commodity_category_priority = #{zomoreCommodityCategoryPriority,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityIsparent != null">
+        zomore_commodity_isparent = #{zomoreCommodityIsparent,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityCreatetime != null">
+        zomore_commodity_createtime = #{zomoreCommodityCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zomoreCommodityUpdatetime != null">
+        zomore_commodity_updatetime = #{zomoreCommodityUpdatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zomoreCommodityShop != null">
+        zomore_commodity_shop = #{zomoreCommodityShop,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where zomore_commodity_category_id = #{zomoreCommodityCategoryId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreServiceCommodityCategory">
+    update zomore_service_commodity_category
+    set zomore_commodity_category_parentid = #{zomoreCommodityCategoryParentid,jdbcType=VARCHAR},
+      zomore_commodity_category_name = #{zomoreCommodityCategoryName,jdbcType=VARCHAR},
+      zomore_commodity_category_priority = #{zomoreCommodityCategoryPriority,jdbcType=INTEGER},
+      zomore_commodity_isparent = #{zomoreCommodityIsparent,jdbcType=INTEGER},
+      zomore_commodity_createtime = #{zomoreCommodityCreatetime,jdbcType=TIMESTAMP},
+      zomore_commodity_updatetime = #{zomoreCommodityUpdatetime,jdbcType=TIMESTAMP},
+      zomore_commodity_shop = #{zomoreCommodityShop,jdbcType=VARCHAR}
+    where zomore_commodity_category_id = #{zomoreCommodityCategoryId,jdbcType=VARCHAR}
+  </update>
+</mapper>

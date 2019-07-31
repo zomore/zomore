@@ -1,0 +1,779 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreMemberMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreMember">
+    <id column="member_memberId" jdbcType="VARCHAR" property="memberMemberid" />
+    <result column="member_number" jdbcType="VARCHAR" property="memberNumber" />
+    <result column="member_memberIdName" jdbcType="VARCHAR" property="memberMemberidname" />
+    <result column="member_phoneNumber" jdbcType="VARCHAR" property="memberPhonenumber" />
+    <result column="member_sex" jdbcType="VARCHAR" property="memberSex" />
+    <result column="member_grade" jdbcType="VARCHAR" property="memberGrade" />
+    <result column="member_discount" jdbcType="VARCHAR" property="memberDiscount" />
+    <result column="member_balance" jdbcType="VARCHAR" property="memberBalance" />
+    <result column="member_money1" jdbcType="DOUBLE" property="memberMoney1" />
+    <result column="member_money2" jdbcType="DOUBLE" property="memberMoney2" />
+    <result column="member_integral" jdbcType="DOUBLE" property="memberIntegral" />
+    <result column="member_subCard" jdbcType="INTEGER" property="memberSubcard" />
+    <result column="member_coupon" jdbcType="VARCHAR" property="memberCoupon" />
+    <result column="member_password" jdbcType="VARCHAR" property="memberPassword" />
+    <result column="member_dateOfOpeningCard" jdbcType="TIMESTAMP" property="memberDateofopeningcard" />
+    <result column="member_dueDate" jdbcType="TIMESTAMP" property="memberDuedate" />
+    <result column="member_birthday" jdbcType="TIMESTAMP" property="memberBirthday" />
+    <result column="member_address" jdbcType="VARCHAR" property="memberAddress" />
+    <result column="member_onCredit" jdbcType="INTEGER" property="memberOncredit" />
+    <result column="member_creditLimit" jdbcType="DECIMAL" property="memberCreditlimit" />
+    <result column="member_state" jdbcType="INTEGER" property="memberState" />
+    <result column="member_guide" jdbcType="VARCHAR" property="memberGuide" />
+    <result column="member_email" jdbcType="VARCHAR" property="memberEmail" />
+    <result column="member_qq" jdbcType="VARCHAR" property="memberQq" />
+    <result column="member_shop" jdbcType="VARCHAR" property="memberShop" />
+    <result column="member_shopcar" jdbcType="VARCHAR" property="memberShopcar" />
+    <result column="member_recommendcode" jdbcType="VARCHAR" property="memberRecommendcode" />
+    <result column="member_invitationcode" jdbcType="VARCHAR" property="memberInvitationcode" />
+    <result column="member_image" jdbcType="VARCHAR" property="memberImage" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zomore.domain.ZomoreMember">
+    <result column="member_note" jdbcType="LONGVARCHAR" property="memberNote" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    member_memberId, member_number, member_memberIdName, member_phoneNumber, member_sex, 
+    member_grade, member_discount, member_balance, member_money1, member_money2, member_integral, 
+    member_subCard, member_coupon, member_password, member_dateOfOpeningCard, member_dueDate, 
+    member_birthday, member_address, member_onCredit, member_creditLimit, member_state, 
+    member_guide, member_email, member_qq, member_shop, member_shopcar, member_recommendcode, 
+    member_invitationcode, member_image
+  </sql>
+  <sql id="Blob_Column_List">
+    member_note
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.zomore.domain.ZomoreMemberExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zomore_member
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreMemberExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_member
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zomore_member
+    where member_memberId = #{memberMemberid,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zomore_member
+    where member_memberId = #{memberMemberid,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreMemberExample">
+    delete from zomore_member
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreMember">
+    insert into zomore_member (member_memberId, member_number, member_memberIdName, 
+      member_phoneNumber, member_sex, member_grade, 
+      member_discount, member_balance, member_money1, 
+      member_money2, member_integral, member_subCard, 
+      member_coupon, member_password, member_dateOfOpeningCard, 
+      member_dueDate, member_birthday, member_address, 
+      member_onCredit, member_creditLimit, member_state, 
+      member_guide, member_email, member_qq, 
+      member_shop, member_shopcar, member_recommendcode, 
+      member_invitationcode, member_note, member_image)
+    values (#{memberMemberid,jdbcType=VARCHAR}, #{memberNumber,jdbcType=VARCHAR}, #{memberMemberidname,jdbcType=VARCHAR}, 
+      #{memberPhonenumber,jdbcType=VARCHAR}, #{memberSex,jdbcType=VARCHAR}, #{memberGrade,jdbcType=VARCHAR}, 
+      #{memberDiscount,jdbcType=VARCHAR}, #{memberBalance,jdbcType=VARCHAR}, #{memberMoney1,jdbcType=DOUBLE}, 
+      #{memberMoney2,jdbcType=DOUBLE}, #{memberIntegral,jdbcType=DOUBLE}, #{memberSubcard,jdbcType=INTEGER}, 
+      #{memberCoupon,jdbcType=VARCHAR}, #{memberPassword,jdbcType=VARCHAR}, #{memberDateofopeningcard,jdbcType=TIMESTAMP}, 
+      #{memberDuedate,jdbcType=TIMESTAMP}, #{memberBirthday,jdbcType=TIMESTAMP}, #{memberAddress,jdbcType=VARCHAR}, 
+      #{memberOncredit,jdbcType=INTEGER}, #{memberCreditlimit,jdbcType=DECIMAL}, #{memberState,jdbcType=INTEGER}, 
+      #{memberGuide,jdbcType=VARCHAR}, #{memberEmail,jdbcType=VARCHAR}, #{memberQq,jdbcType=VARCHAR}, 
+      #{memberShop,jdbcType=VARCHAR}, #{memberShopcar,jdbcType=VARCHAR}, #{memberRecommendcode,jdbcType=VARCHAR}, 
+      #{memberInvitationcode,jdbcType=VARCHAR}, #{memberNote,jdbcType=LONGVARCHAR}, #{memberImage,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreMember">
+    insert into zomore_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="memberMemberid != null">
+        member_memberId,
+      </if>
+      <if test="memberNumber != null">
+        member_number,
+      </if>
+      <if test="memberMemberidname != null">
+        member_memberIdName,
+      </if>
+      <if test="memberPhonenumber != null">
+        member_phoneNumber,
+      </if>
+      <if test="memberSex != null">
+        member_sex,
+      </if>
+      <if test="memberGrade != null">
+        member_grade,
+      </if>
+      <if test="memberDiscount != null">
+        member_discount,
+      </if>
+      <if test="memberBalance != null">
+        member_balance,
+      </if>
+      <if test="memberMoney1 != null">
+        member_money1,
+      </if>
+      <if test="memberMoney2 != null">
+        member_money2,
+      </if>
+      <if test="memberIntegral != null">
+        member_integral,
+      </if>
+      <if test="memberSubcard != null">
+        member_subCard,
+      </if>
+      <if test="memberCoupon != null">
+        member_coupon,
+      </if>
+      <if test="memberPassword != null">
+        member_password,
+      </if>
+      <if test="memberDateofopeningcard != null">
+        member_dateOfOpeningCard,
+      </if>
+      <if test="memberDuedate != null">
+        member_dueDate,
+      </if>
+      <if test="memberBirthday != null">
+        member_birthday,
+      </if>
+      <if test="memberAddress != null">
+        member_address,
+      </if>
+      <if test="memberOncredit != null">
+        member_onCredit,
+      </if>
+      <if test="memberCreditlimit != null">
+        member_creditLimit,
+      </if>
+      <if test="memberState != null">
+        member_state,
+      </if>
+      <if test="memberGuide != null">
+        member_guide,
+      </if>
+      <if test="memberEmail != null">
+        member_email,
+      </if>
+      <if test="memberQq != null">
+        member_qq,
+      </if>
+      <if test="memberShop != null">
+        member_shop,
+      </if>
+      <if test="memberShopcar != null">
+        member_shopcar,
+      </if>
+      <if test="memberRecommendcode != null">
+        member_recommendcode,
+      </if>
+      <if test="memberInvitationcode != null">
+        member_invitationcode,
+      </if>
+      <if test="memberNote != null">
+        member_note,
+      </if>
+      <if test="memberImage != null">
+        member_Image,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="memberMemberid != null">
+        #{memberMemberid,jdbcType=VARCHAR},
+      </if>
+      <if test="memberNumber != null">
+        #{memberNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="memberMemberidname != null">
+        #{memberMemberidname,jdbcType=VARCHAR},
+      </if>
+      <if test="memberPhonenumber != null">
+        #{memberPhonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="memberSex != null">
+        #{memberSex,jdbcType=VARCHAR},
+      </if>
+      <if test="memberGrade != null">
+        #{memberGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="memberDiscount != null">
+        #{memberDiscount,jdbcType=VARCHAR},
+      </if>
+      <if test="memberBalance != null">
+        #{memberBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="memberMoney1 != null">
+        #{memberMoney1,jdbcType=DOUBLE},
+      </if>
+      <if test="memberMoney2 != null">
+        #{memberMoney2,jdbcType=DOUBLE},
+      </if>
+      <if test="memberIntegral != null">
+        #{memberIntegral,jdbcType=DOUBLE},
+      </if>
+      <if test="memberSubcard != null">
+        #{memberSubcard,jdbcType=INTEGER},
+      </if>
+      <if test="memberCoupon != null">
+        #{memberCoupon,jdbcType=VARCHAR},
+      </if>
+      <if test="memberPassword != null">
+        #{memberPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="memberDateofopeningcard != null">
+        #{memberDateofopeningcard,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberDuedate != null">
+        #{memberDuedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberBirthday != null">
+        #{memberBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberAddress != null">
+        #{memberAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="memberOncredit != null">
+        #{memberOncredit,jdbcType=INTEGER},
+      </if>
+      <if test="memberCreditlimit != null">
+        #{memberCreditlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="memberState != null">
+        #{memberState,jdbcType=INTEGER},
+      </if>
+      <if test="memberGuide != null">
+        #{memberGuide,jdbcType=VARCHAR},
+      </if>
+      <if test="memberEmail != null">
+        #{memberEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="memberQq != null">
+        #{memberQq,jdbcType=VARCHAR},
+      </if>
+      <if test="memberShop != null">
+        #{memberShop,jdbcType=VARCHAR},
+      </if>
+      <if test="memberShopcar != null">
+        #{memberShopcar,jdbcType=VARCHAR},
+      </if>
+      <if test="memberRecommendcode != null">
+        #{memberRecommendcode,jdbcType=VARCHAR},
+      </if>
+      <if test="memberInvitationcode != null">
+        #{memberInvitationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="memberNote != null">
+        #{memberNote,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="memberImage != null">
+        #{memberImage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreMemberExample" resultType="java.lang.Long">
+    select count(*) from zomore_member
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_member
+    <set>
+      <if test="record.memberMemberid != null">
+        member_memberId = #{record.memberMemberid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberNumber != null">
+        member_number = #{record.memberNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberMemberidname != null">
+        member_memberIdName = #{record.memberMemberidname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberPhonenumber != null">
+        member_phoneNumber = #{record.memberPhonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberSex != null">
+        member_sex = #{record.memberSex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberGrade != null">
+        member_grade = #{record.memberGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberDiscount != null">
+        member_discount = #{record.memberDiscount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberBalance != null">
+        member_balance = #{record.memberBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberMoney1 != null">
+        member_money1 = #{record.memberMoney1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.memberMoney2 != null">
+        member_money2 = #{record.memberMoney2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.memberIntegral != null">
+        member_integral = #{record.memberIntegral,jdbcType=DOUBLE},
+      </if>
+      <if test="record.memberSubcard != null">
+        member_subCard = #{record.memberSubcard,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberCoupon != null">
+        member_coupon = #{record.memberCoupon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberPassword != null">
+        member_password = #{record.memberPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberDateofopeningcard != null">
+        member_dateOfOpeningCard = #{record.memberDateofopeningcard,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.memberDuedate != null">
+        member_dueDate = #{record.memberDuedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.memberBirthday != null">
+        member_birthday = #{record.memberBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.memberAddress != null">
+        member_address = #{record.memberAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberOncredit != null">
+        member_onCredit = #{record.memberOncredit,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberCreditlimit != null">
+        member_creditLimit = #{record.memberCreditlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="record.memberState != null">
+        member_state = #{record.memberState,jdbcType=INTEGER},
+      </if>
+      <if test="record.memberGuide != null">
+        member_guide = #{record.memberGuide,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberEmail != null">
+        member_email = #{record.memberEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberQq != null">
+        member_qq = #{record.memberQq,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberShop != null">
+        member_shop = #{record.memberShop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberShopcar != null">
+        member_shopcar = #{record.memberShopcar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberRecommendcode != null">
+        member_recommendcode = #{record.memberRecommendcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberInvitationcode != null">
+        member_invitationcode = #{record.memberInvitationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberNote != null">
+        member_note = #{record.memberNote,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.memberImage != null">
+        member_image = #{record.memberImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update zomore_member
+    set member_memberId = #{record.memberMemberid,jdbcType=VARCHAR},
+      member_number = #{record.memberNumber,jdbcType=VARCHAR},
+      member_memberIdName = #{record.memberMemberidname,jdbcType=VARCHAR},
+      member_phoneNumber = #{record.memberPhonenumber,jdbcType=VARCHAR},
+      member_sex = #{record.memberSex,jdbcType=VARCHAR},
+      member_grade = #{record.memberGrade,jdbcType=VARCHAR},
+      member_discount = #{record.memberDiscount,jdbcType=VARCHAR},
+      member_balance = #{record.memberBalance,jdbcType=VARCHAR},
+      member_money1 = #{record.memberMoney1,jdbcType=DOUBLE},
+      member_money2 = #{record.memberMoney2,jdbcType=DOUBLE},
+      member_integral = #{record.memberIntegral,jdbcType=DOUBLE},
+      member_subCard = #{record.memberSubcard,jdbcType=INTEGER},
+      member_coupon = #{record.memberCoupon,jdbcType=VARCHAR},
+      member_password = #{record.memberPassword,jdbcType=VARCHAR},
+      member_dateOfOpeningCard = #{record.memberDateofopeningcard,jdbcType=TIMESTAMP},
+      member_dueDate = #{record.memberDuedate,jdbcType=TIMESTAMP},
+      member_birthday = #{record.memberBirthday,jdbcType=TIMESTAMP},
+      member_address = #{record.memberAddress,jdbcType=VARCHAR},
+      member_onCredit = #{record.memberOncredit,jdbcType=INTEGER},
+      member_creditLimit = #{record.memberCreditlimit,jdbcType=DECIMAL},
+      member_state = #{record.memberState,jdbcType=INTEGER},
+      member_guide = #{record.memberGuide,jdbcType=VARCHAR},
+      member_email = #{record.memberEmail,jdbcType=VARCHAR},
+      member_qq = #{record.memberQq,jdbcType=VARCHAR},
+      member_shop = #{record.memberShop,jdbcType=VARCHAR},
+      member_shopcar = #{record.memberShopcar,jdbcType=VARCHAR},
+      member_recommendcode = #{record.memberRecommendcode,jdbcType=VARCHAR},
+      member_invitationcode = #{record.memberInvitationcode,jdbcType=VARCHAR},
+      member_note = #{record.memberNote,jdbcType=LONGVARCHAR},
+      member_image = #{record.memberImage,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_member
+    set member_memberId = #{record.memberMemberid,jdbcType=VARCHAR},
+      member_number = #{record.memberNumber,jdbcType=VARCHAR},
+      member_memberIdName = #{record.memberMemberidname,jdbcType=VARCHAR},
+      member_phoneNumber = #{record.memberPhonenumber,jdbcType=VARCHAR},
+      member_sex = #{record.memberSex,jdbcType=VARCHAR},
+      member_grade = #{record.memberGrade,jdbcType=VARCHAR},
+      member_discount = #{record.memberDiscount,jdbcType=VARCHAR},
+      member_balance = #{record.memberBalance,jdbcType=VARCHAR},
+      member_money1 = #{record.memberMoney1,jdbcType=DOUBLE},
+      member_money2 = #{record.memberMoney2,jdbcType=DOUBLE},
+      member_integral = #{record.memberIntegral,jdbcType=DOUBLE},
+      member_subCard = #{record.memberSubcard,jdbcType=INTEGER},
+      member_coupon = #{record.memberCoupon,jdbcType=VARCHAR},
+      member_password = #{record.memberPassword,jdbcType=VARCHAR},
+      member_dateOfOpeningCard = #{record.memberDateofopeningcard,jdbcType=TIMESTAMP},
+      member_dueDate = #{record.memberDuedate,jdbcType=TIMESTAMP},
+      member_birthday = #{record.memberBirthday,jdbcType=TIMESTAMP},
+      member_address = #{record.memberAddress,jdbcType=VARCHAR},
+      member_onCredit = #{record.memberOncredit,jdbcType=INTEGER},
+      member_creditLimit = #{record.memberCreditlimit,jdbcType=DECIMAL},
+      member_state = #{record.memberState,jdbcType=INTEGER},
+      member_guide = #{record.memberGuide,jdbcType=VARCHAR},
+      member_email = #{record.memberEmail,jdbcType=VARCHAR},
+      member_qq = #{record.memberQq,jdbcType=VARCHAR},
+      member_shop = #{record.memberShop,jdbcType=VARCHAR},
+      member_shopcar = #{record.memberShopcar,jdbcType=VARCHAR},
+      member_recommendcode = #{record.memberRecommendcode,jdbcType=VARCHAR},
+      member_invitationcode = #{record.memberInvitationcode,jdbcType=VARCHAR},
+      member_image = #{record.memberImage,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreMember">
+    update zomore_member
+    <set>
+      <if test="memberNumber != null">
+        member_number = #{memberNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="memberMemberidname != null">
+        member_memberIdName = #{memberMemberidname,jdbcType=VARCHAR},
+      </if>
+      <if test="memberPhonenumber != null">
+        member_phoneNumber = #{memberPhonenumber,jdbcType=VARCHAR},
+      </if>
+      <if test="memberSex != null">
+        member_sex = #{memberSex,jdbcType=VARCHAR},
+      </if>
+      <if test="memberGrade != null">
+        member_grade = #{memberGrade,jdbcType=VARCHAR},
+      </if>
+      <if test="memberDiscount != null">
+        member_discount = #{memberDiscount,jdbcType=VARCHAR},
+      </if>
+      <if test="memberBalance != null">
+        member_balance = #{memberBalance,jdbcType=VARCHAR},
+      </if>
+      <if test="memberMoney1 != null">
+        member_money1 = #{memberMoney1,jdbcType=DOUBLE},
+      </if>
+      <if test="memberMoney2 != null">
+        member_money2 = #{memberMoney2,jdbcType=DOUBLE},
+      </if>
+      <if test="memberIntegral != null">
+        member_integral = #{memberIntegral,jdbcType=DOUBLE},
+      </if>
+      <if test="memberSubcard != null">
+        member_subCard = #{memberSubcard,jdbcType=INTEGER},
+      </if>
+      <if test="memberCoupon != null">
+        member_coupon = #{memberCoupon,jdbcType=VARCHAR},
+      </if>
+      <if test="memberPassword != null">
+        member_password = #{memberPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="memberDateofopeningcard != null">
+        member_dateOfOpeningCard = #{memberDateofopeningcard,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberDuedate != null">
+        member_dueDate = #{memberDuedate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberBirthday != null">
+        member_birthday = #{memberBirthday,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberAddress != null">
+        member_address = #{memberAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="memberOncredit != null">
+        member_onCredit = #{memberOncredit,jdbcType=INTEGER},
+      </if>
+      <if test="memberCreditlimit != null">
+        member_creditLimit = #{memberCreditlimit,jdbcType=DECIMAL},
+      </if>
+      <if test="memberState != null">
+        member_state = #{memberState,jdbcType=INTEGER},
+      </if>
+      <if test="memberGuide != null">
+        member_guide = #{memberGuide,jdbcType=VARCHAR},
+      </if>
+      <if test="memberEmail != null">
+        member_email = #{memberEmail,jdbcType=VARCHAR},
+      </if>
+      <if test="memberQq != null">
+        member_qq = #{memberQq,jdbcType=VARCHAR},
+      </if>
+      <if test="memberShop != null">
+        member_shop = #{memberShop,jdbcType=VARCHAR},
+      </if>
+      <if test="memberShopcar != null">
+        member_shopcar = #{memberShopcar,jdbcType=VARCHAR},
+      </if>
+      <if test="memberRecommendcode != null">
+        member_recommendcode = #{memberRecommendcode,jdbcType=VARCHAR},
+      </if>
+      <if test="memberInvitationcode != null">
+        member_invitationcode = #{memberInvitationcode,jdbcType=VARCHAR},
+      </if>
+      <if test="memberNote != null">
+        member_note = #{memberNote,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="memberImage != null">
+        member_image = #{memberImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where member_memberId = #{memberMemberid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zomore.domain.ZomoreMember">
+    update zomore_member
+    set member_number = #{memberNumber,jdbcType=VARCHAR},
+      member_memberIdName = #{memberMemberidname,jdbcType=VARCHAR},
+      member_phoneNumber = #{memberPhonenumber,jdbcType=VARCHAR},
+      member_sex = #{memberSex,jdbcType=VARCHAR},
+      member_grade = #{memberGrade,jdbcType=VARCHAR},
+      member_discount = #{memberDiscount,jdbcType=VARCHAR},
+      member_balance = #{memberBalance,jdbcType=VARCHAR},
+      member_money1 = #{memberMoney1,jdbcType=DOUBLE},
+      member_money2 = #{memberMoney2,jdbcType=DOUBLE},
+      member_integral = #{memberIntegral,jdbcType=DOUBLE},
+      member_subCard = #{memberSubcard,jdbcType=INTEGER},
+      member_coupon = #{memberCoupon,jdbcType=VARCHAR},
+      member_password = #{memberPassword,jdbcType=VARCHAR},
+      member_dateOfOpeningCard = #{memberDateofopeningcard,jdbcType=TIMESTAMP},
+      member_dueDate = #{memberDuedate,jdbcType=TIMESTAMP},
+      member_birthday = #{memberBirthday,jdbcType=TIMESTAMP},
+      member_address = #{memberAddress,jdbcType=VARCHAR},
+      member_onCredit = #{memberOncredit,jdbcType=INTEGER},
+      member_creditLimit = #{memberCreditlimit,jdbcType=DECIMAL},
+      member_state = #{memberState,jdbcType=INTEGER},
+      member_guide = #{memberGuide,jdbcType=VARCHAR},
+      member_email = #{memberEmail,jdbcType=VARCHAR},
+      member_qq = #{memberQq,jdbcType=VARCHAR},
+      member_shop = #{memberShop,jdbcType=VARCHAR},
+      member_shopcar = #{memberShopcar,jdbcType=VARCHAR},
+      member_recommendcode = #{memberRecommendcode,jdbcType=VARCHAR},
+      member_invitationcode = #{memberInvitationcode,jdbcType=VARCHAR},
+      member_note = #{memberNote,jdbcType=LONGVARCHAR},
+      member_image = #{memberImage,jdbcType=VARCHAR}
+    where member_memberId = #{memberMemberid,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreMember">
+    update zomore_member
+    set member_number = #{memberNumber,jdbcType=VARCHAR},
+      member_memberIdName = #{memberMemberidname,jdbcType=VARCHAR},
+      member_phoneNumber = #{memberPhonenumber,jdbcType=VARCHAR},
+      member_sex = #{memberSex,jdbcType=VARCHAR},
+      member_grade = #{memberGrade,jdbcType=VARCHAR},
+      member_discount = #{memberDiscount,jdbcType=VARCHAR},
+      member_balance = #{memberBalance,jdbcType=VARCHAR},
+      member_money1 = #{memberMoney1,jdbcType=DOUBLE},
+      member_money2 = #{memberMoney2,jdbcType=DOUBLE},
+      member_integral = #{memberIntegral,jdbcType=DOUBLE},
+      member_subCard = #{memberSubcard,jdbcType=INTEGER},
+      member_coupon = #{memberCoupon,jdbcType=VARCHAR},
+      member_password = #{memberPassword,jdbcType=VARCHAR},
+      member_dateOfOpeningCard = #{memberDateofopeningcard,jdbcType=TIMESTAMP},
+      member_dueDate = #{memberDuedate,jdbcType=TIMESTAMP},
+      member_birthday = #{memberBirthday,jdbcType=TIMESTAMP},
+      member_address = #{memberAddress,jdbcType=VARCHAR},
+      member_onCredit = #{memberOncredit,jdbcType=INTEGER},
+      member_creditLimit = #{memberCreditlimit,jdbcType=DECIMAL},
+      member_state = #{memberState,jdbcType=INTEGER},
+      member_guide = #{memberGuide,jdbcType=VARCHAR},
+      member_email = #{memberEmail,jdbcType=VARCHAR},
+      member_qq = #{memberQq,jdbcType=VARCHAR},
+      member_shop = #{memberShop,jdbcType=VARCHAR},
+      member_shopcar = #{memberShopcar,jdbcType=VARCHAR},
+      member_recommendcode = #{memberRecommendcode,jdbcType=VARCHAR},
+      member_invitationcode = #{memberInvitationcode,jdbcType=VARCHAR},
+      member_image = #{memberImage,jdbcType=VARCHAR}
+    where member_memberId = #{memberMemberid,jdbcType=VARCHAR}
+  </update>
+<select id="countBySex" parameterType="java.lang.String" resultType="java.util.Map">
+    select case  when member_sex is null then '未知' else member_sex end  as name, count(1) as value from zomore_member where member_shop =#{shop} group by member_sex
+
+</select>
+  <select id="selectMemberGetBirthday" parameterType="java.lang.String" resultType="com.zomore.domain.ZomoreMember">
+   select member_memberId as memberMemberid,member_number as memberNumber,member_memberIdName as memberMemberidname,member_phoneNumber as memberPhonenumber,
+  member_balance as memberBalance ,member_birthday as memberBirthday,member_image as memberImage from zomore_member
+  where date_format( member_birthday, '%m%d' )
+  BETWEEN date_format( now( ) , '%m%d' )
+  AND date_format( date_add( now( ) , INTERVAL 2 DAY ) , '%m%d' ) and member_shop=#{shop}
+  </select>
+
+  <select id="selectAllshopMember" parameterType="java.util.Map" resultType="com.zomore.domain.ZomoreMember">
+    select member_memberId as memberMemberid, member_number as memberNumber, member_memberIdName as memberMemberidname, member_phoneNumber as memberPhonenumber, member_sex as memberSex,
+    member_grade as memberGrade, member_discount as memberDiscount, member_balance as memberBalance, member_money1 as memberMoney1, member_money2 as memberMoney2, member_integral as memberIntegral,
+    member_subCard as memberSubcard, member_coupon as memberCoupon, member_password as memberPassword, member_dateOfOpeningCard as memberDateofopeningcard, member_dueDate as memberDuedate,
+    member_birthday as memberBirthday, member_address as memberAddress, member_onCredit as memberOncredit, member_creditLimit as memberCreditlimit , member_state as memberState,
+    member_guide as memberGuide, member_email as memberEmail, member_qq as memberQq, member_shop as memberShop, member_shopcar as memberShopcar, member_recommendcode as memberRecommendcode,
+    member_invitationcode as memberInvitationcode, member_note as memberNote, member_image as memberImage
+    from zomore_member
+    where member_shop in
+    <foreach collection="shoplist" index="index" item="item" open="("
+             separator="," close=")">
+      #{item}
+    </foreach>
+
+    <if test="membergrade!=null">
+      and member_grade =#{membergrade}
+    </if>
+
+    <if test="membername!=null">
+      and member_memberIdName like concat(concat('%',#{membername}),'%')
+    </if>
+    <if test="membernum!=null">
+      and member_number like concat(concat('%',#{membernum}),'%')
+    </if>
+    order by memberDateofopeningcard desc
+  </select>
+  <select id="selectZomoreMenberByNumAndShops" parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+      select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zomore_member
+    where member_shop in
+    <foreach collection="shoplist" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+    <if test="num!=null">
+    and member_number =#{num}
+    </if>
+    <if test="numLike!=null">
+      and member_number like concat(concat('%',#{numLike}),'%')
+    </if>
+    <if test="memberId!=null">
+      and member_memberId =#{memberId}
+    </if>
+  </select>
+
+  <select id="selectZomoreMemberByMap"  parameterType="java.util.Map" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zomore_member
+    where member_shop =#{shopName}
+    <if test="num!=null">
+      and member_number =#{num}
+    </if>
+    <if test="numLike!=null">
+      and member_number like concat(concat('%',#{numLike}),'%')
+    </if>
+    <if test="memberId!=null">
+      and member_memberId =#{memberId}
+    </if>
+  </select>
+
+  <select id="inspetMemberUsernameExist" resultType="int">
+    select count(*) from zomore_member where member_number=#{member} and member_shop=#{memberShop}
+  </select>
+
+
+</mapper>

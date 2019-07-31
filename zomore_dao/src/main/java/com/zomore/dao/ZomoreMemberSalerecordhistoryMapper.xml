@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreMemberSalerecordhistoryMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreMemberSalerecordhistory">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="sale_id" jdbcType="VARCHAR" property="saleId" />
+    <result column="service_id" jdbcType="VARCHAR" property="serviceId" />
+    <result column="money" jdbcType="DOUBLE" property="money" />
+    <result column="money1" jdbcType="DOUBLE" property="money1" />
+    <result column="money2" jdbcType="DOUBLE" property="money2" />
+    <result column="sale_integral" jdbcType="INTEGER" property="saleIntegral" />
+    <result column="give_integral" jdbcType="INTEGER" property="giveIntegral" />
+    <result column="shop" jdbcType="VARCHAR" property="shop" />
+    <result column="time" jdbcType="TIMESTAMP" property="time" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, sale_id, service_id, money, money1, money2, sale_integral, give_integral, shop, 
+    time
+  </sql>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreMemberSalerecordhistoryExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_member_salerecordhistory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zomore_member_salerecordhistory
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from zomore_member_salerecordhistory
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreMemberSalerecordhistoryExample">
+    delete from zomore_member_salerecordhistory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreMemberSalerecordhistory">
+    insert into zomore_member_salerecordhistory (id, sale_id, service_id, 
+      money, money1, money2, 
+      sale_integral, give_integral, shop, 
+      time)
+    values (#{id,jdbcType=INTEGER}, #{saleId,jdbcType=VARCHAR}, #{serviceId,jdbcType=VARCHAR}, 
+      #{money,jdbcType=DOUBLE}, #{money1,jdbcType=DOUBLE}, #{money2,jdbcType=DOUBLE}, 
+      #{saleIntegral,jdbcType=INTEGER}, #{giveIntegral,jdbcType=INTEGER}, #{shop,jdbcType=VARCHAR}, 
+      #{time,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreMemberSalerecordhistory">
+    insert into zomore_member_salerecordhistory
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="saleId != null">
+        sale_id,
+      </if>
+      <if test="serviceId != null">
+        service_id,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="money1 != null">
+        money1,
+      </if>
+      <if test="money2 != null">
+        money2,
+      </if>
+      <if test="saleIntegral != null">
+        sale_integral,
+      </if>
+      <if test="giveIntegral != null">
+        give_integral,
+      </if>
+      <if test="shop != null">
+        shop,
+      </if>
+      <if test="time != null">
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="saleId != null">
+        #{saleId,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceId != null">
+        #{serviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="money1 != null">
+        #{money1,jdbcType=DOUBLE},
+      </if>
+      <if test="money2 != null">
+        #{money2,jdbcType=DOUBLE},
+      </if>
+      <if test="saleIntegral != null">
+        #{saleIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="giveIntegral != null">
+        #{giveIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="shop != null">
+        #{shop,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreMemberSalerecordhistoryExample" resultType="java.lang.Long">
+    select count(*) from zomore_member_salerecordhistory
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_member_salerecordhistory
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.saleId != null">
+        sale_id = #{record.saleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceId != null">
+        service_id = #{record.serviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.money != null">
+        money = #{record.money,jdbcType=DOUBLE},
+      </if>
+      <if test="record.money1 != null">
+        money1 = #{record.money1,jdbcType=DOUBLE},
+      </if>
+      <if test="record.money2 != null">
+        money2 = #{record.money2,jdbcType=DOUBLE},
+      </if>
+      <if test="record.saleIntegral != null">
+        sale_integral = #{record.saleIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="record.giveIntegral != null">
+        give_integral = #{record.giveIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="record.shop != null">
+        shop = #{record.shop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.time != null">
+        time = #{record.time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_member_salerecordhistory
+    set id = #{record.id,jdbcType=INTEGER},
+      sale_id = #{record.saleId,jdbcType=VARCHAR},
+      service_id = #{record.serviceId,jdbcType=VARCHAR},
+      money = #{record.money,jdbcType=DOUBLE},
+      money1 = #{record.money1,jdbcType=DOUBLE},
+      money2 = #{record.money2,jdbcType=DOUBLE},
+      sale_integral = #{record.saleIntegral,jdbcType=INTEGER},
+      give_integral = #{record.giveIntegral,jdbcType=INTEGER},
+      shop = #{record.shop,jdbcType=VARCHAR},
+      time = #{record.time,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreMemberSalerecordhistory">
+    update zomore_member_salerecordhistory
+    <set>
+      <if test="saleId != null">
+        sale_id = #{saleId,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceId != null">
+        service_id = #{serviceId,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="money1 != null">
+        money1 = #{money1,jdbcType=DOUBLE},
+      </if>
+      <if test="money2 != null">
+        money2 = #{money2,jdbcType=DOUBLE},
+      </if>
+      <if test="saleIntegral != null">
+        sale_integral = #{saleIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="giveIntegral != null">
+        give_integral = #{giveIntegral,jdbcType=INTEGER},
+      </if>
+      <if test="shop != null">
+        shop = #{shop,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreMemberSalerecordhistory">
+    update zomore_member_salerecordhistory
+    set sale_id = #{saleId,jdbcType=VARCHAR},
+      service_id = #{serviceId,jdbcType=VARCHAR},
+      money = #{money,jdbcType=DOUBLE},
+      money1 = #{money1,jdbcType=DOUBLE},
+      money2 = #{money2,jdbcType=DOUBLE},
+      sale_integral = #{saleIntegral,jdbcType=INTEGER},
+      give_integral = #{giveIntegral,jdbcType=INTEGER},
+      shop = #{shop,jdbcType=VARCHAR},
+      time = #{time,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

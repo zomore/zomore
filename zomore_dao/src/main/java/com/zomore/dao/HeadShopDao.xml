@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.HeadShopDao">
+
+<update id="updateMultipleById2" parameterType="com.zomore.domain.Multiple" >
+    update multiple
+    <set>
+    <if test="multiplename !=null">
+        multiplename=#{multiplename},
+    </if>
+    <if test="password !=null">
+        password=#{password},
+    </if>
+    <if test="phoneNumber !=null">
+        phoneNumber=#{phoneNumber},
+    </if>
+    <if test="mail !=null">
+        mail=#{mail},
+    </if>
+    <if test="registrationTime !=null">
+        registrationTime=#{registrationTime},
+    </if>
+    <if test="name !=null">
+        name=#{name},
+    </if>
+    <if test="shopName !=null">
+        shopName=#{shopName},
+    </if>
+    <if test="dueTime !=null">
+        dueTime=#{dueTime},
+    </if>
+        <if test="industry !=null">
+            industry=#{industry},
+        </if>
+        <if test="address !=null">
+            address=#{address},
+        </if>
+        <if test="activeDay !=null">
+            activeDay=#{activeDay},
+        </if>
+        <if test="contact !=null">
+            contact=#{contact},
+        </if>
+        <if test="remark !=null">
+            remark=#{remark},
+        </if>
+        <if test="contact !=null">
+            contact=#{contact},
+        </if>
+
+    </set>
+    where multipleId= #{multipleId}
+</update>
+<update id="updataHeadshopbyId2" parameterType="com.zomore.domain.HeadShop">
+    update zomore_head
+    <set>
+        <if test="username !=null">
+            multiplename=#{multiplename},
+        </if>
+        <if test="password !=null">
+            password=#{password},
+        </if>
+        <if test="phoneNumber !=null">
+            phoneNumber=#{phoneNumber},
+        </if>
+        <if test="mail !=null">
+            mail=#{mail},
+        </if>
+        <if test="registrationTime !=null">
+            registrationTime=#{registrationTime},
+        </if>
+        <if test="name !=null">
+            name=#{name},
+        </if>
+        <if test="shopName !=null">
+            shopName=#{shopName},
+        </if>
+        <if test="dueTime !=null">
+            dueTime=#{dueTime},
+        </if>
+        <if test="industry !=null">
+            industry=#{industry},
+        </if>
+        <if test="address !=null">
+            address=#{address},
+        </if>
+        <if test="activeDay !=null">
+            activeDay=#{activeDay},
+        </if>
+        <if test="contact !=null">
+            contact=#{contact},
+        </if>
+        <if test="remark !=null">
+            remark=#{remark},
+        </if>
+        <if test="contact !=null">
+            contact=#{contact},
+        </if>
+
+      </set>
+    where headId= #{headId}
+</update>
+
+    <update id="updataShopById2" parameterType="com.zomore.domain.HeadShop">
+        update shop
+        <set>
+            <if test="username !=null">
+                multiplename=#{multiplename},
+            </if>
+            <if test="password !=null">
+                password=#{password},
+            </if>
+            <if test="phoneNumber !=null">
+                phoneNumber=#{phoneNumber},
+            </if>
+            <if test="mail !=null">
+                mail=#{mail},
+            </if>
+            <if test="registrationTime !=null">
+                registrationTime=#{registrationTime},
+            </if>
+            <if test="name !=null">
+                name=#{name},
+            </if>
+            <if test="shopName !=null">
+                shopName=#{shopName},
+            </if>
+            <if test="dueTime !=null">
+                dueTime=#{dueTime},
+            </if>
+            <if test="industry !=null">
+                industry=#{industry},
+            </if>
+            <if test="address !=null">
+                address=#{address},
+            </if>
+            <if test="activeDay !=null">
+                activeDay=#{activeDay},
+            </if>
+            <if test="contact !=null">
+                contact=#{contact},
+            </if>
+            <if test="remark !=null">
+                remark=#{remark},
+            </if>
+            <if test="contact !=null">
+                contact=#{contact},
+            </if>
+
+        </set>
+            where shopId= #{shopId}
+    </update>
+
+    <update id="updataShopByMultipleId" parameterType="com.zomore.domain.Shop">
+        update shop
+        <set>
+            <if test="username !=null">
+                multiplename=#{multiplename},
+            </if>
+            <if test="password !=null">
+                password=#{password},
+            </if>
+            <if test="phoneNumber !=null">
+                phoneNumber=#{phoneNumber},
+            </if>
+            <if test="mail !=null">
+                mail=#{mail},
+            </if>
+            <if test="registrationTime !=null">
+                registrationTime=#{registrationTime},
+            </if>
+            <if test="name !=null">
+                name=#{name},
+            </if>
+            <if test="shopName !=null">
+                shopName=#{shopName},
+            </if>
+            <if test="dueTime !=null">
+                dueTime=#{dueTime},
+            </if>
+            <if test="industry !=null">
+                industry=#{industry},
+            </if>
+            <if test="address !=null">
+                address=#{address},
+            </if>
+            <if test="activeDay !=null">
+                activeDay=#{activeDay},
+            </if>
+            <if test="contact !=null">
+                contact=#{contact},
+            </if>
+            <if test="remark !=null">
+                remark=#{remark},
+            </if>
+            <if test="contact !=null">
+                contact=#{contact},
+            </if>
+
+        </set>
+        where multipleId= #{multipleId}
+    </update>
+
+    <update id="updataHeadshopBymultipleId" parameterType="com.zomore.domain.HeadShop">
+        update zomore_head
+        <set>
+            <if test="username !=null">
+                multiplename=#{multiplename},
+            </if>
+            <if test="password !=null">
+                password=#{password},
+            </if>
+            <if test="phoneNumber !=null">
+                phoneNumber=#{phoneNumber},
+            </if>
+            <if test="mail !=null">
+                mail=#{mail},
+            </if>
+            <if test="registrationTime !=null">
+                registrationTime=#{registrationTime},
+            </if>
+            <if test="name !=null">
+                name=#{name},
+            </if>
+            <if test="shopName !=null">
+                shopName=#{shopName},
+            </if>
+            <if test="dueTime !=null">
+                dueTime=#{dueTime},
+            </if>
+            <if test="industry !=null">
+                industry=#{industry},
+            </if>
+            <if test="address !=null">
+                address=#{address},
+            </if>
+            <if test="activeDay !=null">
+                activeDay=#{activeDay},
+            </if>
+            <if test="contact !=null">
+                contact=#{contact},
+            </if>
+            <if test="remark !=null">
+                remark=#{remark},
+            </if>
+            <if test="contact !=null">
+                contact=#{contact},
+            </if>
+            <if test="sharedmemberid !=null">
+                sharedmemberid=#{sharedmemberid},
+            </if>
+        </set>
+        where multipleId= #{multipleId}
+    </update>
+
+
+</mapper>

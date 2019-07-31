@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.SettingDao">
+    <insert id="inertGenralSetting" parameterType="com.zomore.domain.CashierGenralSetting">
+           insert into zomore_cashier_generalsetting
+              <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">
+                 id,
+                 </if>
+               <if test="cashiernumber != null">
+                   cashiernumber,
+                </if>
+                <if test="cashiershop != null">
+                    cashiershop,
+                </if>
+                <if test="standbyfund != null">
+                    standbyfund,
+                </if>
+                <if test="newlyadded != null">
+                    newlyadded,
+                </if>
+                <if test="shoppingguide != null">
+                    shoppingguide,
+                </if>
+                <if test="setrepeat != null">
+                    setrepeat,
+                </if>
+                <if test="startup != null">
+                    startup,
+                </if>
+                <if test="system != null">
+                    system,
+                </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="id != null">
+            #{id,jdbcType=INTEGER},
+        </if>
+            <if test="cashiernumber != null">
+                #{cashiernumber,jdbcType=VARCHAR},
+            </if>
+            <if test="cashiershop != null">
+                #{cashiershop,jdbcType=VARCHAR},
+            </if>
+            <if test="standbyfund != null">
+                #{standbyfund,jdbcType=INTEGER},
+            </if>
+            <if test="merge != null">
+                #{merge,jdbcType=INTEGER},
+            </if>
+            <if test="newlyadded != null">
+                #{newlyadded,jdbcType=INTEGER},
+            </if>
+            <if test="shoppingguide != null">
+                #{shoppingguide,jdbcType=INTEGER},
+            </if>
+            <if test="setrepeat != null">
+                #{setrepeat,jdbcType=INTEGER},
+            </if>
+            <if test="startup != null">
+                #{startup,jdbcType=INTEGER},
+            </if>
+            <if test="system != null">
+                #{system,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updataGenralSetting" parameterType="com.zomore.domain.CashierGenralSetting" >
+        update zomore_cashier_generalsetting
+        <set>
+            <if test="standbyfund!=null">
+                standbyfund = #{standbyfund,jdbcType=INTEGER},
+            </if>
+            <if test="merge!=null">
+                merge = #{merge,jdbcType=INTEGER},
+            </if>
+            <if test="newlyadded!=null">
+                newlyadded = #{newlyadded,jdbcType=INTEGER},
+            </if>
+            <if test="shoppingguide!=null">
+                shoppingguide = #{shoppingguide,jdbcType=INTEGER},
+            </if>
+            <if test="setrepeat!=null">
+                setrepeat = #{setrepeat,jdbcType=INTEGER},
+            </if>
+            <if test="startup!=null">
+                startup = #{startup,jdbcType=INTEGER},
+            </if>
+            <if test="system!=null">
+                system = #{system,jdbcType=INTEGER},
+            </if>
+        </set>
+            where id=#{id}
+    </update>
+
+    <insert id="inserFunctionSetting" parameterType="com.zomore.domain.CashierFunctionSetting" >
+        insert into zomore_cashire_functionsetting
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="cashierNumber != null">
+                cashiernumber,
+            </if>
+            <if test="cashierShop != null">
+                cashiershop,
+            </if>
+            <if test="icmemberKar != null">
+                icmemberKar,
+            </if>
+            <if test="memberBirthday != null">
+                memberbirthday,
+            </if>
+            <if test="lockScreen != null">
+                lockscreen,
+            </if>
+            <if test="guestShow != null">
+                guestshow,
+            </if>
+            <if test="guestShowAddress != null">
+                guestshow_address,
+            </if>
+            <if test="primaryExtension != null">
+                primaryextension,
+            </if>
+            <if test="itemNum != null">
+                itemnum,
+            </if>
+            <if test="remarks != null">
+                remarks,
+            </if>
+            <if test="retrieval != null">
+                retrieval,
+            </if>
+        </trim>
+
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="cashierNumber != null">
+                #{cashierNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="cashierShop != null">
+                #{cashierShop,jdbcType=VARCHAR},
+            </if>
+            <if test="icmemberKar != null">
+                #{icmemberKar,jdbcType=INTEGER},
+            </if>
+            <if test="memberBirthday != null">
+                #{memberBirthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lockScreen != null">
+                #{lockScreen,jdbcType=INTEGER},
+            </if>
+            <if test="guestShow != null">
+                #{guestShow,jdbcType=INTEGER},
+            </if>
+            <if test="guestShowAddress != null">
+                #{guestShowAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="primaryExtension != null">
+                #{primaryExtension,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null">
+                #{remarks,jdbcType=INTEGER},
+            </if>
+            <if test="itemNum != null">
+                #{itemNum,jdbcType=INTEGER},
+            </if>
+            <if test="retrieval != null">
+                #{retrieval,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+ <select id="selectFunctionSetting" parameterType="com.zomore.domain.CashierFunctionSetting" resultType="com.zomore.domain.CashierFunctionSetting">
+   select  id as id, cashiernumber as cashierNumber, cashiershop as cashierShop , icmemberKar as icmemberKar, memberbirthday as memberBirthday,
+ lockscreen as lockScreen, guestshow as guestShow, guestshow_address as guestShowAddress , primaryextension as primaryExtension,
+itemnum as itemNum,
+remarks as remarks,retrieval as retrieval from zomore_cashire_functionsetting  where cashiernumber=#{cashierNumber} and cashiershop=#{cashierShop}
+    </select>
+
+    <update id="updataFunctionSetting" parameterType="com.zomore.domain.CashierFunctionSetting">
+        update zomore_cashire_functionsetting
+        <set>
+            <if test="cashierNumber != null">
+                cashiernumber=#{cashierNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="cashierShop != null">
+                cashiershop= #{cashierShop,jdbcType=VARCHAR},
+            </if>
+            <if test="icmemberKar != null">
+                icmemberKar=#{icmemberKar,jdbcType=INTEGER},
+            </if>
+            <if test="memberBirthday != null">
+                memberbirthday=#{memberBirthday,jdbcType=TIMESTAMP},
+            </if>
+            <if test="lockScreen != null">
+                lockscreen=#{lockScreen,jdbcType=INTEGER},
+            </if>
+            <if test="guestShow != null">
+                guestshow= #{guestShow,jdbcType=INTEGER},
+            </if>
+            <if test="guestShowAddress != null">
+                guestshow_address=#{guestShowAddress,jdbcType=VARCHAR},
+            </if>
+            <if test="primaryExtension != null">
+                primaryextension=#{primaryExtension,jdbcType=VARCHAR},
+            </if>
+            <if test="remarks != null">
+                itemnum=#{remarks,jdbcType=INTEGER},
+            </if>
+            <if test="itemNum != null">
+                remarks=#{itemNum,jdbcType=INTEGER},
+            </if>
+            <if test="retrieval != null">
+                retrieval= #{retrieval,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <insert id="inertPrintSetting" parameterType="com.zomore.domain.CashierPrintSetting">
+        insert into zomore_cashier_printsetting
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="cashiernumber != null">
+                cashiernumber,
+            </if>
+            <if test="cashiershop != null">
+                cashiershop,
+            </if>
+            <if test="norms != null">
+                norms,
+            </if>
+            <if test="printnumber != null">
+                printnumber,
+            </if>
+            <if test="tablelist != null">
+                tablelist,
+            </if>
+            <if test="feedback != null">
+                feedback,
+            </if>
+            <if test="hidenum != null">
+                hidenum,
+            </if>
+
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="cashiernumber != null">
+                #{cashiernumber,jdbcType=VARCHAR},
+            </if>
+            <if test="cashiershop != null">
+                #{cashiershop,jdbcType=VARCHAR},
+            </if>
+            <if test="norms != null">
+                #{norms,jdbcType=INTEGER},
+            </if>
+            <if test="printnumber != null">
+                #{printnumber,jdbcType=INTEGER},
+            </if>
+            <if test="tablelist != null">
+                #{tablelist,jdbcType=INTEGER},
+            </if>
+            <if test="feedback != null">
+                #{feedback,jdbcType=INTEGER},
+            </if>
+            <if test="hidenum != null">
+                #{hidenum,jdbcType=INTEGER},
+            </if>
+
+        </trim>
+    </insert>
+
+    <update id="updataPrintSetting" parameterType="com.zomore.domain.CashierPrintSetting" >
+        update zomore_cashier_printsetting
+        <set>
+            <if test="norms!=null">
+                norms = #{norms,jdbcType=INTEGER},
+            </if>
+            <if test="printnumber!=null">
+                printnumber = #{printnumber,jdbcType=INTEGER},
+            </if>
+            <if test="tablelist!=null">
+                tablelist = #{tablelist,jdbcType=INTEGER},
+            </if>
+            <if test="feedback!=null">
+                feedback = #{feedback,jdbcType=INTEGER},
+            </if>
+            <if test="hidenum!=null">
+                hidenum = #{hidenum,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+    <insert id="inertAdvertSetting" parameterType="com.zomore.domain.CashierAdvertSetting">
+        insert into zomore_cashier_advertsetting
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="cashiernumber != null">
+                cashiernumber,
+            </if>
+            <if test="cashiershop != null">
+                cashiershop,
+            </if>
+            <if test="time != null">
+                time,
+            </if>
+            <if test="switchtime != null">
+                switchtime,
+            </if>
+            <if test="screen != null">
+                screen,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="cashiernumber != null">
+                #{cashiernumber,jdbcType=VARCHAR},
+            </if>
+            <if test="cashiershop != null">
+                #{cashiershop,jdbcType=VARCHAR},
+            </if>
+            <if test="time != null">
+                #{time,jdbcType=INTEGER},
+            </if>
+            <if test="switchtime != null">
+                #{switchtime,jdbcType=INTEGER},
+            </if>
+            <if test="screen != null">
+                #{screen,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="updataAdvertSetting" parameterType="com.zomore.domain.CashierAdvertSetting" >
+        update zomore_cashier_advertsetting
+        <set>
+            <if test="time!=null">
+                time = #{time,jdbcType=INTEGER},
+            </if>
+            <if test="switchtime!=null">
+                switchtime = #{switchtime,jdbcType=INTEGER},
+            </if>
+            <if test="screen!=null">
+                screen = #{screen,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
+
+
+</mapper>

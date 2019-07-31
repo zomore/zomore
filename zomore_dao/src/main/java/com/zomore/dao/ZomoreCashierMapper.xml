@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreCashierMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreCashier">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="cashier_number" jdbcType="VARCHAR" property="cashierNumber" />
+    <result column="cashier_name" jdbcType="VARCHAR" property="cashierName" />
+    <result column="cashier_password" jdbcType="VARCHAR" property="cashierPassword" />
+    <result column="cashier_phone" jdbcType="VARCHAR" property="cashierPhone" />
+    <result column="cashier_rolename" jdbcType="VARCHAR" property="cashierRolename" />
+    <result column="cashier_state" jdbcType="INTEGER" property="cashierState" />
+    <result column="cashier_store" jdbcType="VARCHAR" property="cashierStore" />
+    <result column="cashier_discount" jdbcType="INTEGER" property="cashierDiscount" />
+    <result column="cashier_money" jdbcType="DOUBLE" property="cashierMoney" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, cashier_number, cashier_name, cashier_password, cashier_phone, cashier_rolename, 
+    cashier_state, cashier_store, cashier_discount, cashier_money
+  </sql>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreCashierExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_cashier
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zomore_cashier
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from zomore_cashier
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreCashierExample">
+    delete from zomore_cashier
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreCashier">
+    insert into zomore_cashier (id, cashier_number, cashier_name, 
+      cashier_password, cashier_phone, cashier_rolename, 
+      cashier_state, cashier_store, cashier_discount, 
+      cashier_money)
+    values (#{id,jdbcType=INTEGER}, #{cashierNumber,jdbcType=VARCHAR}, #{cashierName,jdbcType=VARCHAR}, 
+      #{cashierPassword,jdbcType=VARCHAR}, #{cashierPhone,jdbcType=VARCHAR}, #{cashierRolename,jdbcType=VARCHAR}, 
+      #{cashierState,jdbcType=INTEGER}, #{cashierStore,jdbcType=VARCHAR}, #{cashierDiscount,jdbcType=INTEGER}, 
+      #{cashierMoney,jdbcType=DOUBLE})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreCashier">
+    insert into zomore_cashier
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="cashierNumber != null">
+        cashier_number,
+      </if>
+      <if test="cashierName != null">
+        cashier_name,
+      </if>
+      <if test="cashierPassword != null">
+        cashier_password,
+      </if>
+      <if test="cashierPhone != null">
+        cashier_phone,
+      </if>
+      <if test="cashierRolename != null">
+        cashier_rolename,
+      </if>
+      <if test="cashierState != null">
+        cashier_state,
+      </if>
+      <if test="cashierStore != null">
+        cashier_store,
+      </if>
+      <if test="cashierDiscount != null">
+        cashier_discount,
+      </if>
+      <if test="cashierMoney != null">
+        cashier_money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="cashierNumber != null">
+        #{cashierNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cashierName != null">
+        #{cashierName,jdbcType=VARCHAR},
+      </if>
+      <if test="cashierPassword != null">
+        #{cashierPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="cashierPhone != null">
+        #{cashierPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="cashierRolename != null">
+        #{cashierRolename,jdbcType=VARCHAR},
+      </if>
+      <if test="cashierState != null">
+        #{cashierState,jdbcType=INTEGER},
+      </if>
+      <if test="cashierStore != null">
+        #{cashierStore,jdbcType=VARCHAR},
+      </if>
+      <if test="cashierDiscount != null">
+        #{cashierDiscount,jdbcType=INTEGER},
+      </if>
+      <if test="cashierMoney != null">
+        #{cashierMoney,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreCashierExample" resultType="java.lang.Long">
+    select count(*) from zomore_cashier
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_cashier
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.cashierNumber != null">
+        cashier_number = #{record.cashierNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cashierName != null">
+        cashier_name = #{record.cashierName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cashierPassword != null">
+        cashier_password = #{record.cashierPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cashierPhone != null">
+        cashier_phone = #{record.cashierPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cashierRolename != null">
+        cashier_rolename = #{record.cashierRolename,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cashierState != null">
+        cashier_state = #{record.cashierState,jdbcType=INTEGER},
+      </if>
+      <if test="record.cashierStore != null">
+        cashier_store = #{record.cashierStore,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cashierDiscount != null">
+        cashier_discount = #{record.cashierDiscount,jdbcType=INTEGER},
+      </if>
+      <if test="record.cashierMoney != null">
+        cashier_money = #{record.cashierMoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_cashier
+    set id = #{record.id,jdbcType=INTEGER},
+      cashier_number = #{record.cashierNumber,jdbcType=VARCHAR},
+      cashier_name = #{record.cashierName,jdbcType=VARCHAR},
+      cashier_password = #{record.cashierPassword,jdbcType=VARCHAR},
+      cashier_phone = #{record.cashierPhone,jdbcType=VARCHAR},
+      cashier_rolename = #{record.cashierRolename,jdbcType=VARCHAR},
+      cashier_state = #{record.cashierState,jdbcType=INTEGER},
+      cashier_store = #{record.cashierStore,jdbcType=VARCHAR},
+      cashier_discount = #{record.cashierDiscount,jdbcType=INTEGER},
+      cashier_money = #{record.cashierMoney,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreCashier">
+    update zomore_cashier
+    <set>
+      <if test="cashierNumber != null">
+        cashier_number = #{cashierNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cashierName != null">
+        cashier_name = #{cashierName,jdbcType=VARCHAR},
+      </if>
+      <if test="cashierPassword != null">
+        cashier_password = #{cashierPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="cashierPhone != null">
+        cashier_phone = #{cashierPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="cashierRolename != null">
+        cashier_rolename = #{cashierRolename,jdbcType=VARCHAR},
+      </if>
+      <if test="cashierState != null">
+        cashier_state = #{cashierState,jdbcType=INTEGER},
+      </if>
+      <if test="cashierStore != null">
+        cashier_store = #{cashierStore,jdbcType=VARCHAR},
+      </if>
+      <if test="cashierDiscount != null">
+        cashier_discount = #{cashierDiscount,jdbcType=INTEGER},
+      </if>
+      <if test="cashierMoney != null">
+        cashier_money = #{cashierMoney,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreCashier">
+    update zomore_cashier
+    <set>
+      <if test="cashierNumber!=null">
+        cashier_number = #{cashierNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="cashierName!=null">
+        cashier_name = #{cashierName,jdbcType=VARCHAR},
+      </if>
+      <if test="cashierPassword!=null">
+        cashier_password = #{cashierPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="cashierPhone!=null">
+        cashier_phone = #{cashierPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="cashierRolename!=null">
+        cashier_rolename = #{cashierRolename,jdbcType=VARCHAR},
+      </if>
+      <if test="cashierState!=null">
+        cashier_state = #{cashierState,jdbcType=INTEGER},
+      </if>
+      <if test="cashierStore!=null">
+        cashier_store = #{cashierStore,jdbcType=VARCHAR},
+      </if>
+      <if test="cashierDiscount!=null">
+        cashier_discount = #{cashierDiscount,jdbcType=INTEGER},
+      </if>
+      <if test="cashierMoney!=null">
+        cashier_money = #{cashierMoney,jdbcType=DOUBLE}
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

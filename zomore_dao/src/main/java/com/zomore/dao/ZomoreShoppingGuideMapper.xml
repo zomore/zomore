@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreShoppingGuideMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreShoppingGuide">
+    <id column="shopping_guide_id" jdbcType="VARCHAR" property="shoppingGuideId" />
+    <result column="shopping_guide_name" jdbcType="VARCHAR" property="shoppingGuideName" />
+    <result column="shopping_guide_phone" jdbcType="VARCHAR" property="shoppingGuidePhone" />
+    <result column="shopping_guide_image" jdbcType="VARCHAR" property="shoppingGuideImage" />
+    <result column="shopping_guide_sale" jdbcType="VARCHAR" property="shoppingGuideSale" />
+    <result column="shopping_guide_appoint" jdbcType="VARCHAR" property="shoppingGuideAppoint" />
+    <result column="shopping_guide_recharge" jdbcType="VARCHAR" property="shoppingGuideRecharge" />
+    <result column="shopping_guide_subcard" jdbcType="VARCHAR" property="shoppingGuideSubcard" />
+    <result column="shopping_guide_shoppingcar" jdbcType="VARCHAR" property="shoppingGuideShoppingcar" />
+    <result column="shopping_guide_lab" jdbcType="VARCHAR" property="shoppingGuideLab" />
+    <result column="shopping_guide_ismember" jdbcType="INTEGER" property="shoppingGuideIsmember" />
+    <result column="shopping_guide_cashier_store" jdbcType="VARCHAR" property="shoppingGuideCashierStore" />
+    <result column="shopping_guide_role" jdbcType="VARCHAR" property="shoppingGuideRole" />
+    <result column="shopping_guide_password" jdbcType="VARCHAR" property="shoppingGuidePassword" />
+    <result column="shopping_guide_state" jdbcType="INTEGER" property="shoppingGuideState" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="updatetime" jdbcType="TIMESTAMP" property="updatetime" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zomore.domain.ZomoreShoppingGuide">
+    <result column="shopping_guide_meno" jdbcType="LONGVARCHAR" property="shoppingGuideMeno" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    shopping_guide_id, shopping_guide_name, shopping_guide_phone, shopping_guide_image, 
+    shopping_guide_sale, shopping_guide_appoint, shopping_guide_recharge, shopping_guide_subcard, 
+    shopping_guide_shoppingcar, shopping_guide_lab, shopping_guide_ismember,shopping_guide_meno, shopping_guide_cashier_store,
+    shopping_guide_role, shopping_guide_password, shopping_guide_state, createtime, updatetime
+  </sql>
+  <sql id="Blob_Column_List">
+    shopping_guide_meno
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.zomore.domain.ZomoreShoppingGuideExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zomore_shopping_guide
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreShoppingGuideExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_shopping_guide
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zomore_shopping_guide
+    where shopping_guide_id = #{shoppingGuideId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zomore_shopping_guide
+    where shopping_guide_id = #{shoppingGuideId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreShoppingGuideExample">
+    delete from zomore_shopping_guide
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreShoppingGuide">
+    insert into zomore_shopping_guide (shopping_guide_id, shopping_guide_name, 
+      shopping_guide_phone, shopping_guide_image, 
+      shopping_guide_sale, shopping_guide_appoint, 
+      shopping_guide_recharge, shopping_guide_subcard, 
+      shopping_guide_shoppingcar, shopping_guide_lab, 
+      shopping_guide_ismember, shopping_guide_cashier_store, 
+      shopping_guide_role, shopping_guide_password, 
+      shopping_guide_state, createtime, updatetime, 
+      shopping_guide_meno)
+    values (#{shoppingGuideId,jdbcType=VARCHAR}, #{shoppingGuideName,jdbcType=VARCHAR}, 
+      #{shoppingGuidePhone,jdbcType=VARCHAR}, #{shoppingGuideImage,jdbcType=VARCHAR}, 
+      #{shoppingGuideSale,jdbcType=VARCHAR}, #{shoppingGuideAppoint,jdbcType=VARCHAR}, 
+      #{shoppingGuideRecharge,jdbcType=VARCHAR}, #{shoppingGuideSubcard,jdbcType=VARCHAR}, 
+      #{shoppingGuideShoppingcar,jdbcType=VARCHAR}, #{shoppingGuideLab,jdbcType=VARCHAR}, 
+      #{shoppingGuideIsmember,jdbcType=INTEGER}, #{shoppingGuideCashierStore,jdbcType=VARCHAR}, 
+      #{shoppingGuideRole,jdbcType=VARCHAR}, #{shoppingGuidePassword,jdbcType=VARCHAR}, 
+      #{shoppingGuideState,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, #{updatetime,jdbcType=TIMESTAMP}, 
+      #{shoppingGuideMeno,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreShoppingGuide">
+    insert into zomore_shopping_guide
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="shoppingGuideId != null">
+        shopping_guide_id,
+      </if>
+      <if test="shoppingGuideName != null">
+        shopping_guide_name,
+      </if>
+      <if test="shoppingGuidePhone != null">
+        shopping_guide_phone,
+      </if>
+      <if test="shoppingGuideImage != null">
+        shopping_guide_image,
+      </if>
+      <if test="shoppingGuideSale != null">
+        shopping_guide_sale,
+      </if>
+      <if test="shoppingGuideAppoint != null">
+        shopping_guide_appoint,
+      </if>
+      <if test="shoppingGuideRecharge != null">
+        shopping_guide_recharge,
+      </if>
+      <if test="shoppingGuideSubcard != null">
+        shopping_guide_subcard,
+      </if>
+      <if test="shoppingGuideShoppingcar != null">
+        shopping_guide_shoppingcar,
+      </if>
+      <if test="shoppingGuideLab != null">
+        shopping_guide_lab,
+      </if>
+      <if test="shoppingGuideIsmember != null">
+        shopping_guide_ismember,
+      </if>
+      <if test="shoppingGuideCashierStore != null">
+        shopping_guide_cashier_store,
+      </if>
+      <if test="shoppingGuideRole != null">
+        shopping_guide_role,
+      </if>
+      <if test="shoppingGuidePassword != null">
+        shopping_guide_password,
+      </if>
+      <if test="shoppingGuideState != null">
+        shopping_guide_state,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="updatetime != null">
+        updatetime,
+      </if>
+      <if test="shoppingGuideMeno != null">
+        shopping_guide_meno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="shoppingGuideId != null">
+        #{shoppingGuideId,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideName != null">
+        #{shoppingGuideName,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuidePhone != null">
+        #{shoppingGuidePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideImage != null">
+        #{shoppingGuideImage,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideSale != null">
+        #{shoppingGuideSale,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideAppoint != null">
+        #{shoppingGuideAppoint,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideRecharge != null">
+        #{shoppingGuideRecharge,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideSubcard != null">
+        #{shoppingGuideSubcard,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideShoppingcar != null">
+        #{shoppingGuideShoppingcar,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideLab != null">
+        #{shoppingGuideLab,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideIsmember != null">
+        #{shoppingGuideIsmember,jdbcType=INTEGER},
+      </if>
+      <if test="shoppingGuideCashierStore != null">
+        #{shoppingGuideCashierStore,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideRole != null">
+        #{shoppingGuideRole,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuidePassword != null">
+        #{shoppingGuidePassword,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideState != null">
+        #{shoppingGuideState,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shoppingGuideMeno != null">
+        #{shoppingGuideMeno,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreShoppingGuideExample" resultType="java.lang.Long">
+    select count(*) from zomore_shopping_guide
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_shopping_guide
+    <set>
+      <if test="record.shoppingGuideId != null">
+        shopping_guide_id = #{record.shoppingGuideId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shoppingGuideName != null">
+        shopping_guide_name = #{record.shoppingGuideName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shoppingGuidePhone != null">
+        shopping_guide_phone = #{record.shoppingGuidePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shoppingGuideImage != null">
+        shopping_guide_image = #{record.shoppingGuideImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shoppingGuideSale != null">
+        shopping_guide_sale = #{record.shoppingGuideSale,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shoppingGuideAppoint != null">
+        shopping_guide_appoint = #{record.shoppingGuideAppoint,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shoppingGuideRecharge != null">
+        shopping_guide_recharge = #{record.shoppingGuideRecharge,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shoppingGuideSubcard != null">
+        shopping_guide_subcard = #{record.shoppingGuideSubcard,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shoppingGuideShoppingcar != null">
+        shopping_guide_shoppingcar = #{record.shoppingGuideShoppingcar,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shoppingGuideLab != null">
+        shopping_guide_lab = #{record.shoppingGuideLab,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shoppingGuideIsmember != null">
+        shopping_guide_ismember = #{record.shoppingGuideIsmember,jdbcType=INTEGER},
+      </if>
+      <if test="record.shoppingGuideCashierStore != null">
+        shopping_guide_cashier_store = #{record.shoppingGuideCashierStore,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shoppingGuideRole != null">
+        shopping_guide_role = #{record.shoppingGuideRole,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shoppingGuidePassword != null">
+        shopping_guide_password = #{record.shoppingGuidePassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shoppingGuideState != null">
+        shopping_guide_state = #{record.shoppingGuideState,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updatetime != null">
+        updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.shoppingGuideMeno != null">
+        shopping_guide_meno = #{record.shoppingGuideMeno,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update zomore_shopping_guide
+    set shopping_guide_id = #{record.shoppingGuideId,jdbcType=VARCHAR},
+      shopping_guide_name = #{record.shoppingGuideName,jdbcType=VARCHAR},
+      shopping_guide_phone = #{record.shoppingGuidePhone,jdbcType=VARCHAR},
+      shopping_guide_image = #{record.shoppingGuideImage,jdbcType=VARCHAR},
+      shopping_guide_sale = #{record.shoppingGuideSale,jdbcType=VARCHAR},
+      shopping_guide_appoint = #{record.shoppingGuideAppoint,jdbcType=VARCHAR},
+      shopping_guide_recharge = #{record.shoppingGuideRecharge,jdbcType=VARCHAR},
+      shopping_guide_subcard = #{record.shoppingGuideSubcard,jdbcType=VARCHAR},
+      shopping_guide_shoppingcar = #{record.shoppingGuideShoppingcar,jdbcType=VARCHAR},
+      shopping_guide_lab = #{record.shoppingGuideLab,jdbcType=VARCHAR},
+      shopping_guide_ismember = #{record.shoppingGuideIsmember,jdbcType=INTEGER},
+      shopping_guide_cashier_store = #{record.shoppingGuideCashierStore,jdbcType=VARCHAR},
+      shopping_guide_role = #{record.shoppingGuideRole,jdbcType=VARCHAR},
+      shopping_guide_password = #{record.shoppingGuidePassword,jdbcType=VARCHAR},
+      shopping_guide_state = #{record.shoppingGuideState,jdbcType=INTEGER},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP},
+      shopping_guide_meno = #{record.shoppingGuideMeno,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_shopping_guide
+    set shopping_guide_id = #{record.shoppingGuideId,jdbcType=VARCHAR},
+      shopping_guide_name = #{record.shoppingGuideName,jdbcType=VARCHAR},
+      shopping_guide_phone = #{record.shoppingGuidePhone,jdbcType=VARCHAR},
+      shopping_guide_image = #{record.shoppingGuideImage,jdbcType=VARCHAR},
+      shopping_guide_sale = #{record.shoppingGuideSale,jdbcType=VARCHAR},
+      shopping_guide_appoint = #{record.shoppingGuideAppoint,jdbcType=VARCHAR},
+      shopping_guide_recharge = #{record.shoppingGuideRecharge,jdbcType=VARCHAR},
+      shopping_guide_subcard = #{record.shoppingGuideSubcard,jdbcType=VARCHAR},
+      shopping_guide_shoppingcar = #{record.shoppingGuideShoppingcar,jdbcType=VARCHAR},
+      shopping_guide_lab = #{record.shoppingGuideLab,jdbcType=VARCHAR},
+      shopping_guide_ismember = #{record.shoppingGuideIsmember,jdbcType=INTEGER},
+      shopping_guide_cashier_store = #{record.shoppingGuideCashierStore,jdbcType=VARCHAR},
+      shopping_guide_role = #{record.shoppingGuideRole,jdbcType=VARCHAR},
+      shopping_guide_password = #{record.shoppingGuidePassword,jdbcType=VARCHAR},
+      shopping_guide_state = #{record.shoppingGuideState,jdbcType=INTEGER},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      updatetime = #{record.updatetime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreShoppingGuide">
+    update zomore_shopping_guide
+    <set>
+      <if test="shoppingGuideName != null">
+        shopping_guide_name = #{shoppingGuideName,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuidePhone != null">
+        shopping_guide_phone = #{shoppingGuidePhone,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideImage != null">
+        shopping_guide_image = #{shoppingGuideImage,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideSale != null">
+        shopping_guide_sale = #{shoppingGuideSale,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideAppoint != null">
+        shopping_guide_appoint = #{shoppingGuideAppoint,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideRecharge != null">
+        shopping_guide_recharge = #{shoppingGuideRecharge,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideSubcard != null">
+        shopping_guide_subcard = #{shoppingGuideSubcard,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideShoppingcar != null">
+        shopping_guide_shoppingcar = #{shoppingGuideShoppingcar,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideLab != null">
+        shopping_guide_lab = #{shoppingGuideLab,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideIsmember != null">
+        shopping_guide_ismember = #{shoppingGuideIsmember,jdbcType=INTEGER},
+      </if>
+      <if test="shoppingGuideCashierStore != null">
+        shopping_guide_cashier_store = #{shoppingGuideCashierStore,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideRole != null">
+        shopping_guide_role = #{shoppingGuideRole,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuidePassword != null">
+        shopping_guide_password = #{shoppingGuidePassword,jdbcType=VARCHAR},
+      </if>
+      <if test="shoppingGuideState != null">
+        shopping_guide_state = #{shoppingGuideState,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null">
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shoppingGuideMeno != null">
+        shopping_guide_meno = #{shoppingGuideMeno,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where shopping_guide_id = #{shoppingGuideId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zomore.domain.ZomoreShoppingGuide">
+    update zomore_shopping_guide
+    set shopping_guide_name = #{shoppingGuideName,jdbcType=VARCHAR},
+      shopping_guide_phone = #{shoppingGuidePhone,jdbcType=VARCHAR},
+      shopping_guide_image = #{shoppingGuideImage,jdbcType=VARCHAR},
+      shopping_guide_sale = #{shoppingGuideSale,jdbcType=VARCHAR},
+      shopping_guide_appoint = #{shoppingGuideAppoint,jdbcType=VARCHAR},
+      shopping_guide_recharge = #{shoppingGuideRecharge,jdbcType=VARCHAR},
+      shopping_guide_subcard = #{shoppingGuideSubcard,jdbcType=VARCHAR},
+      shopping_guide_shoppingcar = #{shoppingGuideShoppingcar,jdbcType=VARCHAR},
+      shopping_guide_lab = #{shoppingGuideLab,jdbcType=VARCHAR},
+      shopping_guide_ismember = #{shoppingGuideIsmember,jdbcType=INTEGER},
+      shopping_guide_cashier_store = #{shoppingGuideCashierStore,jdbcType=VARCHAR},
+      shopping_guide_role = #{shoppingGuideRole,jdbcType=VARCHAR},
+      shopping_guide_password = #{shoppingGuidePassword,jdbcType=VARCHAR},
+      shopping_guide_state = #{shoppingGuideState,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      shopping_guide_meno = #{shoppingGuideMeno,jdbcType=LONGVARCHAR}
+    where shopping_guide_id = #{shoppingGuideId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreShoppingGuide">
+    update zomore_shopping_guide
+    set shopping_guide_name = #{shoppingGuideName,jdbcType=VARCHAR},
+      shopping_guide_phone = #{shoppingGuidePhone,jdbcType=VARCHAR},
+      shopping_guide_image = #{shoppingGuideImage,jdbcType=VARCHAR},
+      shopping_guide_sale = #{shoppingGuideSale,jdbcType=VARCHAR},
+      shopping_guide_appoint = #{shoppingGuideAppoint,jdbcType=VARCHAR},
+      shopping_guide_recharge = #{shoppingGuideRecharge,jdbcType=VARCHAR},
+      shopping_guide_subcard = #{shoppingGuideSubcard,jdbcType=VARCHAR},
+      shopping_guide_shoppingcar = #{shoppingGuideShoppingcar,jdbcType=VARCHAR},
+      shopping_guide_lab = #{shoppingGuideLab,jdbcType=VARCHAR},
+      shopping_guide_ismember = #{shoppingGuideIsmember,jdbcType=INTEGER},
+      shopping_guide_cashier_store = #{shoppingGuideCashierStore,jdbcType=VARCHAR},
+      shopping_guide_role = #{shoppingGuideRole,jdbcType=VARCHAR},
+      shopping_guide_password = #{shoppingGuidePassword,jdbcType=VARCHAR},
+      shopping_guide_state = #{shoppingGuideState,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP}
+    where shopping_guide_id = #{shoppingGuideId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectMultipleAllshopGuides" parameterType="java.util.Map" resultType="com.zomore.domain.ZomoreShoppingGuide">
+    select shopping_guide_id as shoppingGuideId, shopping_guide_name as shoppingGuideName, shopping_guide_phone as shoppingGuidePhone, shopping_guide_image as shoppingGuideImage,
+    shopping_guide_sale as shoppingGuideSale, shopping_guide_appoint as shoppingGuideAppoint, shopping_guide_recharge as shoppingGuideRecharge, shopping_guide_subcard as shoppingGuideSubcard,
+    shopping_guide_shoppingcar as shoppingGuideShoppingcar, shopping_guide_lab as shoppingGuideLab, shopping_guide_ismember as shoppingGuideIsmember, shopping_guide_cashier_store as shoppingGuideCashierStore,
+    shopping_guide_role as shoppingGuideRole, shopping_guide_password as shoppingGuidePassword, shopping_guide_state as shoppingGuideState, shopping_guide_meno as shoppingGuideMeno,createtime as createtime, updatetime as updatetime
+    from zomore_shopping_guide
+    where shopping_guide_cashier_store in
+    <foreach collection="shoplist" index="index" item="item" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+    <if test="name!=null">
+     and shopping_guide_name like concat(concat('%',#{name}),'%')
+    </if>
+    <if test="state!=null">
+      and shopping_guide_state = #{state}
+    </if>
+    order by createtime desc
+  </select>
+</mapper>

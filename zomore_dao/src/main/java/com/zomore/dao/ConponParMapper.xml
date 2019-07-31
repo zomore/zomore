@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ConponParMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ConponPar">
+    <result column="conponId1" jdbcType="VARCHAR" property="conponid1" />
+    <result column="createShop1" jdbcType="VARCHAR" property="createshop1" />
+    <result column="conponType1" jdbcType="INTEGER" property="conpontype1" />
+    <result column="conponNewScope1" jdbcType="VARCHAR" property="conponnewscope1" />
+    <result column="createTime1" jdbcType="VARCHAR" property="createtime1" />
+    <result column="status1" jdbcType="INTEGER" property="status1" />
+    <result column="useSituation1" jdbcType="VARCHAR" property="usesituation1" />
+    <result column="shopId1" jdbcType="VARCHAR" property="shopid1" />
+    <result column="multipleId1" jdbcType="VARCHAR" property="multipleid1" />
+    <result column="duetime1" jdbcType="VARCHAR" property="duetime1" />
+    <result column="conponName1" jdbcType="VARCHAR" property="conponname1" />
+    <result column="manufactured1" jdbcType="VARCHAR" property="manufactured1" />
+    <result column="issued1" jdbcType="VARCHAR" property="issued1" />
+    <result column="used1" jdbcType="VARCHAR" property="used1" />
+    <result column="useStores1" jdbcType="VARCHAR" property="usestores1" />
+    <result column="superposition" jdbcType="VARCHAR" property="superposition" />
+    <result column="money" jdbcType="VARCHAR" property="money" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    conponId1, createShop1, conponType1, conponNewScope1, createTime1, status1, useSituation1, 
+    shopId1, multipleId1, duetime1, conponName1, manufactured1, issued1, used1, useStores1, 
+    superposition, money
+  </sql>
+  <select id="selectByExample" parameterType="com.zomore.domain.ConponParExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from conpon_par
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ConponParExample">
+    delete from conpon_par
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ConponPar">
+    insert into conpon_par (conponId1, createShop1, conponType1, 
+      conponNewScope1, createTime1, status1, 
+      useSituation1, shopId1, multipleId1, 
+      duetime1, conponName1, manufactured1, 
+      issued1, used1, useStores1, 
+      superposition, money)
+    values (#{conponid1,jdbcType=VARCHAR}, #{createshop1,jdbcType=VARCHAR}, #{conpontype1,jdbcType=INTEGER}, 
+      #{conponnewscope1,jdbcType=VARCHAR}, #{createtime1,jdbcType=VARCHAR}, #{status1,jdbcType=INTEGER}, 
+      #{usesituation1,jdbcType=VARCHAR}, #{shopid1,jdbcType=VARCHAR}, #{multipleid1,jdbcType=VARCHAR}, 
+      #{duetime1,jdbcType=VARCHAR}, #{conponname1,jdbcType=VARCHAR}, #{manufactured1,jdbcType=VARCHAR}, 
+      #{issued1,jdbcType=VARCHAR}, #{used1,jdbcType=VARCHAR}, #{usestores1,jdbcType=VARCHAR}, 
+      #{superposition,jdbcType=VARCHAR}, #{money,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ConponPar">
+    insert into conpon_par
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="conponid1 != null">
+        conponId1,
+      </if>
+      <if test="createshop1 != null">
+        createShop1,
+      </if>
+      <if test="conpontype1 != null">
+        conponType1,
+      </if>
+      <if test="conponnewscope1 != null">
+        conponNewScope1,
+      </if>
+      <if test="createtime1 != null">
+        createTime1,
+      </if>
+      <if test="status1 != null">
+        status1,
+      </if>
+      <if test="usesituation1 != null">
+        useSituation1,
+      </if>
+      <if test="shopid1 != null">
+        shopId1,
+      </if>
+      <if test="multipleid1 != null">
+        multipleId1,
+      </if>
+      <if test="duetime1 != null">
+        duetime1,
+      </if>
+      <if test="conponname1 != null">
+        conponName1,
+      </if>
+      <if test="manufactured1 != null">
+        manufactured1,
+      </if>
+      <if test="issued1 != null">
+        issued1,
+      </if>
+      <if test="used1 != null">
+        used1,
+      </if>
+      <if test="usestores1 != null">
+        useStores1,
+      </if>
+      <if test="superposition != null">
+        superposition,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="conponid1 != null">
+        #{conponid1,jdbcType=VARCHAR},
+      </if>
+      <if test="createshop1 != null">
+        #{createshop1,jdbcType=VARCHAR},
+      </if>
+      <if test="conpontype1 != null">
+        #{conpontype1,jdbcType=INTEGER},
+      </if>
+      <if test="conponnewscope1 != null">
+        #{conponnewscope1,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime1 != null">
+        #{createtime1,jdbcType=VARCHAR},
+      </if>
+      <if test="status1 != null">
+        #{status1,jdbcType=INTEGER},
+      </if>
+      <if test="usesituation1 != null">
+        #{usesituation1,jdbcType=VARCHAR},
+      </if>
+      <if test="shopid1 != null">
+        #{shopid1,jdbcType=VARCHAR},
+      </if>
+      <if test="multipleid1 != null">
+        #{multipleid1,jdbcType=VARCHAR},
+      </if>
+      <if test="duetime1 != null">
+        #{duetime1,jdbcType=VARCHAR},
+      </if>
+      <if test="conponname1 != null">
+        #{conponname1,jdbcType=VARCHAR},
+      </if>
+      <if test="manufactured1 != null">
+        #{manufactured1,jdbcType=VARCHAR},
+      </if>
+      <if test="issued1 != null">
+        #{issued1,jdbcType=VARCHAR},
+      </if>
+      <if test="used1 != null">
+        #{used1,jdbcType=VARCHAR},
+      </if>
+      <if test="usestores1 != null">
+        #{usestores1,jdbcType=VARCHAR},
+      </if>
+      <if test="superposition != null">
+        #{superposition,jdbcType=VARCHAR},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ConponParExample" resultType="java.lang.Long">
+    select count(*) from conpon_par
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update conpon_par
+    <set>
+      <if test="record.conponid1 != null">
+        conponId1 = #{record.conponid1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createshop1 != null">
+        createShop1 = #{record.createshop1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conpontype1 != null">
+        conponType1 = #{record.conpontype1,jdbcType=INTEGER},
+      </if>
+      <if test="record.conponnewscope1 != null">
+        conponNewScope1 = #{record.conponnewscope1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime1 != null">
+        createTime1 = #{record.createtime1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status1 != null">
+        status1 = #{record.status1,jdbcType=INTEGER},
+      </if>
+      <if test="record.usesituation1 != null">
+        useSituation1 = #{record.usesituation1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.shopid1 != null">
+        shopId1 = #{record.shopid1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.multipleid1 != null">
+        multipleId1 = #{record.multipleid1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.duetime1 != null">
+        duetime1 = #{record.duetime1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.conponname1 != null">
+        conponName1 = #{record.conponname1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.manufactured1 != null">
+        manufactured1 = #{record.manufactured1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.issued1 != null">
+        issued1 = #{record.issued1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.used1 != null">
+        used1 = #{record.used1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.usestores1 != null">
+        useStores1 = #{record.usestores1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.superposition != null">
+        superposition = #{record.superposition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.money != null">
+        money = #{record.money,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update conpon_par
+    set conponId1 = #{record.conponid1,jdbcType=VARCHAR},
+      createShop1 = #{record.createshop1,jdbcType=VARCHAR},
+      conponType1 = #{record.conpontype1,jdbcType=INTEGER},
+      conponNewScope1 = #{record.conponnewscope1,jdbcType=VARCHAR},
+      createTime1 = #{record.createtime1,jdbcType=VARCHAR},
+      status1 = #{record.status1,jdbcType=INTEGER},
+      useSituation1 = #{record.usesituation1,jdbcType=VARCHAR},
+      shopId1 = #{record.shopid1,jdbcType=VARCHAR},
+      multipleId1 = #{record.multipleid1,jdbcType=VARCHAR},
+      duetime1 = #{record.duetime1,jdbcType=VARCHAR},
+      conponName1 = #{record.conponname1,jdbcType=VARCHAR},
+      manufactured1 = #{record.manufactured1,jdbcType=VARCHAR},
+      issued1 = #{record.issued1,jdbcType=VARCHAR},
+      used1 = #{record.used1,jdbcType=VARCHAR},
+      useStores1 = #{record.usestores1,jdbcType=VARCHAR},
+      superposition = #{record.superposition,jdbcType=VARCHAR},
+      money = #{record.money,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

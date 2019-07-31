@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.MemberShopDao">
+
+
+    <select id="selectAllOrderByMemberAccount" parameterType="com.zomore.domain.MemberShopOrder" resultType="com.zomore.domain.MemberShopOrder">
+
+        select member_orderid as memberOrderId,member_orderaccount as memberOrderAccount,member_ordertime as memberOrderTime,member_orderamout as memberOrderAmout,member_ordershop as memberOrderShop ,member_ordercommdity_num as memberOrderCommodityNumber,
+        member_ordercommdity_name as memberOrderCommodityName,member_ordercommdity_image as memberOrderCommodityImage,membername as memberName,memberphone as memberPhone,
+        memberaddress as memberAddress,member_orderremark as memberOrderRemark from zomore_member_order
+         where memberaccount = #{memberAccount} and member_orderstatus=#{memberOrderStatus} order by memberOrderTime desc
+    </select>
+
+    <select id="findPendingEvaluateOrders" parameterType="com.zomore.domain.MemberShopOrder" resultType="com.zomore.domain.MemberShopOrder">
+
+         select member_orderid as memberOrderId,member_orderaccount as memberOrderAccount,member_ordertime as memberOrderTime,member_orderamout as memberOrderAmout,member_ordershop as memberOrderShop ,member_ordercommdity_num as memberOrderCommodityNumber,
+        member_ordercommdity_name as memberOrderCommodityName,member_ordercommdity_image as memberOrderCommodityImage,membername as memberName,memberphone as memberPhone,
+        memberaddress as memberAddress,member_orderremark as memberOrderRemark from zomore_member_order
+         where memberaccount = #{memberAccount} and member_orderstatus=#{memberOrderStatus} and order_evaluatestatus = #{orderEvaluateStatus} order by memberOrderTime desc
+
+    </select>
+
+    <select id="selectOrderNumberofPay" parameterType="java.lang.String" resultType="java.lang.Integer">
+            select  count(*)  from zomore_member_order where memberaccount = #{account} and member_orderstatus=0
+    </select>
+
+    <select id="selectOrderNumberofSend" parameterType="java.lang.String" resultType="java.lang.Integer">
+           select  count(*)  from zomore_member_order where memberaccount = #{account} and member_orderstatus=1
+    </select>
+
+    <select id="selectOrderNumberofGet" parameterType="java.lang.String" resultType="java.lang.Integer">
+            select  count(*) from zomore_member_order where memberaccount = #{account} and member_orderstatus=2
+    </select>
+
+    <select id="selectOrderNumberofEvalate" parameterType="java.lang.String" resultType="java.lang.Integer">
+             select  count(*)
+             from zomore_member_order
+             where memberaccount = #{account} and member_orderstatus=3 and order_evaluatestatus=0
+    </select>
+
+    <insert id="saveShopcarCommodity" parameterType="com.zomore.domain.ZomoreMemberShopcar">
+
+        insert into zomore_member_shopcar
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="shopcarId !=null">
+                shopcarid,
+            </if>
+            <if test="shopcarCommodityCode !=null">
+                shopcar_commoditycode,
+            </if>
+            <if test="shopcarCommodityName !=null">
+                shopcar_commodityname,
+            </if>
+            <if test="shopcarCommodityNum !=null">
+                shopcar_commoditynum,
+            </if>
+            <if test="shopcarMemberAccount !=null">
+                shopcar_memberaccount,
+            </if>
+            <if test="shopcarCommodityShop !=null">
+                shopcar_commodityshop,
+            </if>
+            <if test="shopcarCommodityIntime !=null">
+                shopcar_commodityintime,
+            </if>
+            <if test="shopcarCommodityId !=null">
+                shopcar_commodityid,
+            </if>
+            <if test="shopcarComodityStore !=null">
+                shopcar_commoditystore,
+            </if>
+            <if test="shopcarCommodityOutprice !=null">
+                shopcar_commodityoutprice,
+            </if>
+            <if test="shopcarCommodityActiveprice !=null">
+                shopcar_commodityactiveprice,
+            </if>
+            <if test="shopccarCommodityImage !=null">
+                shopcar_cmmodityimage,
+            </if>
+
+
+        </trim>
+
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="shopcarId != null" >
+                #{shopcarId,jdbcType=VARCHAR},
+            </if>
+            <if test="shopcarCommodityCode !=null">
+                #{shopcarCommodityCode,jdbcType=VARCHAR},
+            </if>
+            <if test="shopcarCommodityName !=null">
+                #{shopcarCommodityName,jdbcType=VARCHAR},
+            </if>
+            <if test="shopcarCommodityNum !=null">
+                #{shopcarCommodityNum,jdbcType=INTEGER},
+            </if>
+            <if test="shopcarMemberAccount !=null">
+                #{shopcarMemberAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="shopcarCommodityShop !=null">
+                #{shopcarCommodityShop,jdbcType=VARCHAR},
+            </if>
+            <if test="shopcarCommodityIntime !=null">
+                #{shopcarCommodityIntime },
+            </if>
+            <if test="shopcarCommodityId !=null">
+                #{shopcarCommodityId},
+            </if>
+            <if test="shopcarComodityStore !=null">
+                #{shopcarComodityStore},
+            </if>
+            <if test="shopcarCommodityOutprice !=null">
+                #{shopcarCommodityOutprice},
+            </if>
+            <if test="shopcarCommodityActiveprice !=null">
+                #{shopcarCommodityActiveprice},
+            </if>
+            <if test="shopccarCommodityImage !=null">
+                #{shopccarCommodityImage},
+            </if>
+
+        </trim>
+
+    </insert>
+    <select id="selelctAllCommodityFromShopcar" parameterType="java.lang.String" resultType="com.zomore.domain.ZomoreMemberShopcar">
+        select shopcarid as shopcarId,shopcar_commoditycode as shopcarCommodityCode,shopcar_commodityname as shopcarCommodityName,
+        shopcar_commoditynum as shopcarCommodityNum,shopcar_memberaccount as shopcarMemberAccount,shopcar_commodityshop as shopcarCommodityShop,
+        shopcar_commodityintime as shopcarCommodityIntime, shopcar_cmmodityimage as shopccarCommodityImage
+        from zomore_member_shopcar where shopcar_commodityshop= #{shop}  and shopcar_memberaccount = #{memberAccount} ORDER BY shopcarCommodityIntime DESC
+    </select>
+
+    <update id="updataShopcarCommodity" parameterType="com.zomore.domain.ZomoreMemberShopcar" >
+        update zomore_member_shopcar
+        <set>
+            <if test="shopcarCommodityCode !=null">
+                shopcar_commoditycode = #{shopcarCommodityCode,jdbcType=VARCHAR},
+            </if>
+            <if test="shopcarCommodityName !=null">
+                shopcar_commodityname=#{shopcarCommodityName,jdbcType=VARCHAR},
+            </if>
+            <if test="shopcarCommodityNum !=null">
+                shopcar_commoditynum = #{shopcarCommodityNum,jdbcType=INTEGER},
+            </if>
+            <if test="shopcarMemberAccount !=null">
+                shopcar_memberaccount= #{shopcarMemberAccount,jdbcType=VARCHAR},
+            </if>
+            <if test="shopcarCommodityShop !=null">
+                shopcar_commodityshop=#{shopcarCommodityShop,jdbcType=VARCHAR},
+            </if>
+            <if test="shopcarCommodityIntime !=null">
+                shopcar_commodityintime=#{shopcarCommodityIntime},
+            </if>
+            <if test="shopcarCommodityId !=null">
+                shopcar_commodityid=#{shopcarCommodityId},
+            </if>
+            <if test="shopcarComodityStore !=null">
+                shopcar_commoditystore=#{shopcarComodityStore},
+            </if>
+            <if test="shopcarCommodityOutprice !=null">
+                shopcar_commodityoutprice=#{shopcarCommodityOutprice},
+            </if>
+            <if test="shopcarCommodityActiveprice !=null">
+                shopcar_commodityactiveprice=#{shopcarCommodityActiveprice},
+            </if>
+            <if test="shopccarCommodityImage !=null">
+                shopcar_cmmodityimage=#{shopccarCommodityImage},
+            </if>
+        </set>
+        where shopcarid= #{shopcarId}
+    </update>
+
+    <insert id="saveMemberOrder" parameterType="com.zomore.domain.MemberShopOrder">
+        insert into zomore_member_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="memberOrderId !=null">
+                member_orderid,
+            </if>
+            <if test="memberOrderAccount !=null">
+                member_orderaccount,
+            </if>
+            <if test="memberOrderTime !=null">
+                member_ordertime,
+            </if>
+            <if test="memberOrderAmout !=null">
+                member_orderamout,
+            </if>
+            <if test="memberOrderShop !=null">
+                member_ordershop,
+            </if>
+            <if test="memberOrderCommodityNumber !=null">
+                member_ordercommdity_num,
+            </if>
+            <if test="memberOrderCommodityName !=null">
+                member_ordercommdity_name,
+            </if>
+            <if test="memberOrderCommodityImage !=null">
+                member_ordercommdity_image,
+            </if>
+            <if test="memberAccount !=null">
+                memberaccount,
+            </if>
+            <if test="memberName !=null">
+                membername,
+            </if>
+
+            <if test="memberPhone !=null">
+                memberphone,
+            </if>
+
+            <if test="memberAddress !=null">
+                memberaddress,
+            </if>
+            <if test="memberOrderStatus !=null">
+                member_orderstatus,
+            </if>
+            <if test="memberOrderRemark !=null">
+                member_orderremark,
+            </if>
+            <if test="orderEvaluateStatus !=null">
+                order_evaluatestatus,
+            </if>
+
+            <if test="orderEvaluate !=null">
+                order_evaluate,
+            </if>
+
+        </trim>
+
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="memberOrderId !=null">
+                #{memberOrderId},
+            </if>
+            <if test="memberOrderAccount !=null">
+                #{memberOrderAccount},
+            </if>
+            <if test="memberOrderTime !=null">
+                 #{memberOrderTime},
+            </if>
+            <if test="memberOrderAmout !=null">
+                 #{memberOrderAmout},
+            </if>
+            <if test="memberOrderShop !=null">
+                 #{memberOrderShop},
+            </if>
+            <if test="memberOrderCommodityNumber !=null">
+                 #{memberOrderCommodityNumber},
+            </if>
+            <if test="memberOrderCommodityName !=null">
+                 #{memberOrderCommodityName},
+            </if>
+            <if test="memberOrderCommodityImage !=null">
+                 #{memberOrderCommodityImage},
+            </if>
+            <if test="memberAccount !=null">
+                 #{memberAccount},
+            </if>
+            <if test="memberName !=null">
+                 #{memberName},
+            </if>
+
+            <if test="memberPhone !=null">
+                 #{memberPhone},
+            </if>
+
+            <if test="memberAddress !=null">
+                 #{memberAddress},
+            </if>
+            <if test="memberOrderStatus !=null">
+                 #{memberOrderStatus},
+            </if>
+            <if test="memberOrderRemark !=null">
+                 #{memberOrderRemark},
+            </if>
+            <if test="orderEvaluateStatus !=null">
+                 #{orderEvaluateStatus},
+            </if>
+
+            <if test="orderEvaluate !=null">
+                 #{orderEvaluate},
+            </if>
+
+        </trim>
+    </insert>
+
+    <select id="selsectCommodityById" parameterType="java.lang.String" resultType="com.zomore.domain.ZomoreCommodity">
+
+        select zomore_commodity_id as zomoreCommodityId,zomore_commodity_name as zomoreCommodityName,zomore_commodity_image as zomoreCommodityImage,zomore_commodity_code as zomoreCommodityCode ,zomore_commodity_num as zomoreCommodityNum,
+    zomore_commodity_specifications as zomoreCommoditySpecifications,zomore_commodity_pingyin as zomoreCommodityPingyin, zomore_commodity_type as zomoreCommodityType,zomore_commodity_main as zomoreCommodityMain ,
+    zomore_commodity_in as zomoreCommodityIn,zomore_commodity_out as zomoreCommodityOut,zomore_commodity_outall as zomoreCommodityOutall ,zomore_commodity_isdiscount as zomoreCommodityIsdiscount,
+    zomore_commodity_provide as  zomoreCommodityProvide from  zomore_commodity where zomore_commodity_id=#{commodityId}
+    </select>
+
+    <select id="selectComodityStoreByCommodityId"  parameterType="java.lang.String" resultType="com.zomore.domain.ZomoreCommodityStore">
+        select zomore_commodity_storeid as zomoreCommodityStoreid,zomore_commodity_id as zomoreCommodityId,zomore_commodity_store as zomoreCommodityStore ,zomore_commodity_uplimit as zomoreCommodityUplimit,
+        zomore_commodity_downlimit as zomoreCommodityDownlimit,zomore_commodity_inventory_position as zomoreCommodityInventoryPosition  from zomore_commodity_store where zomore_commodity_id = #{commodityId}
+
+    </select>
+    <select id="selectAllShopcar" parameterType="com.zomore.domain.ZomoreMemberShopcar" resultType="com.zomore.domain.ZomoreMemberShopcar">
+        select shopcarid as shopcarId,shopcar_commoditycode as shopcarCommodityCode,shopcar_commodityid as shopcarCommodityId,shopcar_commodityname as shopcarCommodityName, shopcar_commoditynum as shopcarCommodityNum,
+        shopcar_commodityoutprice as shopcarCommodityOutprice,shopcar_commodityactiveprice as shopcarCommodityActiveprice,shopcar_memberaccount as shopcarMemberAccount,shopcar_commodityshop as shopcarCommodityShop,
+        shopcar_commodityintime as shopcarCommodityIntime,shopcar_commoditystore as shopcarComodityStore, shopcar_cmmodityimage as shopccarCommodityImage from zomore_member_shopcar where shopcar_commodityshop =#{shopcarCommodityShop} and shopcar_memberaccount = #{shopcarMemberAccount}
+    </select>
+    <select id="selectShoopCarByShopcarId" parameterType="java.lang.String" resultType="com.zomore.domain.ZomoreMemberShopcar">
+        select shopcarid as shopcarId,shopcar_commoditycode as shopcarCommodityCode,shopcar_commodityid as shopcarCommodityId,shopcar_commodityname as shopcarCommodityName, shopcar_commoditynum as shopcarCommodityNum,
+        shopcar_commodityoutprice as shopcarCommodityOutprice,shopcar_commodityactiveprice as shopcarCommodityActiveprice,shopcar_memberaccount as shopcarMemberAccount,shopcar_commodityshop as shopcarCommodityShop,
+        shopcar_commodityintime as shopcarCommodityIntime,shopcar_commoditystore as shopcarComodityStore, shopcar_cmmodityimage as shopccarCommodityImage from zomore_member_shopcar where shopcarid= #{shopcarId}
+    </select>
+    <delete id="deleteShopcarById" parameterType="com.zomore.domain.ZomoreMemberShopcar">
+        delete from zomore_member_shopcar where shopcarid = #{shopcarId}
+    </delete>
+    <update id="changeCommodityNum" parameterType="com.zomore.domain.ZomoreMemberShopcar">
+        update zomore_member_shopcar set shopcar_commoditynum = #{shopcarCommodityNum} where shopcarid =#{shopcarId}
+    </update>
+
+    <insert id="saveMemberOrderDetails" parameterType="com.zomore.domain.MemberShopOrderDetail">
+        insert into zomore_member_orderdetails
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="memberOrderdetailId !=null">
+                member_orderdetail_id,
+            </if>
+            <if test="memberOrderdetailOrderid !=null">
+                member_orderdetail_orderid,
+            </if>
+            <if test="memberOrderdetailCommodityCode !=null">
+                member_orderdetail_commoditycode,
+            </if>
+            <if test="memberOrderdetailComodityNum !=null">
+                member_orderdetail_comoditynum,
+            </if>
+            <if test="memberOrderdetailCommodityName !=null">
+                member_orderdetail_commodityname,
+            </if>
+            <if test="memberOrderdetailCommdityUnit !=null">
+                member_orderdetail_comodityunit,
+            </if>
+            <if test="memberOrderdetailComooditySpecification !=null">
+                member_orderdetail_commodityspecification,
+            </if>
+            <if test="memberOrderdetailCommodityShopname !=null">
+                member_orderdetail_commodityshopname,
+            </if>
+            <if test="memberOrderdetailCmmodityShopaccount !=null">
+                member_orderdetail_cmmodityshopaccount,
+            </if>
+            <if test="memberOrderdetialCommodityImage !=null">
+                member_orderdetail_commodityimage,
+            </if>
+
+            <if test="memberOrderdetailCommodityId !=null">
+                member_orderdetail_commodityid,
+            </if>
+
+            <if test="memberOrdetailCommodityoutprice !=null">
+                member_orderdetail_commodityoutprice,
+            </if>
+
+        </trim>
+
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="memberOrderdetailId !=null">
+                #{memberOrderdetailId},
+            </if>
+            <if test="memberOrderdetailOrderid !=null">
+                #{memberOrderdetailOrderid},
+            </if>
+            <if test="memberOrderdetailCommodityCode !=null">
+                #{memberOrderdetailCommodityCode},
+            </if>
+            <if test="memberOrderdetailComodityNum !=null">
+                #{memberOrderdetailComodityNum},
+            </if>
+            <if test="memberOrderdetailCommodityName !=null">
+                #{memberOrderdetailCommodityName},
+            </if>
+            <if test="memberOrderdetailCommdityUnit !=null">
+                #{memberOrderdetailCommdityUnit},
+            </if>
+            <if test="memberOrderdetailComooditySpecification !=null">
+                #{memberOrderdetailComooditySpecification},
+            </if>
+            <if test="memberOrderdetailCommodityShopname !=null">
+                #{memberOrderdetailCommodityShopname},
+            </if>
+            <if test="memberOrderdetailCmmodityShopaccount !=null">
+                #{memberOrderdetailCmmodityShopaccount},
+            </if>
+            <if test="memberOrderdetialCommodityImage !=null">
+                #{memberOrderdetialCommodityImage},
+            </if>
+
+            <if test="memberOrderdetailCommodityId !=null">
+                #{memberOrderdetailCommodityId},
+            </if>
+
+            <if test="memberOrdetailCommodityoutprice !=null">
+                #{memberOrdetailCommodityoutprice},
+            </if>
+
+        </trim>
+    </insert>
+    <delete id="deleteOrderWithPendingpay" parameterType="com.zomore.domain.MemberShopOrder" >
+        delete from zomore_member_order where member_orderid = #{memberOrderId}
+    </delete>
+
+    <select id="findMemberShoporderByOrderId" parameterType="com.zomore.domain.MemberShopOrder" resultType="com.zomore.domain.MemberShopOrder">
+         select member_orderid as memberOrderId,member_orderaccount as memberOrderAccount,member_ordertime as memberOrderTime,member_orderamout as memberOrderAmout,member_ordershop as memberOrderShop ,member_ordercommdity_num as memberOrderCommodityNumber,
+        member_ordercommdity_name as memberOrderCommodityName,member_ordercommdity_image as memberOrderCommodityImage,membername as memberName,memberphone as memberPhone,
+        memberaddress as memberAddress,member_orderremark as memberOrderRemark,order_evaluatestatus as orderEvaluateStatus,member_orderstatus as memberOrderStatus from zomore_member_order where member_orderid = #{memberOrderId}
+    </select>
+
+    <select id="findMemberShopOrderDetailByOrderId" parameterType="com.zomore.domain.MemberShopOrderDetail" resultType="com.zomore.domain.MemberShopOrderDetail">
+        select member_orderdetail_id as memberOrderdetailId,member_orderdetail_orderid as memberOrderdetailOrderid,member_orderdetail_commoditycode as memberOrderdetailCommodityCode,
+        member_orderdetail_comoditynum as memberOrderdetailComodityNum,member_orderdetail_commodityname as memberOrderdetailCommodityName,member_orderdetail_comodityunit as memberOrderdetailCommdityUnit,
+        member_orderdetail_commodityspecification as memberOrderdetailComooditySpecification,member_orderdetail_commodityshopname as memberOrderdetailCommodityShopname,
+         member_orderdetail_cmmodityshopaccount as memberOrderdetailCmmodityShopaccount,member_orderdetail_commodityimage as memberOrderdetialCommodityImage,member_orderdetail_commodityid as memberOrderdetailCommodityId,
+         member_orderdetail_commodityoutprice as memberOrdetailCommodityoutprice from zomore_member_orderdetails where member_orderdetail_orderid = #{memberOrderdetailOrderid}
+
+
+    </select>
+    <update id="updataMemberOrder" parameterType="com.zomore.domain.MemberShopOrder">
+        update zomore_member_order
+        <set>
+            <if test="memberOrderCommodityImage !=null">
+                member_ordercommdity_image=#{memberOrderCommodityImage},
+            </if>
+            <if test="memberName !=null">
+                membername=#{memberName},
+            </if>
+            <if test="memberPhone !=null">
+                memberphone=#{memberPhone},
+            </if>
+            <if test="memberAddress !=null">
+                memberaddress=#{memberAddress},
+            </if>
+            <if test="memberOrderStatus !=null">
+                member_orderstatus=#{memberOrderStatus},
+            </if>
+            <if test="memberOrderRemark !=null">
+                member_orderremark=#{memberOrderRemark},
+            </if>
+            <if test="orderEvaluateStatus !=null">
+                order_evaluatestatus=#{orderEvaluateStatus},
+            </if>
+            <if test="orderEvaluate !=null">
+                order_evaluate=#{orderEvaluate},
+            </if>
+
+        </set>
+        where member_orderid= #{memberOrderId}
+    </update>
+
+    <delete id="deleteAllshopcar" parameterType="com.zomore.domain.ZomoreMemberShopcar">
+        delete from zomore_member_shopcar where shopcar_memberaccount =#{shopcarMemberAccount} and shopcar_commodityshop=#{shopcarCommodityShop}
+    </delete>
+
+</mapper>

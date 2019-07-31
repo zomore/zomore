@@ -1,0 +1,584 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreServiceCommodityMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreServiceCommodity">
+    <id column="service_commodity_id" jdbcType="VARCHAR" property="serviceCommodityId" />
+    <result column="service_commodity_name" jdbcType="VARCHAR" property="serviceCommodityName" />
+    <result column="service_commodity_isservice" jdbcType="INTEGER" property="serviceCommodityIsservice" />
+    <result column="service_commodity_main" jdbcType="VARCHAR" property="serviceCommodityMain" />
+    <result column="service_commodity_inprice" jdbcType="DOUBLE" property="serviceCommodityInprice" />
+    <result column="service_commodity_outprice" jdbcType="DOUBLE" property="serviceCommodityOutprice" />
+    <result column="service_commodity_ismemberdiscount" jdbcType="INTEGER" property="serviceCommodityIsmemberdiscount" />
+    <result column="service_commodity_membershipprice" jdbcType="DOUBLE" property="serviceCommodityMembershipprice" />
+    <result column="service_commodity_pinyincode" jdbcType="VARCHAR" property="serviceCommodityPinyincode" />
+    <result column="service_commodity_createtime" jdbcType="TIMESTAMP" property="serviceCommodityCreatetime" />
+    <result column="service_commodity_state" jdbcType="INTEGER" property="serviceCommodityState" />
+    <result column="service_commodity_shop" jdbcType="VARCHAR" property="serviceCommodityShop" />
+    <result column="service_commodity_type" jdbcType="VARCHAR" property="serviceCommodityType" />
+    <result column="service_commodity_labber" jdbcType="VARCHAR" property="serviceCommodityLabber" />
+    <result column="service_commodity_isintegral" jdbcType="INTEGER" property="serviceCommodityIsintegral" />
+    <result column="service_commodity_integraltype" jdbcType="INTEGER" property="serviceCommodityIntegraltype" />
+    <result column="service_commodity_integralvalue" jdbcType="VARCHAR" property="serviceCommodityIntegralvalue" />
+    <result column="service_commodity_isroyalty" jdbcType="INTEGER" property="serviceCommodityIsroyalty" />
+    <result column="service_commodity_royaltytype" jdbcType="INTEGER" property="serviceCommodityRoyaltytype" />
+    <result column="service_commodity_royaltyvalue" jdbcType="VARCHAR" property="serviceCommodityRoyaltyvalue" />
+    <result column="service_commodity_image" jdbcType="VARCHAR" property="serviceCommodityImage" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zomore.domain.ZomoreServiceCommodity">
+    <result column="service_commodity_meno" jdbcType="LONGVARCHAR" property="serviceCommodityMeno" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    service_commodity_id, service_commodity_name, service_commodity_isservice, service_commodity_main, 
+    service_commodity_inprice, service_commodity_outprice, service_commodity_ismemberdiscount, 
+    service_commodity_membershipprice, service_commodity_pinyincode, service_commodity_createtime, 
+    service_commodity_state, service_commodity_shop, service_commodity_type, service_commodity_labber, 
+    service_commodity_isintegral, service_commodity_integraltype, service_commodity_integralvalue, 
+    service_commodity_isroyalty, service_commodity_royaltytype, service_commodity_royaltyvalue, service_commodity_image
+  </sql>
+  <sql id="Blob_Column_List">
+    service_commodity_meno
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.zomore.domain.ZomoreServiceCommodityExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zomore_service_commodity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreServiceCommodityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_service_commodity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zomore_service_commodity
+    where service_commodity_id = #{serviceCommodityId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zomore_service_commodity
+    where service_commodity_id = #{serviceCommodityId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreServiceCommodityExample">
+    delete from zomore_service_commodity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreServiceCommodity">
+    insert into zomore_service_commodity (service_commodity_id, service_commodity_name, 
+      service_commodity_isservice, service_commodity_main, 
+      service_commodity_inprice, service_commodity_outprice, 
+      service_commodity_ismemberdiscount, service_commodity_membershipprice, 
+      service_commodity_pinyincode, service_commodity_createtime, 
+      service_commodity_state, service_commodity_shop, 
+      service_commodity_type, service_commodity_labber, 
+      service_commodity_isintegral, service_commodity_integraltype, 
+      service_commodity_integralvalue, service_commodity_isroyalty, 
+      service_commodity_royaltytype, service_commodity_royaltyvalue, 
+      service_commodity_meno, service_commodity_image)
+    values (#{serviceCommodityId,jdbcType=VARCHAR}, #{serviceCommodityName,jdbcType=VARCHAR}, 
+      #{serviceCommodityIsservice,jdbcType=INTEGER}, #{serviceCommodityMain,jdbcType=VARCHAR}, 
+      #{serviceCommodityInprice,jdbcType=DOUBLE}, #{serviceCommodityOutprice,jdbcType=DOUBLE}, 
+      #{serviceCommodityIsmemberdiscount,jdbcType=INTEGER}, #{serviceCommodityMembershipprice,jdbcType=DOUBLE}, 
+      #{serviceCommodityPinyincode,jdbcType=VARCHAR}, #{serviceCommodityCreatetime,jdbcType=TIMESTAMP}, 
+      #{serviceCommodityState,jdbcType=INTEGER}, #{serviceCommodityShop,jdbcType=VARCHAR}, 
+      #{serviceCommodityType,jdbcType=VARCHAR}, #{serviceCommodityLabber,jdbcType=VARCHAR}, 
+      #{serviceCommodityIsintegral,jdbcType=INTEGER}, #{serviceCommodityIntegraltype,jdbcType=INTEGER}, 
+      #{serviceCommodityIntegralvalue,jdbcType=VARCHAR}, #{serviceCommodityIsroyalty,jdbcType=INTEGER}, 
+      #{serviceCommodityRoyaltytype,jdbcType=INTEGER}, #{serviceCommodityRoyaltyvalue,jdbcType=VARCHAR}, 
+      #{serviceCommodityMeno,jdbcType=LONGVARCHAR}, #{serviceCommodityImage,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreServiceCommodity">
+    insert into zomore_service_commodity
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="serviceCommodityId != null">
+        service_commodity_id,
+      </if>
+      <if test="serviceCommodityName != null">
+        service_commodity_name,
+      </if>
+      <if test="serviceCommodityIsservice != null">
+        service_commodity_isservice,
+      </if>
+      <if test="serviceCommodityMain != null">
+        service_commodity_main,
+      </if>
+      <if test="serviceCommodityInprice != null">
+        service_commodity_inprice,
+      </if>
+      <if test="serviceCommodityOutprice != null">
+        service_commodity_outprice,
+      </if>
+      <if test="serviceCommodityIsmemberdiscount != null">
+        service_commodity_ismemberdiscount,
+      </if>
+      <if test="serviceCommodityMembershipprice != null">
+        service_commodity_membershipprice,
+      </if>
+      <if test="serviceCommodityPinyincode != null">
+        service_commodity_pinyincode,
+      </if>
+      <if test="serviceCommodityCreatetime != null">
+        service_commodity_createtime,
+      </if>
+      <if test="serviceCommodityState != null">
+        service_commodity_state,
+      </if>
+      <if test="serviceCommodityShop != null">
+        service_commodity_shop,
+      </if>
+      <if test="serviceCommodityType != null">
+        service_commodity_type,
+      </if>
+      <if test="serviceCommodityLabber != null">
+        service_commodity_labber,
+      </if>
+      <if test="serviceCommodityIsintegral != null">
+        service_commodity_isintegral,
+      </if>
+      <if test="serviceCommodityIntegraltype != null">
+        service_commodity_integraltype,
+      </if>
+      <if test="serviceCommodityIntegralvalue != null">
+        service_commodity_integralvalue,
+      </if>
+      <if test="serviceCommodityIsroyalty != null">
+        service_commodity_isroyalty,
+      </if>
+      <if test="serviceCommodityRoyaltytype != null">
+        service_commodity_royaltytype,
+      </if>
+      <if test="serviceCommodityRoyaltyvalue != null">
+        service_commodity_royaltyvalue,
+      </if>
+      <if test="serviceCommodityMeno != null">
+        service_commodity_meno,
+      </if>
+      <if test="serviceCommodityImage != null">
+        service_commodity_image,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="serviceCommodityId != null">
+        #{serviceCommodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCommodityName != null">
+        #{serviceCommodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCommodityIsservice != null">
+        #{serviceCommodityIsservice,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCommodityMain != null">
+        #{serviceCommodityMain,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCommodityInprice != null">
+        #{serviceCommodityInprice,jdbcType=DOUBLE},
+      </if>
+      <if test="serviceCommodityOutprice != null">
+        #{serviceCommodityOutprice,jdbcType=DOUBLE},
+      </if>
+      <if test="serviceCommodityIsmemberdiscount != null">
+        #{serviceCommodityIsmemberdiscount,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCommodityMembershipprice != null">
+        #{serviceCommodityMembershipprice,jdbcType=DOUBLE},
+      </if>
+      <if test="serviceCommodityPinyincode != null">
+        #{serviceCommodityPinyincode,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCommodityCreatetime != null">
+        #{serviceCommodityCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceCommodityState != null">
+        #{serviceCommodityState,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCommodityShop != null">
+        #{serviceCommodityShop,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCommodityType != null">
+        #{serviceCommodityType,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCommodityLabber != null">
+        #{serviceCommodityLabber,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCommodityIsintegral != null">
+        #{serviceCommodityIsintegral,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCommodityIntegraltype != null">
+        #{serviceCommodityIntegraltype,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCommodityIntegralvalue != null">
+        #{serviceCommodityIntegralvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCommodityIsroyalty != null">
+        #{serviceCommodityIsroyalty,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCommodityRoyaltytype != null">
+        #{serviceCommodityRoyaltytype,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCommodityRoyaltyvalue != null">
+        #{serviceCommodityRoyaltyvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCommodityMeno != null">
+        #{serviceCommodityMeno,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="serviceCommodityImage != null">
+        #{serviceCommodityImage,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreServiceCommodityExample" resultType="java.lang.Long">
+    select count(*) from zomore_service_commodity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_service_commodity
+    <set>
+      <if test="record.serviceCommodityId != null">
+        service_commodity_id = #{record.serviceCommodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceCommodityName != null">
+        service_commodity_name = #{record.serviceCommodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceCommodityIsservice != null">
+        service_commodity_isservice = #{record.serviceCommodityIsservice,jdbcType=INTEGER},
+      </if>
+      <if test="record.serviceCommodityMain != null">
+        service_commodity_main = #{record.serviceCommodityMain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceCommodityInprice != null">
+        service_commodity_inprice = #{record.serviceCommodityInprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.serviceCommodityOutprice != null">
+        service_commodity_outprice = #{record.serviceCommodityOutprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.serviceCommodityIsmemberdiscount != null">
+        service_commodity_ismemberdiscount = #{record.serviceCommodityIsmemberdiscount,jdbcType=INTEGER},
+      </if>
+      <if test="record.serviceCommodityMembershipprice != null">
+        service_commodity_membershipprice = #{record.serviceCommodityMembershipprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.serviceCommodityPinyincode != null">
+        service_commodity_pinyincode = #{record.serviceCommodityPinyincode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceCommodityCreatetime != null">
+        service_commodity_createtime = #{record.serviceCommodityCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.serviceCommodityState != null">
+        service_commodity_state = #{record.serviceCommodityState,jdbcType=INTEGER},
+      </if>
+      <if test="record.serviceCommodityShop != null">
+        service_commodity_shop = #{record.serviceCommodityShop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceCommodityType != null">
+        service_commodity_type = #{record.serviceCommodityType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceCommodityLabber != null">
+        service_commodity_labber = #{record.serviceCommodityLabber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceCommodityIsintegral != null">
+        service_commodity_isintegral = #{record.serviceCommodityIsintegral,jdbcType=INTEGER},
+      </if>
+      <if test="record.serviceCommodityIntegraltype != null">
+        service_commodity_integraltype = #{record.serviceCommodityIntegraltype,jdbcType=INTEGER},
+      </if>
+      <if test="record.serviceCommodityIntegralvalue != null">
+        service_commodity_integralvalue = #{record.serviceCommodityIntegralvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceCommodityIsroyalty != null">
+        service_commodity_isroyalty = #{record.serviceCommodityIsroyalty,jdbcType=INTEGER},
+      </if>
+      <if test="record.serviceCommodityRoyaltytype != null">
+        service_commodity_royaltytype = #{record.serviceCommodityRoyaltytype,jdbcType=INTEGER},
+      </if>
+      <if test="record.serviceCommodityRoyaltyvalue != null">
+        service_commodity_royaltyvalue = #{record.serviceCommodityRoyaltyvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.serviceCommodityMeno != null">
+        service_commodity_meno = #{record.serviceCommodityMeno,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.serviceCommodityImage != null">
+        service_commodity_image = #{record.serviceCommodityImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update zomore_service_commodity
+    set service_commodity_id = #{record.serviceCommodityId,jdbcType=VARCHAR},
+      service_commodity_name = #{record.serviceCommodityName,jdbcType=VARCHAR},
+      service_commodity_isservice = #{record.serviceCommodityIsservice,jdbcType=INTEGER},
+      service_commodity_main = #{record.serviceCommodityMain,jdbcType=VARCHAR},
+      service_commodity_inprice = #{record.serviceCommodityInprice,jdbcType=DOUBLE},
+      service_commodity_outprice = #{record.serviceCommodityOutprice,jdbcType=DOUBLE},
+      service_commodity_ismemberdiscount = #{record.serviceCommodityIsmemberdiscount,jdbcType=INTEGER},
+      service_commodity_membershipprice = #{record.serviceCommodityMembershipprice,jdbcType=DOUBLE},
+      service_commodity_pinyincode = #{record.serviceCommodityPinyincode,jdbcType=VARCHAR},
+      service_commodity_createtime = #{record.serviceCommodityCreatetime,jdbcType=TIMESTAMP},
+      service_commodity_state = #{record.serviceCommodityState,jdbcType=INTEGER},
+      service_commodity_shop = #{record.serviceCommodityShop,jdbcType=VARCHAR},
+      service_commodity_type = #{record.serviceCommodityType,jdbcType=VARCHAR},
+      service_commodity_labber = #{record.serviceCommodityLabber,jdbcType=VARCHAR},
+      service_commodity_isintegral = #{record.serviceCommodityIsintegral,jdbcType=INTEGER},
+      service_commodity_integraltype = #{record.serviceCommodityIntegraltype,jdbcType=INTEGER},
+      service_commodity_integralvalue = #{record.serviceCommodityIntegralvalue,jdbcType=VARCHAR},
+      service_commodity_isroyalty = #{record.serviceCommodityIsroyalty,jdbcType=INTEGER},
+      service_commodity_royaltytype = #{record.serviceCommodityRoyaltytype,jdbcType=INTEGER},
+      service_commodity_royaltyvalue = #{record.serviceCommodityRoyaltyvalue,jdbcType=VARCHAR},
+      service_commodity_meno = #{record.serviceCommodityMeno,jdbcType=LONGVARCHAR},
+      service_commodity_image = #{record.serviceCommodityImage,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_service_commodity
+    set service_commodity_id = #{record.serviceCommodityId,jdbcType=VARCHAR},
+      service_commodity_name = #{record.serviceCommodityName,jdbcType=VARCHAR},
+      service_commodity_isservice = #{record.serviceCommodityIsservice,jdbcType=INTEGER},
+      service_commodity_main = #{record.serviceCommodityMain,jdbcType=VARCHAR},
+      service_commodity_inprice = #{record.serviceCommodityInprice,jdbcType=DOUBLE},
+      service_commodity_outprice = #{record.serviceCommodityOutprice,jdbcType=DOUBLE},
+      service_commodity_ismemberdiscount = #{record.serviceCommodityIsmemberdiscount,jdbcType=INTEGER},
+      service_commodity_membershipprice = #{record.serviceCommodityMembershipprice,jdbcType=DOUBLE},
+      service_commodity_pinyincode = #{record.serviceCommodityPinyincode,jdbcType=VARCHAR},
+      service_commodity_createtime = #{record.serviceCommodityCreatetime,jdbcType=TIMESTAMP},
+      service_commodity_state = #{record.serviceCommodityState,jdbcType=INTEGER},
+      service_commodity_shop = #{record.serviceCommodityShop,jdbcType=VARCHAR},
+      service_commodity_type = #{record.serviceCommodityType,jdbcType=VARCHAR},
+      service_commodity_labber = #{record.serviceCommodityLabber,jdbcType=VARCHAR},
+      service_commodity_isintegral = #{record.serviceCommodityIsintegral,jdbcType=INTEGER},
+      service_commodity_integraltype = #{record.serviceCommodityIntegraltype,jdbcType=INTEGER},
+      service_commodity_integralvalue = #{record.serviceCommodityIntegralvalue,jdbcType=VARCHAR},
+      service_commodity_isroyalty = #{record.serviceCommodityIsroyalty,jdbcType=INTEGER},
+      service_commodity_royaltytype = #{record.serviceCommodityRoyaltytype,jdbcType=INTEGER},
+      service_commodity_royaltyvalue = #{record.serviceCommodityRoyaltyvalue,jdbcType=VARCHAR},
+      service_commodity_image = #{record.serviceCommodityImage,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreServiceCommodity">
+    update zomore_service_commodity
+    <set>
+      <if test="serviceCommodityName != null">
+        service_commodity_name = #{serviceCommodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCommodityIsservice != null">
+        service_commodity_isservice = #{serviceCommodityIsservice,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCommodityMain != null">
+        service_commodity_main = #{serviceCommodityMain,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCommodityInprice != null">
+        service_commodity_inprice = #{serviceCommodityInprice,jdbcType=DOUBLE},
+      </if>
+      <if test="serviceCommodityOutprice != null">
+        service_commodity_outprice = #{serviceCommodityOutprice,jdbcType=DOUBLE},
+      </if>
+      <if test="serviceCommodityIsmemberdiscount != null">
+        service_commodity_ismemberdiscount = #{serviceCommodityIsmemberdiscount,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCommodityMembershipprice != null">
+        service_commodity_membershipprice = #{serviceCommodityMembershipprice,jdbcType=DOUBLE},
+      </if>
+      <if test="serviceCommodityPinyincode != null">
+        service_commodity_pinyincode = #{serviceCommodityPinyincode,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCommodityCreatetime != null">
+        service_commodity_createtime = #{serviceCommodityCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="serviceCommodityState != null">
+        service_commodity_state = #{serviceCommodityState,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCommodityShop != null">
+        service_commodity_shop = #{serviceCommodityShop,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCommodityType != null">
+        service_commodity_type = #{serviceCommodityType,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCommodityLabber != null">
+        service_commodity_labber = #{serviceCommodityLabber,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCommodityIsintegral != null">
+        service_commodity_isintegral = #{serviceCommodityIsintegral,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCommodityIntegraltype != null">
+        service_commodity_integraltype = #{serviceCommodityIntegraltype,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCommodityIntegralvalue != null">
+        service_commodity_integralvalue = #{serviceCommodityIntegralvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCommodityIsroyalty != null">
+        service_commodity_isroyalty = #{serviceCommodityIsroyalty,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCommodityRoyaltytype != null">
+        service_commodity_royaltytype = #{serviceCommodityRoyaltytype,jdbcType=INTEGER},
+      </if>
+      <if test="serviceCommodityRoyaltyvalue != null">
+        service_commodity_royaltyvalue = #{serviceCommodityRoyaltyvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="serviceCommodityMeno != null">
+        service_commodity_meno = #{serviceCommodityMeno,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="serviceCommodityImage != null">
+        service_commodity_image = #{serviceCommodityImage,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where service_commodity_id = #{serviceCommodityId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zomore.domain.ZomoreServiceCommodity">
+    update zomore_service_commodity
+    set service_commodity_name = #{serviceCommodityName,jdbcType=VARCHAR},
+      service_commodity_isservice = #{serviceCommodityIsservice,jdbcType=INTEGER},
+      service_commodity_main = #{serviceCommodityMain,jdbcType=VARCHAR},
+      service_commodity_inprice = #{serviceCommodityInprice,jdbcType=DOUBLE},
+      service_commodity_outprice = #{serviceCommodityOutprice,jdbcType=DOUBLE},
+      service_commodity_ismemberdiscount = #{serviceCommodityIsmemberdiscount,jdbcType=INTEGER},
+      service_commodity_membershipprice = #{serviceCommodityMembershipprice,jdbcType=DOUBLE},
+      service_commodity_pinyincode = #{serviceCommodityPinyincode,jdbcType=VARCHAR},
+      service_commodity_createtime = #{serviceCommodityCreatetime,jdbcType=TIMESTAMP},
+      service_commodity_state = #{serviceCommodityState,jdbcType=INTEGER},
+      service_commodity_shop = #{serviceCommodityShop,jdbcType=VARCHAR},
+      service_commodity_type = #{serviceCommodityType,jdbcType=VARCHAR},
+      service_commodity_labber = #{serviceCommodityLabber,jdbcType=VARCHAR},
+      service_commodity_isintegral = #{serviceCommodityIsintegral,jdbcType=INTEGER},
+      service_commodity_integraltype = #{serviceCommodityIntegraltype,jdbcType=INTEGER},
+      service_commodity_integralvalue = #{serviceCommodityIntegralvalue,jdbcType=VARCHAR},
+      service_commodity_isroyalty = #{serviceCommodityIsroyalty,jdbcType=INTEGER},
+      service_commodity_royaltytype = #{serviceCommodityRoyaltytype,jdbcType=INTEGER},
+      service_commodity_royaltyvalue = #{serviceCommodityRoyaltyvalue,jdbcType=VARCHAR},
+      service_commodity_meno = #{serviceCommodityMeno,jdbcType=LONGVARCHAR},
+      service_commodity_image = #{serviceCommodityImage,jdbcType=VARCHAR}
+    where service_commodity_id = #{serviceCommodityId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreServiceCommodity">
+    update zomore_service_commodity
+    set service_commodity_name = #{serviceCommodityName,jdbcType=VARCHAR},
+      service_commodity_isservice = #{serviceCommodityIsservice,jdbcType=INTEGER},
+      service_commodity_main = #{serviceCommodityMain,jdbcType=VARCHAR},
+      service_commodity_inprice = #{serviceCommodityInprice,jdbcType=DOUBLE},
+      service_commodity_outprice = #{serviceCommodityOutprice,jdbcType=DOUBLE},
+      service_commodity_ismemberdiscount = #{serviceCommodityIsmemberdiscount,jdbcType=INTEGER},
+      service_commodity_membershipprice = #{serviceCommodityMembershipprice,jdbcType=DOUBLE},
+      service_commodity_pinyincode = #{serviceCommodityPinyincode,jdbcType=VARCHAR},
+      service_commodity_createtime = #{serviceCommodityCreatetime,jdbcType=TIMESTAMP},
+      service_commodity_state = #{serviceCommodityState,jdbcType=INTEGER},
+      service_commodity_shop = #{serviceCommodityShop,jdbcType=VARCHAR},
+      service_commodity_type = #{serviceCommodityType,jdbcType=VARCHAR},
+      service_commodity_labber = #{serviceCommodityLabber,jdbcType=VARCHAR},
+      service_commodity_isintegral = #{serviceCommodityIsintegral,jdbcType=INTEGER},
+      service_commodity_integraltype = #{serviceCommodityIntegraltype,jdbcType=INTEGER},
+      service_commodity_integralvalue = #{serviceCommodityIntegralvalue,jdbcType=VARCHAR},
+      service_commodity_isroyalty = #{serviceCommodityIsroyalty,jdbcType=INTEGER},
+      service_commodity_royaltytype = #{serviceCommodityRoyaltytype,jdbcType=INTEGER},
+      service_commodity_royaltyvalue = #{serviceCommodityRoyaltyvalue,jdbcType=VARCHAR},
+      service_commodity_image = #{serviceCommodityRoyaltyvalue,jdbcType=VARCHAR}
+    where service_commodity_id = #{serviceCommodityId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectServiceContSale" parameterType="java.lang.String" resultType="java.util.Map">
+    SELECT DISTINCT zomore_commodity_name as name,COUNT(zomore_commodity_num) as number from zomore_service_commodity_salecommodit where zomore_commodity_shop = #{shop} GROUP BY zomore_commodity_name
+    ORDER BY COUNT(zomore_commodity_num) desc limit 0,5
+  </select>
+
+  <!--List<String> selectLaberByShopName(String shopname);-->
+  <select id="selectLaberByShopName" resultType="string" parameterType="string">
+    SELECT DISTINCT service_commodity_labber from zomore_service_commodity
+  WHERE service_commodity_shop =#{shopname} and service_commodity_labber is not null
+
+  </select>
+
+  <select id="selectServiceCommodityBylist" parameterType="java.util.Map" resultType="com.zomore.domain.ZomoreServiceCommodity">
+    select
+    <foreach collection="stringList" index="index" item="item" open="" separator="," close="">
+      ${item}
+    </foreach>
+    from zomore_service_commodity
+    where service_commodity_shop =#{shopName}
+  </select>
+</mapper>

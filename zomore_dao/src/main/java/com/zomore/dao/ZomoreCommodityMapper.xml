@@ -1,0 +1,784 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreCommodityMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreCommodity">
+    <id column="zomore_commodity_id" jdbcType="VARCHAR" property="zomoreCommodityId" />
+    <result column="zomore_commodity_name" jdbcType="VARCHAR" property="zomoreCommodityName" />
+    <result column="zomore_commodity_image" jdbcType="VARCHAR" property="zomoreCommodityImage" />
+    <result column="zomore_commodity_code" jdbcType="VARCHAR" property="zomoreCommodityCode" />
+    <result column="zomore_commodity_num" jdbcType="VARCHAR" property="zomoreCommodityNum" />
+    <result column="zomore_commodity_specifications" jdbcType="VARCHAR" property="zomoreCommoditySpecifications" />
+    <result column="zomore_commodity_pingyin" jdbcType="VARCHAR" property="zomoreCommodityPingyin" />
+    <result column="zomore_commodity_type" jdbcType="VARCHAR" property="zomoreCommodityType" />
+    <result column="zomore_commodity_main" jdbcType="VARCHAR" property="zomoreCommodityMain" />
+    <result column="zomore_commodity_in" jdbcType="VARCHAR" property="zomoreCommodityIn" />
+    <result column="zomore_commodity_out" jdbcType="VARCHAR" property="zomoreCommodityOut" />
+    <result column="zomore_commodity_outall" jdbcType="VARCHAR" property="zomoreCommodityOutall" />
+    <result column="zomore_commodity_isdiscount" jdbcType="INTEGER" property="zomoreCommodityIsdiscount" />
+    <result column="zomore_commodity_provide" jdbcType="VARCHAR" property="zomoreCommodityProvide" />
+    <result column="zomore_commodity_productdate" jdbcType="TIMESTAMP" property="zomoreCommodityProductdate" />
+    <result column="zomore_commodity_time" jdbcType="INTEGER" property="zomoreCommodityTime" />
+    <result column="zomore_commodity_createtime" jdbcType="TIMESTAMP" property="zomoreCommodityCreatetime" />
+    <result column="zomore_commodity_isuser" jdbcType="INTEGER" property="zomoreCommodityIsuser" />
+    <result column="zomore_commodity_isservice" jdbcType="INTEGER" property="zomoreCommodityIsservice" />
+    <result column="zomore_commodity_laber1" jdbcType="VARCHAR" property="zomoreCommodityLaber1" />
+    <result column="zomore_commodity_laber2" jdbcType="VARCHAR" property="zomoreCommodityLaber2" />
+    <result column="zomore_commodity_laber3" jdbcType="VARCHAR" property="zomoreCommodityLaber3" />
+    <result column="zomore_commodity_laberproduct" jdbcType="VARCHAR" property="zomoreCommodityLaberproduct" />
+    <result column="zomore_commodity_isintegral" jdbcType="INTEGER" property="zomoreCommodityIsintegral" />
+    <result column="zomore_commodity_brand" jdbcType="VARCHAR" property="zomoreCommodityBrand" />
+    <result column="zomore_commodity_memberprice" jdbcType="VARCHAR" property="zomoreCommodityMemberprice" />
+    <result column="zomore_commodity_shop" jdbcType="VARCHAR" property="zomoreCommodityShop" />
+    <result column="zomore_commodity_isroyalty" jdbcType="INTEGER" property="zomoreCommodityIsroyalty" />
+    <result column="zomore_commodity_royaltytype" jdbcType="INTEGER" property="zomoreCommodityRoyaltytype" />
+    <result column="zomore_commodity_royaltyvalue" jdbcType="VARCHAR" property="zomoreCommodityRoyaltyvalue" />
+    <result column="zomore_commodity_updown" jdbcType="INTEGER" property="zomoreCommodityUpdown" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zomore.domain.ZomoreCommodity">
+    <result column="zomore_commodity_meno" jdbcType="LONGVARCHAR" property="zomoreCommodityMeno" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    zomore_commodity_id, zomore_commodity_name, zomore_commodity_image, zomore_commodity_code, 
+    zomore_commodity_num, zomore_commodity_specifications, zomore_commodity_pingyin, 
+    zomore_commodity_type, zomore_commodity_main, zomore_commodity_in, zomore_commodity_out, 
+    zomore_commodity_outall, zomore_commodity_isdiscount, zomore_commodity_provide, zomore_commodity_productdate, 
+    zomore_commodity_time, zomore_commodity_createtime, zomore_commodity_isuser, zomore_commodity_isservice, 
+    zomore_commodity_laber1, zomore_commodity_laber2, zomore_commodity_laber3, zomore_commodity_laberproduct, 
+    zomore_commodity_isintegral, zomore_commodity_brand, zomore_commodity_memberprice, 
+    zomore_commodity_shop, zomore_commodity_isroyalty, zomore_commodity_royaltytype, 
+    zomore_commodity_royaltyvalue, zomore_commodity_updown
+  </sql>
+  <sql id="Blob_Column_List">
+    zomore_commodity_meno
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.zomore.domain.ZomoreCommodityExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zomore_commodity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+    /*  group by ${orderByClause}*/
+      order by zomore_commodity_createtime desc
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreCommodityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_commodity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zomore_commodity
+    where zomore_commodity_id = #{zomoreCommodityId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zomore_commodity
+    where zomore_commodity_id = #{zomoreCommodityId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreCommodityExample">
+    delete from zomore_commodity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreCommodity">
+    insert into zomore_commodity (zomore_commodity_id, zomore_commodity_name, 
+      zomore_commodity_image, zomore_commodity_code, 
+      zomore_commodity_num, zomore_commodity_specifications, 
+      zomore_commodity_pingyin, zomore_commodity_type, 
+      zomore_commodity_main, zomore_commodity_in, 
+      zomore_commodity_out, zomore_commodity_outall, 
+      zomore_commodity_isdiscount, zomore_commodity_provide, 
+      zomore_commodity_productdate, zomore_commodity_time, 
+      zomore_commodity_createtime, zomore_commodity_isuser, 
+      zomore_commodity_isservice, zomore_commodity_laber1, 
+      zomore_commodity_laber2, zomore_commodity_laber3, 
+      zomore_commodity_laberproduct, zomore_commodity_isintegral, 
+      zomore_commodity_brand, zomore_commodity_memberprice, 
+      zomore_commodity_shop, zomore_commodity_isroyalty, 
+      zomore_commodity_royaltytype, zomore_commodity_royaltyvalue, 
+      zomore_commodity_updown, zomore_commodity_meno
+      )
+    values (#{zomoreCommodityId,jdbcType=VARCHAR}, #{zomoreCommodityName,jdbcType=VARCHAR}, 
+      #{zomoreCommodityImage,jdbcType=VARCHAR}, #{zomoreCommodityCode,jdbcType=VARCHAR}, 
+      #{zomoreCommodityNum,jdbcType=VARCHAR}, #{zomoreCommoditySpecifications,jdbcType=VARCHAR}, 
+      #{zomoreCommodityPingyin,jdbcType=VARCHAR}, #{zomoreCommodityType,jdbcType=VARCHAR}, 
+      #{zomoreCommodityMain,jdbcType=VARCHAR}, #{zomoreCommodityIn,jdbcType=VARCHAR}, 
+      #{zomoreCommodityOut,jdbcType=VARCHAR}, #{zomoreCommodityOutall,jdbcType=VARCHAR}, 
+      #{zomoreCommodityIsdiscount,jdbcType=INTEGER}, #{zomoreCommodityProvide,jdbcType=VARCHAR}, 
+      #{zomoreCommodityProductdate,jdbcType=TIMESTAMP}, #{zomoreCommodityTime,jdbcType=INTEGER}, 
+      #{zomoreCommodityCreatetime,jdbcType=TIMESTAMP}, #{zomoreCommodityIsuser,jdbcType=INTEGER}, 
+      #{zomoreCommodityIsservice,jdbcType=INTEGER}, #{zomoreCommodityLaber1,jdbcType=VARCHAR}, 
+      #{zomoreCommodityLaber2,jdbcType=VARCHAR}, #{zomoreCommodityLaber3,jdbcType=VARCHAR}, 
+      #{zomoreCommodityLaberproduct,jdbcType=VARCHAR}, #{zomoreCommodityIsintegral,jdbcType=INTEGER}, 
+      #{zomoreCommodityBrand,jdbcType=VARCHAR}, #{zomoreCommodityMemberprice,jdbcType=VARCHAR}, 
+      #{zomoreCommodityShop,jdbcType=VARCHAR}, #{zomoreCommodityIsroyalty,jdbcType=INTEGER}, 
+      #{zomoreCommodityRoyaltytype,jdbcType=INTEGER}, #{zomoreCommodityRoyaltyvalue,jdbcType=VARCHAR}, 
+      #{zomoreCommodityUpdown,jdbcType=INTEGER}, #{zomoreCommodityMeno,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreCommodity">
+    insert into zomore_commodity
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="zomoreCommodityId != null">
+        zomore_commodity_id,
+      </if>
+      <if test="zomoreCommodityName != null">
+        zomore_commodity_name,
+      </if>
+      <if test="zomoreCommodityImage != null">
+        zomore_commodity_image,
+      </if>
+      <if test="zomoreCommodityCode != null">
+        zomore_commodity_code,
+      </if>
+      <if test="zomoreCommodityNum != null">
+        zomore_commodity_num,
+      </if>
+      <if test="zomoreCommoditySpecifications != null">
+        zomore_commodity_specifications,
+      </if>
+      <if test="zomoreCommodityPingyin != null">
+        zomore_commodity_pingyin,
+      </if>
+      <if test="zomoreCommodityType != null">
+        zomore_commodity_type,
+      </if>
+      <if test="zomoreCommodityMain != null">
+        zomore_commodity_main,
+      </if>
+      <if test="zomoreCommodityIn != null">
+        zomore_commodity_in,
+      </if>
+      <if test="zomoreCommodityOut != null">
+        zomore_commodity_out,
+      </if>
+      <if test="zomoreCommodityOutall != null">
+        zomore_commodity_outall,
+      </if>
+      <if test="zomoreCommodityIsdiscount != null">
+        zomore_commodity_isdiscount,
+      </if>
+      <if test="zomoreCommodityProvide != null">
+        zomore_commodity_provide,
+      </if>
+      <if test="zomoreCommodityProductdate != null">
+        zomore_commodity_productdate,
+      </if>
+      <if test="zomoreCommodityTime != null">
+        zomore_commodity_time,
+      </if>
+      <if test="zomoreCommodityCreatetime != null">
+        zomore_commodity_createtime,
+      </if>
+      <if test="zomoreCommodityIsuser != null">
+        zomore_commodity_isuser,
+      </if>
+      <if test="zomoreCommodityIsservice != null">
+        zomore_commodity_isservice,
+      </if>
+      <if test="zomoreCommodityLaber1 != null">
+        zomore_commodity_laber1,
+      </if>
+      <if test="zomoreCommodityLaber2 != null">
+        zomore_commodity_laber2,
+      </if>
+      <if test="zomoreCommodityLaber3 != null">
+        zomore_commodity_laber3,
+      </if>
+      <if test="zomoreCommodityLaberproduct != null">
+        zomore_commodity_laberproduct,
+      </if>
+      <if test="zomoreCommodityIsintegral != null">
+        zomore_commodity_isintegral,
+      </if>
+      <if test="zomoreCommodityBrand != null">
+        zomore_commodity_brand,
+      </if>
+      <if test="zomoreCommodityMemberprice != null">
+        zomore_commodity_memberprice,
+      </if>
+      <if test="zomoreCommodityShop != null">
+        zomore_commodity_shop,
+      </if>
+      <if test="zomoreCommodityIsroyalty != null">
+        zomore_commodity_isroyalty,
+      </if>
+      <if test="zomoreCommodityRoyaltytype != null">
+        zomore_commodity_royaltytype,
+      </if>
+      <if test="zomoreCommodityRoyaltyvalue != null">
+        zomore_commodity_royaltyvalue,
+      </if>
+      <if test="zomoreCommodityUpdown != null">
+        zomore_commodity_updown,
+      </if>
+      <if test="zomoreCommodityMeno != null">
+        zomore_commodity_meno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="zomoreCommodityId != null">
+        #{zomoreCommodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityName != null">
+        #{zomoreCommodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityImage != null">
+        #{zomoreCommodityImage,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityCode != null">
+        #{zomoreCommodityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityNum != null">
+        #{zomoreCommodityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySpecifications != null">
+        #{zomoreCommoditySpecifications,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityPingyin != null">
+        #{zomoreCommodityPingyin,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityType != null">
+        #{zomoreCommodityType,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityMain != null">
+        #{zomoreCommodityMain,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityIn != null">
+        #{zomoreCommodityIn,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityOut != null">
+        #{zomoreCommodityOut,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityOutall != null">
+        #{zomoreCommodityOutall,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityIsdiscount != null">
+        #{zomoreCommodityIsdiscount,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityProvide != null">
+        #{zomoreCommodityProvide,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityProductdate != null">
+        #{zomoreCommodityProductdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zomoreCommodityTime != null">
+        #{zomoreCommodityTime,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityCreatetime != null">
+        #{zomoreCommodityCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zomoreCommodityIsuser != null">
+        #{zomoreCommodityIsuser,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityIsservice != null">
+        #{zomoreCommodityIsservice,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityLaber1 != null">
+        #{zomoreCommodityLaber1,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityLaber2 != null">
+        #{zomoreCommodityLaber2,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityLaber3 != null">
+        #{zomoreCommodityLaber3,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityLaberproduct != null">
+        #{zomoreCommodityLaberproduct,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityIsintegral != null">
+        #{zomoreCommodityIsintegral,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityBrand != null">
+        #{zomoreCommodityBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityMemberprice != null">
+        #{zomoreCommodityMemberprice,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityShop != null">
+        #{zomoreCommodityShop,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityIsroyalty != null">
+        #{zomoreCommodityIsroyalty,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityRoyaltytype != null">
+        #{zomoreCommodityRoyaltytype,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityRoyaltyvalue != null">
+        #{zomoreCommodityRoyaltyvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityUpdown != null">
+        #{zomoreCommodityUpdown,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityMeno != null">
+        #{zomoreCommodityMeno,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreCommodityExample" resultType="java.lang.Long">
+    select count(*) from zomore_commodity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_commodity
+    <set>
+      <if test="record.zomoreCommodityId != null">
+        zomore_commodity_id = #{record.zomoreCommodityId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityName != null">
+        zomore_commodity_name = #{record.zomoreCommodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityImage != null">
+        zomore_commodity_image = #{record.zomoreCommodityImage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityCode != null">
+        zomore_commodity_code = #{record.zomoreCommodityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityNum != null">
+        zomore_commodity_num = #{record.zomoreCommodityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommoditySpecifications != null">
+        zomore_commodity_specifications = #{record.zomoreCommoditySpecifications,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityPingyin != null">
+        zomore_commodity_pingyin = #{record.zomoreCommodityPingyin,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityType != null">
+        zomore_commodity_type = #{record.zomoreCommodityType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityMain != null">
+        zomore_commodity_main = #{record.zomoreCommodityMain,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityIn != null">
+        zomore_commodity_in = #{record.zomoreCommodityIn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityOut != null">
+        zomore_commodity_out = #{record.zomoreCommodityOut,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityOutall != null">
+        zomore_commodity_outall = #{record.zomoreCommodityOutall,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityIsdiscount != null">
+        zomore_commodity_isdiscount = #{record.zomoreCommodityIsdiscount,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommodityProvide != null">
+        zomore_commodity_provide = #{record.zomoreCommodityProvide,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityProductdate != null">
+        zomore_commodity_productdate = #{record.zomoreCommodityProductdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zomoreCommodityTime != null">
+        zomore_commodity_time = #{record.zomoreCommodityTime,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommodityCreatetime != null">
+        zomore_commodity_createtime = #{record.zomoreCommodityCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zomoreCommodityIsuser != null">
+        zomore_commodity_isuser = #{record.zomoreCommodityIsuser,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommodityIsservice != null">
+        zomore_commodity_isservice = #{record.zomoreCommodityIsservice,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommodityLaber1 != null">
+        zomore_commodity_laber1 = #{record.zomoreCommodityLaber1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityLaber2 != null">
+        zomore_commodity_laber2 = #{record.zomoreCommodityLaber2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityLaber3 != null">
+        zomore_commodity_laber3 = #{record.zomoreCommodityLaber3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityLaberproduct != null">
+        zomore_commodity_laberproduct = #{record.zomoreCommodityLaberproduct,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityIsintegral != null">
+        zomore_commodity_isintegral = #{record.zomoreCommodityIsintegral,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommodityBrand != null">
+        zomore_commodity_brand = #{record.zomoreCommodityBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityMemberprice != null">
+        zomore_commodity_memberprice = #{record.zomoreCommodityMemberprice,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityShop != null">
+        zomore_commodity_shop = #{record.zomoreCommodityShop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityIsroyalty != null">
+        zomore_commodity_isroyalty = #{record.zomoreCommodityIsroyalty,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommodityRoyaltytype != null">
+        zomore_commodity_royaltytype = #{record.zomoreCommodityRoyaltytype,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommodityRoyaltyvalue != null">
+        zomore_commodity_royaltyvalue = #{record.zomoreCommodityRoyaltyvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityUpdown != null">
+        zomore_commodity_updown = #{record.zomoreCommodityUpdown,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommodityMeno != null">
+        zomore_commodity_meno = #{record.zomoreCommodityMeno,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update zomore_commodity
+    set zomore_commodity_id = #{record.zomoreCommodityId,jdbcType=VARCHAR},
+      zomore_commodity_name = #{record.zomoreCommodityName,jdbcType=VARCHAR},
+      zomore_commodity_image = #{record.zomoreCommodityImage,jdbcType=VARCHAR},
+      zomore_commodity_code = #{record.zomoreCommodityCode,jdbcType=VARCHAR},
+      zomore_commodity_num = #{record.zomoreCommodityNum,jdbcType=VARCHAR},
+      zomore_commodity_specifications = #{record.zomoreCommoditySpecifications,jdbcType=VARCHAR},
+      zomore_commodity_pingyin = #{record.zomoreCommodityPingyin,jdbcType=VARCHAR},
+      zomore_commodity_type = #{record.zomoreCommodityType,jdbcType=VARCHAR},
+      zomore_commodity_main = #{record.zomoreCommodityMain,jdbcType=VARCHAR},
+      zomore_commodity_in = #{record.zomoreCommodityIn,jdbcType=VARCHAR},
+      zomore_commodity_out = #{record.zomoreCommodityOut,jdbcType=VARCHAR},
+      zomore_commodity_outall = #{record.zomoreCommodityOutall,jdbcType=VARCHAR},
+      zomore_commodity_isdiscount = #{record.zomoreCommodityIsdiscount,jdbcType=INTEGER},
+      zomore_commodity_provide = #{record.zomoreCommodityProvide,jdbcType=VARCHAR},
+      zomore_commodity_productdate = #{record.zomoreCommodityProductdate,jdbcType=TIMESTAMP},
+      zomore_commodity_time = #{record.zomoreCommodityTime,jdbcType=INTEGER},
+      zomore_commodity_createtime = #{record.zomoreCommodityCreatetime,jdbcType=TIMESTAMP},
+      zomore_commodity_isuser = #{record.zomoreCommodityIsuser,jdbcType=INTEGER},
+      zomore_commodity_isservice = #{record.zomoreCommodityIsservice,jdbcType=INTEGER},
+      zomore_commodity_laber1 = #{record.zomoreCommodityLaber1,jdbcType=VARCHAR},
+      zomore_commodity_laber2 = #{record.zomoreCommodityLaber2,jdbcType=VARCHAR},
+      zomore_commodity_laber3 = #{record.zomoreCommodityLaber3,jdbcType=VARCHAR},
+      zomore_commodity_laberproduct = #{record.zomoreCommodityLaberproduct,jdbcType=VARCHAR},
+      zomore_commodity_isintegral = #{record.zomoreCommodityIsintegral,jdbcType=INTEGER},
+      zomore_commodity_brand = #{record.zomoreCommodityBrand,jdbcType=VARCHAR},
+      zomore_commodity_memberprice = #{record.zomoreCommodityMemberprice,jdbcType=VARCHAR},
+      zomore_commodity_shop = #{record.zomoreCommodityShop,jdbcType=VARCHAR},
+      zomore_commodity_isroyalty = #{record.zomoreCommodityIsroyalty,jdbcType=INTEGER},
+      zomore_commodity_royaltytype = #{record.zomoreCommodityRoyaltytype,jdbcType=INTEGER},
+      zomore_commodity_royaltyvalue = #{record.zomoreCommodityRoyaltyvalue,jdbcType=VARCHAR},
+      zomore_commodity_updown = #{record.zomoreCommodityUpdown,jdbcType=INTEGER},
+      zomore_commodity_meno = #{record.zomoreCommodityMeno,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_commodity
+    set zomore_commodity_id = #{record.zomoreCommodityId,jdbcType=VARCHAR},
+      zomore_commodity_name = #{record.zomoreCommodityName,jdbcType=VARCHAR},
+      zomore_commodity_image = #{record.zomoreCommodityImage,jdbcType=VARCHAR},
+      zomore_commodity_code = #{record.zomoreCommodityCode,jdbcType=VARCHAR},
+      zomore_commodity_num = #{record.zomoreCommodityNum,jdbcType=VARCHAR},
+      zomore_commodity_specifications = #{record.zomoreCommoditySpecifications,jdbcType=VARCHAR},
+      zomore_commodity_pingyin = #{record.zomoreCommodityPingyin,jdbcType=VARCHAR},
+      zomore_commodity_type = #{record.zomoreCommodityType,jdbcType=VARCHAR},
+      zomore_commodity_main = #{record.zomoreCommodityMain,jdbcType=VARCHAR},
+      zomore_commodity_in = #{record.zomoreCommodityIn,jdbcType=VARCHAR},
+      zomore_commodity_out = #{record.zomoreCommodityOut,jdbcType=VARCHAR},
+      zomore_commodity_outall = #{record.zomoreCommodityOutall,jdbcType=VARCHAR},
+      zomore_commodity_isdiscount = #{record.zomoreCommodityIsdiscount,jdbcType=INTEGER},
+      zomore_commodity_provide = #{record.zomoreCommodityProvide,jdbcType=VARCHAR},
+      zomore_commodity_productdate = #{record.zomoreCommodityProductdate,jdbcType=TIMESTAMP},
+      zomore_commodity_time = #{record.zomoreCommodityTime,jdbcType=INTEGER},
+      zomore_commodity_createtime = #{record.zomoreCommodityCreatetime,jdbcType=TIMESTAMP},
+      zomore_commodity_isuser = #{record.zomoreCommodityIsuser,jdbcType=INTEGER},
+      zomore_commodity_isservice = #{record.zomoreCommodityIsservice,jdbcType=INTEGER},
+      zomore_commodity_laber1 = #{record.zomoreCommodityLaber1,jdbcType=VARCHAR},
+      zomore_commodity_laber2 = #{record.zomoreCommodityLaber2,jdbcType=VARCHAR},
+      zomore_commodity_laber3 = #{record.zomoreCommodityLaber3,jdbcType=VARCHAR},
+      zomore_commodity_laberproduct = #{record.zomoreCommodityLaberproduct,jdbcType=VARCHAR},
+      zomore_commodity_isintegral = #{record.zomoreCommodityIsintegral,jdbcType=INTEGER},
+      zomore_commodity_brand = #{record.zomoreCommodityBrand,jdbcType=VARCHAR},
+      zomore_commodity_memberprice = #{record.zomoreCommodityMemberprice,jdbcType=VARCHAR},
+      zomore_commodity_shop = #{record.zomoreCommodityShop,jdbcType=VARCHAR},
+      zomore_commodity_isroyalty = #{record.zomoreCommodityIsroyalty,jdbcType=INTEGER},
+      zomore_commodity_royaltytype = #{record.zomoreCommodityRoyaltytype,jdbcType=INTEGER},
+      zomore_commodity_royaltyvalue = #{record.zomoreCommodityRoyaltyvalue,jdbcType=VARCHAR},
+      zomore_commodity_updown = #{record.zomoreCommodityUpdown,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreCommodity">
+    update zomore_commodity
+    <set>
+      <if test="zomoreCommodityName != null">
+        zomore_commodity_name = #{zomoreCommodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityImage != null">
+        zomore_commodity_image = #{zomoreCommodityImage,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityCode != null">
+        zomore_commodity_code = #{zomoreCommodityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityNum != null">
+        zomore_commodity_num = #{zomoreCommodityNum,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySpecifications != null">
+        zomore_commodity_specifications = #{zomoreCommoditySpecifications,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityPingyin != null">
+        zomore_commodity_pingyin = #{zomoreCommodityPingyin,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityType != null">
+        zomore_commodity_type = #{zomoreCommodityType,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityMain != null">
+        zomore_commodity_main = #{zomoreCommodityMain,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityIn != null">
+        zomore_commodity_in = #{zomoreCommodityIn,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityOut != null">
+        zomore_commodity_out = #{zomoreCommodityOut,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityOutall != null">
+        zomore_commodity_outall = #{zomoreCommodityOutall,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityIsdiscount != null">
+        zomore_commodity_isdiscount = #{zomoreCommodityIsdiscount,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityProvide != null">
+        zomore_commodity_provide = #{zomoreCommodityProvide,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityProductdate != null">
+        zomore_commodity_productdate = #{zomoreCommodityProductdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zomoreCommodityTime != null">
+        zomore_commodity_time = #{zomoreCommodityTime,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityCreatetime != null">
+        zomore_commodity_createtime = #{zomoreCommodityCreatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zomoreCommodityIsuser != null">
+        zomore_commodity_isuser = #{zomoreCommodityIsuser,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityIsservice != null">
+        zomore_commodity_isservice = #{zomoreCommodityIsservice,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityLaber1 != null">
+        zomore_commodity_laber1 = #{zomoreCommodityLaber1,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityLaber2 != null">
+        zomore_commodity_laber2 = #{zomoreCommodityLaber2,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityLaber3 != null">
+        zomore_commodity_laber3 = #{zomoreCommodityLaber3,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityLaberproduct != null">
+        zomore_commodity_laberproduct = #{zomoreCommodityLaberproduct,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityIsintegral != null">
+        zomore_commodity_isintegral = #{zomoreCommodityIsintegral,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityBrand != null">
+        zomore_commodity_brand = #{zomoreCommodityBrand,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityMemberprice != null">
+        zomore_commodity_memberprice = #{zomoreCommodityMemberprice,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityShop != null">
+        zomore_commodity_shop = #{zomoreCommodityShop,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityIsroyalty != null">
+        zomore_commodity_isroyalty = #{zomoreCommodityIsroyalty,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityRoyaltytype != null">
+        zomore_commodity_royaltytype = #{zomoreCommodityRoyaltytype,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityRoyaltyvalue != null">
+        zomore_commodity_royaltyvalue = #{zomoreCommodityRoyaltyvalue,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityUpdown != null">
+        zomore_commodity_updown = #{zomoreCommodityUpdown,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityMeno != null">
+        zomore_commodity_meno = #{zomoreCommodityMeno,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where zomore_commodity_id = #{zomoreCommodityId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zomore.domain.ZomoreCommodity">
+    update zomore_commodity
+    set zomore_commodity_name = #{zomoreCommodityName,jdbcType=VARCHAR},
+      zomore_commodity_image = #{zomoreCommodityImage,jdbcType=VARCHAR},
+      zomore_commodity_code = #{zomoreCommodityCode,jdbcType=VARCHAR},
+      zomore_commodity_num = #{zomoreCommodityNum,jdbcType=VARCHAR},
+      zomore_commodity_specifications = #{zomoreCommoditySpecifications,jdbcType=VARCHAR},
+      zomore_commodity_pingyin = #{zomoreCommodityPingyin,jdbcType=VARCHAR},
+      zomore_commodity_type = #{zomoreCommodityType,jdbcType=VARCHAR},
+      zomore_commodity_main = #{zomoreCommodityMain,jdbcType=VARCHAR},
+      zomore_commodity_in = #{zomoreCommodityIn,jdbcType=VARCHAR},
+      zomore_commodity_out = #{zomoreCommodityOut,jdbcType=VARCHAR},
+      zomore_commodity_outall = #{zomoreCommodityOutall,jdbcType=VARCHAR},
+      zomore_commodity_isdiscount = #{zomoreCommodityIsdiscount,jdbcType=INTEGER},
+      zomore_commodity_provide = #{zomoreCommodityProvide,jdbcType=VARCHAR},
+      zomore_commodity_productdate = #{zomoreCommodityProductdate,jdbcType=TIMESTAMP},
+      zomore_commodity_time = #{zomoreCommodityTime,jdbcType=INTEGER},
+      zomore_commodity_createtime = #{zomoreCommodityCreatetime,jdbcType=TIMESTAMP},
+      zomore_commodity_isuser = #{zomoreCommodityIsuser,jdbcType=INTEGER},
+      zomore_commodity_isservice = #{zomoreCommodityIsservice,jdbcType=INTEGER},
+      zomore_commodity_laber1 = #{zomoreCommodityLaber1,jdbcType=VARCHAR},
+      zomore_commodity_laber2 = #{zomoreCommodityLaber2,jdbcType=VARCHAR},
+      zomore_commodity_laber3 = #{zomoreCommodityLaber3,jdbcType=VARCHAR},
+      zomore_commodity_laberproduct = #{zomoreCommodityLaberproduct,jdbcType=VARCHAR},
+      zomore_commodity_isintegral = #{zomoreCommodityIsintegral,jdbcType=INTEGER},
+      zomore_commodity_brand = #{zomoreCommodityBrand,jdbcType=VARCHAR},
+      zomore_commodity_memberprice = #{zomoreCommodityMemberprice,jdbcType=VARCHAR},
+      zomore_commodity_shop = #{zomoreCommodityShop,jdbcType=VARCHAR},
+      zomore_commodity_isroyalty = #{zomoreCommodityIsroyalty,jdbcType=INTEGER},
+      zomore_commodity_royaltytype = #{zomoreCommodityRoyaltytype,jdbcType=INTEGER},
+      zomore_commodity_royaltyvalue = #{zomoreCommodityRoyaltyvalue,jdbcType=VARCHAR},
+      zomore_commodity_updown = #{zomoreCommodityUpdown,jdbcType=INTEGER},
+      zomore_commodity_meno = #{zomoreCommodityMeno,jdbcType=LONGVARCHAR}
+    where zomore_commodity_id = #{zomoreCommodityId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreCommodity">
+    update zomore_commodity
+    set zomore_commodity_name = #{zomoreCommodityName,jdbcType=VARCHAR},
+      zomore_commodity_image = #{zomoreCommodityImage,jdbcType=VARCHAR},
+      zomore_commodity_code = #{zomoreCommodityCode,jdbcType=VARCHAR},
+      zomore_commodity_num = #{zomoreCommodityNum,jdbcType=VARCHAR},
+      zomore_commodity_specifications = #{zomoreCommoditySpecifications,jdbcType=VARCHAR},
+      zomore_commodity_pingyin = #{zomoreCommodityPingyin,jdbcType=VARCHAR},
+      zomore_commodity_type = #{zomoreCommodityType,jdbcType=VARCHAR},
+      zomore_commodity_main = #{zomoreCommodityMain,jdbcType=VARCHAR},
+      zomore_commodity_in = #{zomoreCommodityIn,jdbcType=VARCHAR},
+      zomore_commodity_out = #{zomoreCommodityOut,jdbcType=VARCHAR},
+      zomore_commodity_outall = #{zomoreCommodityOutall,jdbcType=VARCHAR},
+      zomore_commodity_isdiscount = #{zomoreCommodityIsdiscount,jdbcType=INTEGER},
+      zomore_commodity_provide = #{zomoreCommodityProvide,jdbcType=VARCHAR},
+      zomore_commodity_productdate = #{zomoreCommodityProductdate,jdbcType=TIMESTAMP},
+      zomore_commodity_time = #{zomoreCommodityTime,jdbcType=INTEGER},
+      zomore_commodity_createtime = #{zomoreCommodityCreatetime,jdbcType=TIMESTAMP},
+      zomore_commodity_isuser = #{zomoreCommodityIsuser,jdbcType=INTEGER},
+      zomore_commodity_isservice = #{zomoreCommodityIsservice,jdbcType=INTEGER},
+      zomore_commodity_laber1 = #{zomoreCommodityLaber1,jdbcType=VARCHAR},
+      zomore_commodity_laber2 = #{zomoreCommodityLaber2,jdbcType=VARCHAR},
+      zomore_commodity_laber3 = #{zomoreCommodityLaber3,jdbcType=VARCHAR},
+      zomore_commodity_laberproduct = #{zomoreCommodityLaberproduct,jdbcType=VARCHAR},
+      zomore_commodity_isintegral = #{zomoreCommodityIsintegral,jdbcType=INTEGER},
+      zomore_commodity_brand = #{zomoreCommodityBrand,jdbcType=VARCHAR},
+      zomore_commodity_memberprice = #{zomoreCommodityMemberprice,jdbcType=VARCHAR},
+      zomore_commodity_shop = #{zomoreCommodityShop,jdbcType=VARCHAR},
+      zomore_commodity_isroyalty = #{zomoreCommodityIsroyalty,jdbcType=INTEGER},
+      zomore_commodity_royaltytype = #{zomoreCommodityRoyaltytype,jdbcType=INTEGER},
+      zomore_commodity_royaltyvalue = #{zomoreCommodityRoyaltyvalue,jdbcType=VARCHAR},
+      zomore_commodity_updown = #{zomoreCommodityUpdown,jdbcType=INTEGER}
+    where zomore_commodity_id = #{zomoreCommodityId,jdbcType=VARCHAR}
+  </update>
+
+  <select id="selectCommodityDetails" parameterType="java.lang.String" resultType="com.zomore.domain.ZomoreCommodity">
+
+    select zomore_commodity_id as zomoreCommodityId,zomore_commodity_name as zomoreCommodityName,zomore_commodity_image as zomoreCommodityImage,zomore_commodity_code as zomoreCommodityCode ,zomore_commodity_num as zomoreCommodityNum,
+    zomore_commodity_specifications as zomoreCommoditySpecifications,zomore_commodity_pingyin as zomoreCommodityPingyin, zomore_commodity_type as zomoreCommodityType,zomore_commodity_main as zomoreCommodityMain ,
+    zomore_commodity_in as zomoreCommodityIn,zomore_commodity_out as zomoreCommodityOut,zomore_commodity_outall as zomoreCommodityOutall ,zomore_commodity_isdiscount as zomoreCommodityIsdiscount,
+    zomore_commodity_provide as  zomoreCommodityProvide from  zomore_commodity where zomore_commodity_shop=#{shop} and zomore_commodity_code=#{commodityCode}
+
+
+  </select>
+
+
+
+ <select id="selectAllCommodityByShop" parameterType="com.zomore.utils.PageUtils" resultType="com.zomore.domain.ZomoreCommodity">
+     select zomore_commodity_id as zomoreCommodityId,zomore_commodity_name as zomoreCommodityName,zomore_commodity_image as zomoreCommodityImage,zomore_commodity_code as zomoreCommodityCode ,zomore_commodity_num as zomoreCommodityNum,
+    zomore_commodity_specifications as zomoreCommoditySpecifications,zomore_commodity_pingyin as zomoreCommodityPingyin, zomore_commodity_type as zomoreCommodityType,zomore_commodity_main as zomoreCommodityMain ,
+    zomore_commodity_in as zomoreCommodityIn,zomore_commodity_out as zomoreCommodityOut,zomore_commodity_outall as zomoreCommodityOutall ,zomore_commodity_isdiscount as zomoreCommodityIsdiscount,
+    zomore_commodity_provide as  zomoreCommodityProvide from  zomore_commodity where zomore_commodity_shop=#{shopName} limit #{start},#{pageSize}
+  </select>
+
+  <!--List<String> selectOnlyLable();-->
+  <select id="selectOnlyLable" resultType="string">
+  SELECT DISTINCT zomore_commodity_laber1 from zomore_commodity
+    WHERE zomore_commodity_shop =#{shopname} and zomore_commodity_laber1 is not null
+
+  </select>
+
+  <select id="selectCommodityByList" parameterType="java.util.Map" resultType="com.zomore.domain.ZomoreCommodity">
+    select
+    <foreach collection="listString" index="index" item="item" open="" separator="," close="">
+      ${item}
+    </foreach>
+    from zomore_commodity
+    where zomore_commodity_shop=#{shopName}
+  </select>
+</mapper>

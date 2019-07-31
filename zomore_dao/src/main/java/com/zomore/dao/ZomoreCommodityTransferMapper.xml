@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreCommodityTransferMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreCommodityTransfer">
+    <id column="zomore_commodity_transfer_id" jdbcType="VARCHAR" property="zomoreCommodityTransferId" />
+    <result column="zomore_commodity_transfer_num" jdbcType="VARCHAR" property="zomoreCommodityTransferNum" />
+    <result column="zomore_commodity_transfer_size" jdbcType="VARCHAR" property="zomoreCommodityTransferSize" />
+    <result column="zomore_commodity_transfer_instore" jdbcType="VARCHAR" property="zomoreCommodityTransferInstore" />
+    <result column="zomore_commodity_transfer_outstore" jdbcType="VARCHAR" property="zomoreCommodityTransferOutstore" />
+    <result column="zomore_commodity_transfer_meno" jdbcType="VARCHAR" property="zomoreCommodityTransferMeno" />
+    <result column="zomore_commodity_transfer_time" jdbcType="VARCHAR" property="zomoreCommodityTransferTime" />
+    <result column="zomore_commodity_transfer_datetime" jdbcType="TIMESTAMP" property="zomoreCommodityTransferDatetime" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="zomore_commodity_transfer_staff" jdbcType="VARCHAR" property="zomoreCommodityTransferStaff" />
+    <result column="zomore_commodity_transfer_concat" jdbcType="VARCHAR" property="zomoreCommodityTransferConcat" />
+    <result column="zomore_commodity_transfer_concatphone" jdbcType="VARCHAR" property="zomoreCommodityTransferConcatPhone" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    zomore_commodity_transfer_id, zomore_commodity_transfer_num, zomore_commodity_transfer_size, 
+    zomore_commodity_transfer_instore, zomore_commodity_transfer_outstore, zomore_commodity_transfer_meno, 
+    zomore_commodity_transfer_time, zomore_commodity_transfer_datetime, state,zomore_commodity_transfer_staff,
+    zomore_commodity_transfer_concat,zomore_commodity_transfer_concatphone
+  </sql>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreCommodityTransferExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_commodity_transfer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zomore_commodity_transfer
+    where zomore_commodity_transfer_id = #{zomoreCommodityTransferId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zomore_commodity_transfer
+    where zomore_commodity_transfer_id = #{zomoreCommodityTransferId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreCommodityTransferExample">
+    delete from zomore_commodity_transfer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreCommodityTransfer">
+    insert into zomore_commodity_transfer (zomore_commodity_transfer_id, zomore_commodity_transfer_num, 
+      zomore_commodity_transfer_size, zomore_commodity_transfer_instore, 
+      zomore_commodity_transfer_outstore, zomore_commodity_transfer_meno, 
+      zomore_commodity_transfer_time, zomore_commodity_transfer_datetime, 
+      state)
+    values (#{zomoreCommodityTransferId,jdbcType=VARCHAR}, #{zomoreCommodityTransferNum,jdbcType=VARCHAR}, 
+      #{zomoreCommodityTransferSize,jdbcType=VARCHAR}, #{zomoreCommodityTransferInstore,jdbcType=VARCHAR}, 
+      #{zomoreCommodityTransferOutstore,jdbcType=VARCHAR}, #{zomoreCommodityTransferMeno,jdbcType=VARCHAR}, 
+      #{zomoreCommodityTransferTime,jdbcType=VARCHAR}, #{zomoreCommodityTransferDatetime,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreCommodityTransfer">
+    insert into zomore_commodity_transfer
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="zomoreCommodityTransferId != null">
+        zomore_commodity_transfer_id,
+      </if>
+      <if test="zomoreCommodityTransferNum != null">
+        zomore_commodity_transfer_num,
+      </if>
+      <if test="zomoreCommodityTransferSize != null">
+        zomore_commodity_transfer_size,
+      </if>
+      <if test="zomoreCommodityTransferInstore != null">
+        zomore_commodity_transfer_instore,
+      </if>
+      <if test="zomoreCommodityTransferOutstore != null">
+        zomore_commodity_transfer_outstore,
+      </if>
+      <if test="zomoreCommodityTransferMeno != null">
+        zomore_commodity_transfer_meno,
+      </if>
+      <if test="zomoreCommodityTransferTime != null">
+        zomore_commodity_transfer_time,
+      </if>
+      <if test="zomoreCommodityTransferDatetime != null">
+        zomore_commodity_transfer_datetime,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="zomoreCommodityTransferStaff!=null">
+        zomore_commodity_transfer_staff,
+      </if>
+      <if test="zomoreCommodityTransferConcat!=null">
+        zomore_commodity_transfer_concat,
+      </if>
+      <if test="zomoreCommodityTransferConcatPhone!=null">
+        zomore_commodity_transfer_concatphone,
+      </if>
+
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="zomoreCommodityTransferId != null">
+        #{zomoreCommodityTransferId,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityTransferNum != null">
+        #{zomoreCommodityTransferNum,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityTransferSize != null">
+        #{zomoreCommodityTransferSize,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityTransferInstore != null">
+        #{zomoreCommodityTransferInstore,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityTransferOutstore != null">
+        #{zomoreCommodityTransferOutstore,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityTransferMeno != null">
+        #{zomoreCommodityTransferMeno,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityTransferTime != null">
+        #{zomoreCommodityTransferTime,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityTransferDatetime != null">
+        #{zomoreCommodityTransferDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityTransferStaff!=null">
+        #{zomoreCommodityTransferStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityTransferConcat!=null">
+        #{zomoreCommodityTransferConcat,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityTransferConcatPhone!=null">
+        #{zomoreCommodityTransferConcatPhone,jdbcType=VARCHAR},
+      </if>
+    </trim>
+
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreCommodityTransferExample" resultType="java.lang.Long">
+    select count(*) from zomore_commodity_transfer
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_commodity_transfer
+    <set>
+      <if test="record.zomoreCommodityTransferId != null">
+        zomore_commodity_transfer_id = #{record.zomoreCommodityTransferId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityTransferNum != null">
+        zomore_commodity_transfer_num = #{record.zomoreCommodityTransferNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityTransferSize != null">
+        zomore_commodity_transfer_size = #{record.zomoreCommodityTransferSize,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityTransferInstore != null">
+        zomore_commodity_transfer_instore = #{record.zomoreCommodityTransferInstore,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityTransferOutstore != null">
+        zomore_commodity_transfer_outstore = #{record.zomoreCommodityTransferOutstore,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityTransferMeno != null">
+        zomore_commodity_transfer_meno = #{record.zomoreCommodityTransferMeno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityTransferTime != null">
+        zomore_commodity_transfer_time = #{record.zomoreCommodityTransferTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityTransferDatetime != null">
+        zomore_commodity_transfer_datetime = #{record.zomoreCommodityTransferDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_commodity_transfer
+    set zomore_commodity_transfer_id = #{record.zomoreCommodityTransferId,jdbcType=VARCHAR},
+      zomore_commodity_transfer_num = #{record.zomoreCommodityTransferNum,jdbcType=VARCHAR},
+      zomore_commodity_transfer_size = #{record.zomoreCommodityTransferSize,jdbcType=VARCHAR},
+      zomore_commodity_transfer_instore = #{record.zomoreCommodityTransferInstore,jdbcType=VARCHAR},
+      zomore_commodity_transfer_outstore = #{record.zomoreCommodityTransferOutstore,jdbcType=VARCHAR},
+      zomore_commodity_transfer_meno = #{record.zomoreCommodityTransferMeno,jdbcType=VARCHAR},
+      zomore_commodity_transfer_time = #{record.zomoreCommodityTransferTime,jdbcType=VARCHAR},
+      zomore_commodity_transfer_datetime = #{record.zomoreCommodityTransferDatetime,jdbcType=TIMESTAMP},
+      state = #{record.state,jdbcType=INTEGER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreCommodityTransfer">
+    update zomore_commodity_transfer
+    <set>
+      <if test="zomoreCommodityTransferNum != null">
+        zomore_commodity_transfer_num = #{zomoreCommodityTransferNum,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityTransferSize != null">
+        zomore_commodity_transfer_size = #{zomoreCommodityTransferSize,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityTransferInstore != null">
+        zomore_commodity_transfer_instore = #{zomoreCommodityTransferInstore,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityTransferOutstore != null">
+        zomore_commodity_transfer_outstore = #{zomoreCommodityTransferOutstore,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityTransferMeno != null">
+        zomore_commodity_transfer_meno = #{zomoreCommodityTransferMeno,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityTransferTime != null">
+        zomore_commodity_transfer_time = #{zomoreCommodityTransferTime,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityTransferDatetime != null">
+        zomore_commodity_transfer_datetime = #{zomoreCommodityTransferDatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityTransferStaff!=null">
+        zomore_commodity_transfer_staff=#{zomoreCommodityTransferStaff,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityTransferConcat!=null">
+        zomore_commodity_transfer_concat=#{zomoreCommodityTransferConcat,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityTransferConcatPhone!=null">
+        zomore_commodity_transfer_concatphone=#{zomoreCommodityTransferConcatPhone,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where zomore_commodity_transfer_id = #{zomoreCommodityTransferId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreCommodityTransfer">
+    update zomore_commodity_transfer
+    set zomore_commodity_transfer_num = #{zomoreCommodityTransferNum,jdbcType=VARCHAR},
+      zomore_commodity_transfer_size = #{zomoreCommodityTransferSize,jdbcType=VARCHAR},
+      zomore_commodity_transfer_instore = #{zomoreCommodityTransferInstore,jdbcType=VARCHAR},
+      zomore_commodity_transfer_outstore = #{zomoreCommodityTransferOutstore,jdbcType=VARCHAR},
+      zomore_commodity_transfer_meno = #{zomoreCommodityTransferMeno,jdbcType=VARCHAR},
+      zomore_commodity_transfer_time = #{zomoreCommodityTransferTime,jdbcType=VARCHAR},
+      zomore_commodity_transfer_datetime = #{zomoreCommodityTransferDatetime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=INTEGER}
+    where zomore_commodity_transfer_id = #{zomoreCommodityTransferId,jdbcType=VARCHAR}
+  </update>
+  <select id="selectTransferCommodity" parameterType="java.lang.String" resultType="com.zomore.domain.ZomoreCommodityTransfer">
+    select zomore_commodity_transfer_id as zomoreCommodityTransferId,zomore_commodity_transfer_num as zomoreCommodityTransferNum,zomore_commodity_transfer_size as zomoreCommodityTransferSize,zomore_commodity_transfer_instore as zomoreCommodityTransferInstore,
+    zomore_commodity_transfer_outstore as zomoreCommodityTransferOutstore,zomore_commodity_transfer_meno as zomoreCommodityTransferMeno,zomore_commodity_transfer_time as zomoreCommodityTransferTime ,zomore_commodity_transfer_datetime as zomoreCommodityTransferDatetime,
+    state as state  from zomore_commodity_transfer where zomore_commodity_transfer_instore =#{shop} or zomore_commodity_transfer_outstore=#{shop}
+  </select>
+
+  <select id="selectTransferCommodity2" parameterType="java.lang.String" resultType="com.zomore.domain.ZomoreCommodityTransfer">
+   select zomore_commodity_transfer_id as zomoreCommodityTransferId,zomore_commodity_transfer_num as zomoreCommodityTransferNum,zomore_commodity_transfer_size as zomoreCommodityTransferSize,zomore_commodity_transfer_instore as zomoreCommodityTransferInstore,
+    zomore_commodity_transfer_outstore as zomoreCommodityTransferOutstore,zomore_commodity_transfer_meno as zomoreCommodityTransferMeno,zomore_commodity_transfer_time as zomoreCommodityTransferTime ,zomore_commodity_transfer_datetime as zomoreCommodityTransferDatetime,
+    state as state  from zomore_commodity_transfer where zomore_commodity_transfer_instore =#{shop}  or zomore_commodity_transfer_outstore=#{shop} and zomore_commodity_transfer_id = #{transferCommodityId}
+  </select>
+
+  <delete id="deleteTransferCommodityById" parameterType="java.lang.String" >
+    delete from zomore_commodity_transfer where zomore_commodity_transfer_id = #{transferCommodityId}
+  </delete>
+
+  <select id="selectTransferCommodityDetails" parameterType="java.lang.String" resultType="com.zomore.domain.ZomoreCommodityTransferCommodity">
+    select  id as id,zomore_commodity_transfer_name as zomoreCommodityTransferName, zomore_commodity_transfer_code as zomoreCommodityTransferCode, zomore_commodity_transfer_num as zomoreCommodityTransferNum,
+    zomore_commodity_transfer_price as zomoreCommodityTransferPrice, zomore_commodity_transfer_id as zomoreCommodityTransferId from zomore_commodity_transfer_commodity where zomore_commodity_transfer_id=#{transferCommodityId}
+
+  </select>
+
+  <update id="updateTransferCommocityNum" parameterType="com.zomore.domain.ZomoreCommodityTransferCommodity">
+    update zomore_commodity_transfer_commodity
+    <set>
+      <if test="zomoreCommodityTransferNum!=null">
+        zomore_commodity_transfer_num=#{zomoreCommodityTransferNum},
+      </if>
+      <if test="zomoreCommodityTransferPrice!=null">
+        zomore_commodity_transfer_price=#{zomoreCommodityTransferPrice},
+      </if>
+    </set>
+    where id=#{id}
+  </update>
+
+  <select id="selectZomoreCommodityTransferCommodityById" parameterType="java.lang.String" resultType="com.zomore.domain.ZomoreCommodityTransferCommodity">
+    select id as id,zomore_commodity_transfer_name as zomoreCommodityTransferName, zomore_commodity_transfer_code as zomoreCommodityTransferCode,
+    zomore_commodity_transfer_num as zomoreCommodityTransferNum, zomore_commodity_transfer_price as zomoreCommodityTransferPrice, zomore_commodity_transfer_id as zomoreCommodityTransferId
+    from zomore_commodity_transfer_commodity
+    where id=#{id}
+
+  </select>
+  <delete id="deleteTransferCommodityDetailsByTransferId" parameterType="java.lang.String">
+      delete from zomore_commodity_transfer_commodity where zomore_commodity_transfer_id=#{transferCommodityId}
+  </delete>
+
+  <select id="selectTransferCommodityByNum" parameterType="java.lang.String" resultType="com.zomore.domain.ZomoreCommodityTransfer">
+     select zomore_commodity_transfer_id as zomoreCommodityTransferId,zomore_commodity_transfer_num as zomoreCommodityTransferNum,zomore_commodity_transfer_size as zomoreCommodityTransferSize,zomore_commodity_transfer_instore as zomoreCommodityTransferInstore,
+    zomore_commodity_transfer_outstore as zomoreCommodityTransferOutstore,zomore_commodity_transfer_meno as zomoreCommodityTransferMeno,zomore_commodity_transfer_time as zomoreCommodityTransferTime ,zomore_commodity_transfer_datetime as zomoreCommodityTransferDatetime,
+    state as state  from zomore_commodity_transfer where zomore_commodity_transfer_instore =#{shop}  or zomore_commodity_transfer_outstore=#{shop}
+    <if test="num!=null">
+      and zomore_commodity_transfer_id like concat(concat('%',#{num}),'%')
+    </if>
+    order by zomoreCommodityTransferDatetime desc
+  </select>
+
+  <select id="selectAllShopTransferCommoditys" parameterType="java.util.Map" resultType="com.zomore.domain.ZomoreCommodityTransfer">
+    select zomore_commodity_transfer_id as zomoreCommodityTransferId,zomore_commodity_transfer_num as zomoreCommodityTransferNum,zomore_commodity_transfer_size as zomoreCommodityTransferSize,zomore_commodity_transfer_instore as zomoreCommodityTransferInstore,
+    zomore_commodity_transfer_outstore as zomoreCommodityTransferOutstore,zomore_commodity_transfer_meno as zomoreCommodityTransferMeno,zomore_commodity_transfer_time as zomoreCommodityTransferTime ,zomore_commodity_transfer_datetime as zomoreCommodityTransferDatetime,
+    state as state  from zomore_commodity_transfer
+    where zomore_commodity_transfer_instore in
+    <foreach collection="shoplist" index="index" item="item" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+    <if test="num!=null">
+      and zomore_commodity_transfer_id like concat(concat('%', #{num}), '%')
+    </if>
+    <if test="state!=null">
+      and state=#{state}
+    </if>
+    order by zomoreCommodityTransferDatetime desc
+  </select>
+
+  <select id="selectAllTransferNums" parameterType="java.util.Map" resultType="com.zomore.domain.ZomoreCommodityTransfer">
+    select zomore_commodity_transfer_id as zomoreCommodityTransferId,zomore_commodity_transfer_num as zomoreCommodityTransferNum,zomore_commodity_transfer_size as zomoreCommodityTransferSize,zomore_commodity_transfer_instore as zomoreCommodityTransferInstore,
+    zomore_commodity_transfer_outstore as zomoreCommodityTransferOutstore,zomore_commodity_transfer_meno as zomoreCommodityTransferMeno,zomore_commodity_transfer_time as zomoreCommodityTransferTime ,zomore_commodity_transfer_datetime as zomoreCommodityTransferDatetime,
+    state as state  from zomore_commodity_transfer where zomore_commodity_transfer_instore =#{shop}  or zomore_commodity_transfer_outstore=#{shop}
+    <if test="num!=null">
+      and zomore_commodity_transfer_id like concat(concat('%',#{num}),'%')
+    </if>
+    order by zomoreCommodityTransferDatetime desc
+
+  </select>
+</mapper>

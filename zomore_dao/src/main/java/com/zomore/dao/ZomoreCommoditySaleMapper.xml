@@ -1,0 +1,611 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreCommoditySaleMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreCommoditySale">
+    <id column="zomore_commodity_sale_id" jdbcType="VARCHAR" property="zomoreCommoditySaleId" />
+    <result column="zomore_commodity_sale_time" jdbcType="TIMESTAMP" property="zomoreCommoditySaleTime" />
+    <result column="zomore_commodity_sale_type" jdbcType="VARCHAR" property="zomoreCommoditySaleType" />
+    <result column="zomore_commodity_sale_name" jdbcType="VARCHAR" property="zomoreCommoditySaleName" />
+    <result column="zomore_commodity_sale_member" jdbcType="VARCHAR" property="zomoreCommoditySaleMember" />
+    <result column="zomore_commodity_sale_num" jdbcType="INTEGER" property="zomoreCommoditySaleNum" />
+    <result column="zomore_commodity_sale_money" jdbcType="VARCHAR" property="zomoreCommoditySaleMoney" />
+    <result column="zomore_commodity_sale_inmoney" jdbcType="VARCHAR" property="zomoreCommoditySaleInmoney" />
+    <result column="zomore_commodity_sale_letmoney" jdbcType="VARCHAR" property="zomoreCommoditySaleLetmoney" />
+    <result column="zomore_commodity_sale_savemoney" jdbcType="VARCHAR" property="zomoreCommoditySaleSavemoney" />
+    <result column="zomore_commodity_sale_guide" jdbcType="VARCHAR" property="zomoreCommoditySaleGuide" />
+    <result column="zomore_commodity_shop" jdbcType="VARCHAR" property="zomoreCommodityShop" />
+    <result column="zomore_commodity_state" jdbcType="INTEGER" property="zomoreCommodityState" />
+    <result column="zomore_commodity_meno" jdbcType="VARCHAR" property="zomoreCommodityMeno" />
+    <result column="zomore_commodity_guadanNum" jdbcType="VARCHAR" property="zomoreCommodityGuadannum" />
+    <result column="total" jdbcType="VARCHAR" property="total"  />
+    <result column="time" jdbcType="VARCHAR" property="time" />
+
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    zomore_commodity_sale_id, zomore_commodity_sale_time, zomore_commodity_sale_type, 
+    zomore_commodity_sale_name, zomore_commodity_sale_member, zomore_commodity_sale_num, 
+    zomore_commodity_sale_money, zomore_commodity_sale_inmoney, zomore_commodity_sale_letmoney,
+    zomore_commodity_sale_savemoney, zomore_commodity_sale_guide, zomore_commodity_shop, 
+    zomore_commodity_state, zomore_commodity_meno, zomore_commodity_guadanNum
+  </sql>
+
+
+  <select id="selectSaleChart" resultType="java.util.Map">
+    SELECT zomore_commodity_type AS type,SUM(zomore_commodity_money) AS money FROM zomore_commodity_sale_commodit WHERE zomore_commodity_shop=#{shop,jdbcType=VARCHAR} GROUP BY  zomore_commodity_type ORDER BY SUM(zomore_commodity_money) DESC LIMIT 0,5;
+  </select>
+
+  <select id="selectSaleChart2" parameterType="java.util.Date" resultType="java.util.Map">
+    SELECT zomore_commodity_type AS type,SUM(zomore_commodity_money) AS money FROM zomore_commodity_sale_commodit WHERE zomore_commodity_shop=#{shop,jdbcType=VARCHAR} and zomore_commodity_sale_time BETWEEN #{date}AND #{date1}GROUP BY  zomore_commodity_type ORDER BY SUM(zomore_commodity_money) DESC LIMIT 0,5;
+  </select>
+
+
+
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreCommoditySaleExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_commodity_sale
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zomore_commodity_sale
+    where zomore_commodity_sale_id = #{zomoreCommoditySaleId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zomore_commodity_sale
+    where zomore_commodity_sale_id = #{zomoreCommoditySaleId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreCommoditySaleExample">
+    delete from zomore_commodity_sale
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreCommoditySale">
+    insert into zomore_commodity_sale (zomore_commodity_sale_id, zomore_commodity_sale_time, 
+      zomore_commodity_sale_type, zomore_commodity_sale_name, 
+      zomore_commodity_sale_member, zomore_commodity_sale_num, 
+      zomore_commodity_sale_money, zomore_commodity_sale_inmoney, 
+      zomore_commodity_sale_letmoney, zomore_commodity_sale_savemoney, 
+      zomore_commodity_sale_guide, zomore_commodity_shop, 
+      zomore_commodity_state, zomore_commodity_meno, 
+      zomore_commodity_guadanNum)
+    values (#{zomoreCommoditySaleId,jdbcType=VARCHAR}, #{zomoreCommoditySaleTime,jdbcType=TIMESTAMP}, 
+      #{zomoreCommoditySaleType,jdbcType=VARCHAR}, #{zomoreCommoditySaleName,jdbcType=VARCHAR}, 
+      #{zomoreCommoditySaleMember,jdbcType=VARCHAR}, #{zomoreCommoditySaleNum,jdbcType=INTEGER}, 
+      #{zomoreCommoditySaleMoney,jdbcType=VARCHAR}, #{zomoreCommoditySaleInmoney,jdbcType=VARCHAR}, 
+      #{zomoreCommoditySaleLetmoney,jdbcType=VARCHAR}, #{zomoreCommoditySaleSavemoney,jdbcType=VARCHAR}, 
+      #{zomoreCommoditySaleGuide,jdbcType=VARCHAR}, #{zomoreCommodityShop,jdbcType=VARCHAR}, 
+      #{zomoreCommodityState,jdbcType=INTEGER}, #{zomoreCommodityMeno,jdbcType=VARCHAR}, 
+      #{zomoreCommodityGuadannum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreCommoditySale">
+    insert into zomore_commodity_sale
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="zomoreCommoditySaleId != null">
+        zomore_commodity_sale_id,
+      </if>
+      <if test="zomoreCommoditySaleTime != null">
+        zomore_commodity_sale_time,
+      </if>
+      <if test="zomoreCommoditySaleType != null">
+        zomore_commodity_sale_type,
+      </if>
+      <if test="zomoreCommoditySaleName != null">
+        zomore_commodity_sale_name,
+      </if>
+      <if test="zomoreCommoditySaleMember != null">
+        zomore_commodity_sale_member,
+      </if>
+      <if test="zomoreCommoditySaleNum != null">
+        zomore_commodity_sale_num,
+      </if>
+      <if test="zomoreCommoditySaleMoney != null">
+        zomore_commodity_sale_money,
+      </if>
+      <if test="zomoreCommoditySaleInmoney != null">
+        zomore_commodity_sale_inmoney,
+      </if>
+      <if test="zomoreCommoditySaleLetmoney != null">
+        zomore_commodity_sale_letmoney,
+      </if>
+      <if test="zomoreCommoditySaleSavemoney != null">
+        zomore_commodity_sale_savemoney,
+      </if>
+      <if test="zomoreCommoditySaleGuide != null">
+        zomore_commodity_sale_guide,
+      </if>
+      <if test="zomoreCommodityShop != null">
+        zomore_commodity_shop,
+      </if>
+      <if test="zomoreCommodityState != null">
+        zomore_commodity_state,
+      </if>
+      <if test="zomoreCommodityMeno != null">
+        zomore_commodity_meno,
+      </if>
+      <if test="zomoreCommodityGuadannum != null">
+        zomore_commodity_guadanNum,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="zomoreCommoditySaleId != null">
+        #{zomoreCommoditySaleId,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleTime != null">
+        #{zomoreCommoditySaleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zomoreCommoditySaleType != null">
+        #{zomoreCommoditySaleType,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleName != null">
+        #{zomoreCommoditySaleName,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleMember != null">
+        #{zomoreCommoditySaleMember,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleNum != null">
+        #{zomoreCommoditySaleNum,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommoditySaleMoney != null">
+        #{zomoreCommoditySaleMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleInmoney != null">
+        #{zomoreCommoditySaleInmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleLetmoney != null">
+        #{zomoreCommoditySaleLetmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleSavemoney != null">
+        #{zomoreCommoditySaleSavemoney,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleGuide != null">
+        #{zomoreCommoditySaleGuide,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityShop != null">
+        #{zomoreCommodityShop,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityState != null">
+        #{zomoreCommodityState,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityMeno != null">
+        #{zomoreCommodityMeno,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityGuadannum != null">
+        #{zomoreCommodityGuadannum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreCommoditySaleExample" resultType="java.lang.Long">
+    select count(*) from zomore_commodity_sale
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_commodity_sale
+    <set>
+      <if test="record.zomoreCommoditySaleId != null">
+        zomore_commodity_sale_id = #{record.zomoreCommoditySaleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommoditySaleTime != null">
+        zomore_commodity_sale_time = #{record.zomoreCommoditySaleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.zomoreCommoditySaleType != null">
+        zomore_commodity_sale_type = #{record.zomoreCommoditySaleType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommoditySaleName != null">
+        zomore_commodity_sale_name = #{record.zomoreCommoditySaleName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommoditySaleMember != null">
+        zomore_commodity_sale_member = #{record.zomoreCommoditySaleMember,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommoditySaleNum != null">
+        zomore_commodity_sale_num = #{record.zomoreCommoditySaleNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommoditySaleMoney != null">
+        zomore_commodity_sale_money = #{record.zomoreCommoditySaleMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommoditySaleInmoney != null">
+        zomore_commodity_sale_inmoney = #{record.zomoreCommoditySaleInmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommoditySaleLetmoney != null">
+        zomore_commodity_sale_letmoney = #{record.zomoreCommoditySaleLetmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommoditySaleSavemoney != null">
+        zomore_commodity_sale_savemoney = #{record.zomoreCommoditySaleSavemoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommoditySaleGuide != null">
+        zomore_commodity_sale_guide = #{record.zomoreCommoditySaleGuide,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityShop != null">
+        zomore_commodity_shop = #{record.zomoreCommodityShop,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityState != null">
+        zomore_commodity_state = #{record.zomoreCommodityState,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommodityMeno != null">
+        zomore_commodity_meno = #{record.zomoreCommodityMeno,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityGuadannum != null">
+        zomore_commodity_guadanNum = #{record.zomoreCommodityGuadannum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_commodity_sale
+    set zomore_commodity_sale_id = #{record.zomoreCommoditySaleId,jdbcType=VARCHAR},
+      zomore_commodity_sale_time = #{record.zomoreCommoditySaleTime,jdbcType=TIMESTAMP},
+      zomore_commodity_sale_type = #{record.zomoreCommoditySaleType,jdbcType=VARCHAR},
+      zomore_commodity_sale_name = #{record.zomoreCommoditySaleName,jdbcType=VARCHAR},
+      zomore_commodity_sale_member = #{record.zomoreCommoditySaleMember,jdbcType=VARCHAR},
+      zomore_commodity_sale_num = #{record.zomoreCommoditySaleNum,jdbcType=INTEGER},
+      zomore_commodity_sale_money = #{record.zomoreCommoditySaleMoney,jdbcType=VARCHAR},
+      zomore_commodity_sale_inmoney = #{record.zomoreCommoditySaleInmoney,jdbcType=VARCHAR},
+      zomore_commodity_sale_letmoney = #{record.zomoreCommoditySaleLetmoney,jdbcType=VARCHAR},
+      zomore_commodity_sale_savemoney = #{record.zomoreCommoditySaleSavemoney,jdbcType=VARCHAR},
+      zomore_commodity_sale_guide = #{record.zomoreCommoditySaleGuide,jdbcType=VARCHAR},
+      zomore_commodity_shop = #{record.zomoreCommodityShop,jdbcType=VARCHAR},
+      zomore_commodity_state = #{record.zomoreCommodityState,jdbcType=INTEGER},
+      zomore_commodity_meno = #{record.zomoreCommodityMeno,jdbcType=VARCHAR},
+      zomore_commodity_guadanNum = #{record.zomoreCommodityGuadannum,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreCommoditySale">
+    update zomore_commodity_sale
+    <set>
+      <if test="zomoreCommoditySaleTime != null">
+        zomore_commodity_sale_time = #{zomoreCommoditySaleTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="zomoreCommoditySaleType != null">
+        zomore_commodity_sale_type = #{zomoreCommoditySaleType,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleName != null">
+        zomore_commodity_sale_name = #{zomoreCommoditySaleName,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleMember != null">
+        zomore_commodity_sale_member = #{zomoreCommoditySaleMember,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleNum != null">
+        zomore_commodity_sale_num = #{zomoreCommoditySaleNum,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommoditySaleMoney != null">
+        zomore_commodity_sale_money = #{zomoreCommoditySaleMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleInmoney != null">
+        zomore_commodity_sale_inmoney = #{zomoreCommoditySaleInmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleLetmoney != null">
+        zomore_commodity_sale_letmoney = #{zomoreCommoditySaleLetmoney,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleSavemoney != null">
+        zomore_commodity_sale_savemoney = #{zomoreCommoditySaleSavemoney,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommoditySaleGuide != null">
+        zomore_commodity_sale_guide = #{zomoreCommoditySaleGuide,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityShop != null">
+        zomore_commodity_shop = #{zomoreCommodityShop,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityState != null">
+        zomore_commodity_state = #{zomoreCommodityState,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityMeno != null">
+        zomore_commodity_meno = #{zomoreCommodityMeno,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityGuadannum != null">
+        zomore_commodity_guadanNum = #{zomoreCommodityGuadannum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where zomore_commodity_sale_id = #{zomoreCommoditySaleId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreCommoditySale">
+    update zomore_commodity_sale
+    set zomore_commodity_sale_time = #{zomoreCommoditySaleTime,jdbcType=TIMESTAMP},
+      zomore_commodity_sale_type = #{zomoreCommoditySaleType,jdbcType=VARCHAR},
+      zomore_commodity_sale_name = #{zomoreCommoditySaleName,jdbcType=VARCHAR},
+      zomore_commodity_sale_member = #{zomoreCommoditySaleMember,jdbcType=VARCHAR},
+      zomore_commodity_sale_num = #{zomoreCommoditySaleNum,jdbcType=INTEGER},
+      zomore_commodity_sale_money = #{zomoreCommoditySaleMoney,jdbcType=VARCHAR},
+      zomore_commodity_sale_inmoney = #{zomoreCommoditySaleInmoney,jdbcType=VARCHAR},
+      zomore_commodity_sale_letmoney = #{zomoreCommoditySaleLetmoney,jdbcType=VARCHAR},
+      zomore_commodity_sale_savemoney = #{zomoreCommoditySaleSavemoney,jdbcType=VARCHAR},
+      zomore_commodity_sale_guide = #{zomoreCommoditySaleGuide,jdbcType=VARCHAR},
+      zomore_commodity_shop = #{zomoreCommodityShop,jdbcType=VARCHAR},
+      zomore_commodity_state = #{zomoreCommodityState,jdbcType=INTEGER},
+      zomore_commodity_meno = #{zomoreCommodityMeno,jdbcType=VARCHAR},
+      zomore_commodity_guadanNum = #{zomoreCommodityGuadannum,jdbcType=VARCHAR}
+    where zomore_commodity_sale_id = #{zomoreCommoditySaleId,jdbcType=VARCHAR}
+  </update>
+  
+  <select id="selectTotal" parameterType="com.zomore.domain.ZomoreCommoditySale"   resultType="java.util.Map">
+SELECT t3.total,t3.time  FROM (SELECT t1.paid,t2.retired,(IFNULL(t1.paid,0)-IFNULL(t2.retired,0)) as total ,t1.time time1,t2.time time2,IFNULL(t1.time,t2.time) AS time
+ FROM
+(SELECT
+	IFNULL(SUM(zomore_commodity_sale_inmoney),0) as paid,date_format(zomore_commodity_sale_time,'%Y%m%d') as time,date_format(now() ,'%Y%m%d' ) as today
+from
+	zomore_commodity_sale WHERE zomore_commodity_state =1 and zomore_commodity_shop=#{zomoreCommodityShop}GROUP BY time
+) t1 LEFT JOIN
+(SELECT
+	IFNULL(SUM(zomore_commodity_sale_inmoney),0) as retired,date_format(zomore_commodity_sale_time,'%Y%m%d') as time,date_format(now() ,'%Y%m%d' ) as today
+from
+	zomore_commodity_sale WHERE zomore_commodity_state =3 and zomore_commodity_shop=#{zomoreCommodityShop} GROUP BY time
+) t2  ON t1.today=t2.today AND t1.time=t2.time) t3 WHERE t3.time between (date_format(DATE_SUB(CURDATE(), INTERVAL 6 DAY) ,'%Y%m%d'))  AND date_format(now() ,'%Y%m%d')
+
+
+  </select>
+
+
+  <select id="selectTotalService" parameterType="com.zomore.domain.ZomoreServiceCommodityorder"   resultType="java.util.Map">
+SELECT t3.total,t3.time  FROM (SELECT t1.paid,t2.retired,(IFNULL(t1.paid,0)-IFNULL(t2.retired,0)) as total ,t1.time time1,t2.time time2,IFNULL(t1.time,t2.time) AS time
+ FROM
+(SELECT
+	IFNULL(SUM(zomore_commodity_sale_inmoney),0) as paid,date_format(zomore_commodity_sale_time,'%Y%m%d') as time,date_format(now() ,'%Y%m%d' ) as today
+from
+	zomore_service_commodityorder WHERE zomore_commodity_state =1 and zomore_commodity_shop=#{zomoreCommodityShop} GROUP BY time
+) t1 LEFT JOIN
+(SELECT
+	IFNULL(SUM(zomore_commodity_sale_inmoney),0) as retired,date_format(zomore_commodity_sale_time,'%Y%m%d') as time,date_format(now() ,'%Y%m%d' ) as today
+from
+	zomore_service_commodityorder WHERE zomore_commodity_state =3  and zomore_commodity_shop=#{zomoreCommodityShop} GROUP BY time
+) t2  ON t1.today=t2.today AND t1.time=t2.time) t3 WHERE t3.time between (date_format(DATE_SUB(CURDATE(), INTERVAL 6 DAY) ,'%Y%m%d'))  AND date_format(now() ,'%Y%m%d')
+
+
+  </select>
+
+  <select id="selectTotalMemberSale" parameterType="com.zomore.domain.ZomoreCommoditySale"   resultType="java.util.Map">
+SELECT t3.total,t3.time  FROM (SELECT t1.paid,t2.retired,(IFNULL(t1.paid,0)-IFNULL(t2.retired,0)) as total ,t1.time time1,t2.time time2,IFNULL(t1.time,t2.time) AS time
+ FROM
+(SELECT
+	IFNULL(SUM(zomore_commodity_sale_inmoney),0) as paid,date_format(zomore_commodity_sale_time,'%Y%m%d') as time,date_format(now() ,'%Y%m%d' ) as today
+from
+	zomore_commodity_sale WHERE zomore_commodity_state =1  and zomore_commodity_shop=#{zomoreCommodityShop} AND zomore_commodity_sale_member != "来宾" GROUP BY time
+) t1 LEFT JOIN
+(SELECT
+	IFNULL(SUM(zomore_commodity_sale_inmoney),0) as retired,date_format(zomore_commodity_sale_time,'%Y%m%d') as time,date_format(now() ,'%Y%m%d' ) as today
+from
+	zomore_commodity_sale WHERE zomore_commodity_state =3 AND zomore_commodity_sale_member != "来宾"  GROUP BY time
+) t2  ON t1.today=t2.today AND t1.time=t2.time) t3 WHERE t3.time between (date_format(DATE_SUB(CURDATE(), INTERVAL 6 DAY) ,'%Y%m%d'))  AND date_format(now() ,'%Y%m%d')
+
+
+  </select>
+
+  <select id="selectTotalMemberServiceSale" parameterType="com.zomore.domain.ZomoreServiceCommodityorder"   resultType="java.util.Map">
+SELECT t3.total,t3.time  FROM (SELECT t1.paid,t2.retired,(IFNULL(t1.paid,0)-IFNULL(t2.retired,0)) as total ,t1.time time1,t2.time time2,IFNULL(t1.time,t2.time) AS time
+ FROM
+(SELECT
+	IFNULL(SUM(zomore_commodity_sale_inmoney),0) as paid,date_format(zomore_commodity_sale_time,'%Y%m%d') as time,date_format(now() ,'%Y%m%d' ) as today
+from
+	zomore_service_commodityorder WHERE zomore_commodity_state =1  and zomore_commodity_shop=#{zomoreCommodityShop} AND zomore_commodity_sale_member != "来宾" GROUP BY time
+) t1 LEFT JOIN
+(SELECT
+	IFNULL(SUM(zomore_commodity_sale_inmoney),0) as retired,date_format(zomore_commodity_sale_time,'%Y%m%d') as time,date_format(now() ,'%Y%m%d' ) as today
+from
+	zomore_service_commodityorder WHERE zomore_commodity_state =3 AND zomore_commodity_sale_member != "来宾"  GROUP BY time
+) t2  ON t1.today=t2.today AND t1.time=t2.time) t3 WHERE t3.time between (date_format(DATE_SUB(CURDATE(), INTERVAL 6 DAY) ,'%Y%m%d'))  AND date_format(now() ,'%Y%m%d')
+
+
+  </select>
+
+<!--会员消费服务商品储值卡统计-->
+  <select id="selectTotalMemberServicePaytypeSale" parameterType="com.zomore.domain.ZomoreServiceCommodityorder"   resultType="java.util.Map">
+SELECT t3.total,t3.time  FROM (SELECT t1.paid,t2.retired,(IFNULL(t1.paid,0)-IFNULL(t2.retired,0)) as total ,t1.time time1,t2.time time2,IFNULL(t1.time,t2.time) AS time
+ FROM
+(SELECT
+	IFNULL(SUM(zomore_commodity_sale_inmoney),0) as paid,date_format(zomore_commodity_sale_time,'%Y%m%d') as time,date_format(now() ,'%Y%m%d' ) as today
+from
+	zomore_service_commodityorder WHERE zomore_commodity_state =1  and zomore_commodity_sale_type='1' and zomore_commodity_shop=#{zomoreCommodityShop} AND zomore_commodity_sale_member != "来宾" GROUP BY time
+) t1 LEFT JOIN
+(SELECT
+	IFNULL(SUM(zomore_commodity_sale_inmoney),0) as retired,date_format(zomore_commodity_sale_time,'%Y%m%d') as time,date_format(now() ,'%Y%m%d' ) as today
+from
+	zomore_service_commodityorder WHERE zomore_commodity_state =3  and zomore_commodity_sale_type='1'  AND zomore_commodity_sale_member != "来宾"  GROUP BY time
+) t2  ON t1.today=t2.today AND t1.time=t2.time) t3 WHERE t3.time between (date_format(DATE_SUB(CURDATE(), INTERVAL 6 DAY) ,'%Y%m%d'))  AND date_format(now() ,'%Y%m%d')
+
+
+  </select>
+
+
+  <!--会员消费普通商品储值卡统计-->
+  <select id="selectTotalMemberPaytypeSale" parameterType="com.zomore.domain.ZomoreServiceCommodityorder"   resultType="java.util.Map">
+SELECT t3.total,t3.time  FROM (SELECT t1.paid,t2.retired,(IFNULL(t1.paid,0)-IFNULL(t2.retired,0)) as total ,t1.time time1,t2.time time2,IFNULL(t1.time,t2.time) AS time
+ FROM
+(SELECT
+	IFNULL(SUM(zomore_commodity_sale_inmoney),0) as paid,date_format(zomore_commodity_sale_time,'%Y%m%d') as time,date_format(now() ,'%Y%m%d' ) as today
+from
+	zomore_commodity_sale WHERE zomore_commodity_state =1  and zomore_commodity_sale_type='1' and zomore_commodity_shop=#{zomoreCommodityShop} AND zomore_commodity_sale_member != "来宾" GROUP BY time
+) t1 LEFT JOIN
+(SELECT
+	IFNULL(SUM(zomore_commodity_sale_inmoney),0) as retired,date_format(zomore_commodity_sale_time,'%Y%m%d') as time,date_format(now() ,'%Y%m%d' ) as today
+from
+	zomore_commodity_sale WHERE zomore_commodity_state =3  and zomore_commodity_sale_type='1' AND zomore_commodity_sale_member != "来宾"  GROUP BY time
+) t2  ON t1.today=t2.today AND t1.time=t2.time) t3 WHERE t3.time between (date_format(DATE_SUB(CURDATE(), INTERVAL 6 DAY) ,'%Y%m%d'))  AND date_format(now() ,'%Y%m%d')
+
+
+  </select>
+
+<select id="searchCommoditySale" parameterType="com.zomore.utils.CountCommoditySale" resultType="com.zomore.utils.CountCommoditySale">
+
+  select c.commodityName as commodityName,c.commodityCode as commodityCode,c.commodityType as commodityType,SUM(c.saleNum) as saleNum,
+  SUM(c.commodityOutprice) as commodityOutprice, SUM(c.commodityRealMoney) as commodityRealMoney,c.shop as shop
+  from (select t.zomore_commodity_sale_id as id, d.zomore_commodity_sale_time as saletime,t.zomore_commodity_code as commodityCode,d.zomore_commodity_state as saleStatus,d.zomore_commodity_shop as shop,t.zomore_commodity_name as commodityName,t.zomore_commodity_type as commodityType,t.zomore_commodity_num
+  as saleNum, t.zomore_commodity_money as commodityOutprice, t.zomore_commodity_inmoney as commodityRealMoney
+  from zomore_commodity_sale_commodit  t LEFT JOIN zomore_commodity_sale d on t.zomore_commodity_sale_id=d.zomore_commodity_sale_id
+  )c where c.saleStatus=1
+  <if test="shop!=null">
+    and c.shop=#{shop}
+  </if >
+
+  <if test="saletime1!=null and saletime2!=null">
+   and c.saletime between #{saletime1} and #{saletime2}
+  </if>
+
+  <if test="commodityCode!=null">
+    and c.commodityCode  LIKE concat(concat('%',#{commodityCode}),'%')
+  </if>
+  <if test="commodityName!=null">
+    and c.commodityName LIKE '%${commodityName}%'
+  </if>
+  <if test="commodityType!=null">
+    and c.commodityType =#{commodityType}
+  </if>
+   GROUP BY commodityName
+</select>
+
+  <select id="selectAllshopCountSale" parameterType="java.util.Map" resultType="com.zomore.utils.CountCommoditySale">
+     select c.commodityName as commodityName,c.commodityCode as commodityCode,c.commodityType as commodityType,SUM(c.saleNum) as saleNum,
+  SUM(c.commodityOutprice) as commodityOutprice, SUM(c.commodityRealMoney) as commodityRealMoney,c.shop as shop
+  from (select t.zomore_commodity_sale_id as id, d.zomore_commodity_sale_time as saletime,t.zomore_commodity_code as commodityCode,d.zomore_commodity_state as saleStatus,d.zomore_commodity_shop as shop,t.zomore_commodity_name as commodityName,t.zomore_commodity_type as commodityType,t.zomore_commodity_num
+  as saleNum, t.zomore_commodity_money as commodityOutprice, t.zomore_commodity_inmoney as commodityRealMoney
+  from zomore_commodity_sale_commodit  t LEFT JOIN zomore_commodity_sale d on t.zomore_commodity_sale_id=d.zomore_commodity_sale_id
+  )c where c.saleStatus=1
+    and c.shop in
+    <foreach collection="shoplist" index="index" item="item" open="("
+             separator="," close=")">
+      #{item}
+    </foreach>
+    <if test="startime!=null and endtime!=null">
+      and c.saletime between #{startime} and #{endtime}
+    </if>
+    <if test="commodityCode!=null">
+      and c.commodityCode  LIKE concat(concat('%',#{commodityCode}),'%')
+    </if>
+    <if test="commodityName!=null">
+      and c.commodityName LIKE concat(concat('%',#{commodityName}),'%')
+    </if>
+    GROUP BY commodityName
+  </select>
+
+
+
+  <select id="selectTotalGuideSale" parameterType="com.zomore.domain.ZomoreCommoditySale"   resultType="java.util.Map">
+SELECT t3.total,t3.time  FROM (SELECT t1.paid,t2.retired,(IFNULL(t1.paid,0)-IFNULL(t2.retired,0)) as total ,t1.time time1,t2.time time2,IFNULL(t1.time,t2.time) AS time
+ FROM
+(SELECT
+	IFNULL(SUM(zomore_commodity_sale_inmoney),0) as paid,date_format(zomore_commodity_sale_time,'%Y%m%d') as time,date_format(now() ,'%Y%m%d' ) as today
+from
+	zomore_commodity_sale WHERE zomore_commodity_state =1  and zomore_commodity_shop=#{zomoreCommodityShop} AND zomore_commodity_sale_guide =#{zomoreCommoditySaleGuide} GROUP BY time
+) t1 LEFT JOIN
+(SELECT
+	IFNULL(SUM(zomore_commodity_sale_inmoney),0) as retired,date_format(zomore_commodity_sale_time,'%Y%m%d') as time,date_format(now() ,'%Y%m%d' ) as today
+from
+	zomore_commodity_sale WHERE zomore_commodity_state =3 AND zomore_commodity_sale_guide =#{zomoreCommoditySaleGuide}  GROUP BY time
+) t2  ON t1.today=t2.today AND t1.time=t2.time) t3 WHERE t3.time between (date_format(DATE_SUB(CURDATE(), INTERVAL 6 DAY) ,'%Y%m%d'))  AND date_format(now() ,'%Y%m%d')
+
+
+  </select>
+
+  <select id="selectTotalGuideServiceSale" parameterType="com.zomore.domain.ZomoreServiceCommodityorder"   resultType="java.util.Map">
+SELECT t3.total,t3.time  FROM (SELECT t1.paid,t2.retired,(IFNULL(t1.paid,0)-IFNULL(t2.retired,0)) as total ,t1.time time1,t2.time time2,IFNULL(t1.time,t2.time) AS time
+ FROM
+(SELECT
+	IFNULL(SUM(zomore_commodity_sale_inmoney),0) as paid,date_format(zomore_commodity_sale_time,'%Y%m%d') as time,date_format(now() ,'%Y%m%d' ) as today
+from
+	zomore_service_commodityorder WHERE zomore_commodity_state =1  and zomore_commodity_shop=#{zomoreCommodityShop} AND zomore_commodity_sale_guide =#{zomoreCommoditySaleGuide} GROUP BY time
+) t1 LEFT JOIN
+(SELECT
+	IFNULL(SUM(zomore_commodity_sale_inmoney),0) as retired,date_format(zomore_commodity_sale_time,'%Y%m%d') as time,date_format(now() ,'%Y%m%d' ) as today
+from
+	zomore_service_commodityorder WHERE zomore_commodity_state =3 AND zomore_commodity_sale_guide =#{zomoreCommoditySaleGuide} GROUP BY time
+) t2  ON t1.today=t2.today AND t1.time=t2.time) t3 WHERE t3.time between (date_format(DATE_SUB(CURDATE(), INTERVAL 6 DAY) ,'%Y%m%d'))  AND date_format(now() ,'%Y%m%d')
+
+
+  </select>
+<!--总部下店铺所有的销售-->
+  <select id="selectAllShopSaleByName" parameterType="java.util.Map" resultType="com.zomore.domain.ZomoreCommoditySale">
+    select zomore_commodity_sale_id as zomoreCommoditySaleId, zomore_commodity_sale_time as zomoreCommoditySaleTime, zomore_commodity_sale_type as zomoreCommoditySaleType,
+    zomore_commodity_sale_name as zomoreCommoditySaleName, zomore_commodity_sale_member as zomoreCommoditySaleMember, zomore_commodity_sale_num as zomoreCommoditySaleNum,
+    zomore_commodity_sale_money as zomoreCommoditySaleMoney, zomore_commodity_sale_inmoney as zomoreCommoditySaleInmoney, zomore_commodity_sale_letmoney as zomoreCommoditySaleLetmoney,
+    zomore_commodity_sale_savemoney as zomoreCommoditySaleSavemoney, zomore_commodity_sale_guide as zomoreCommoditySaleGuide, zomore_commodity_shop as zomoreCommodityShop,
+    zomore_commodity_state as zomoreCommodityState, zomore_commodity_meno as zomoreCommodityMeno, zomore_commodity_guadanNum as zomoreCommodityGuadannum
+    from zomore_commodity_sale
+    where zomore_commodity_shop in
+    <foreach collection="shoplist" index="index" item="item" open="("
+             separator="," close=")">
+      #{item}
+    </foreach>
+    <if test="startime!=null and endtime!=null">
+      and zomore_commodity_sale_time between #{startime}and #{endtime}
+    </if>
+    <if test="num!=null">
+      and zomore_commodity_sale_id LIKE concat(concat('%',#{num}),'%')
+    </if>
+    order by zomoreCommoditySaleTime desc
+
+  </select>
+
+
+
+</mapper>

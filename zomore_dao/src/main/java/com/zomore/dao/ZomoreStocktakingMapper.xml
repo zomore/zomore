@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreStocktakingMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreStocktaking">
+    <id column="stockTaking_id" jdbcType="INTEGER" property="stocktakingId" />
+    <result column="stockTaking_historyid" jdbcType="VARCHAR" property="stocktakingHistoryid" />
+    <result column="stockTaking_code" jdbcType="VARCHAR" property="stocktakingCode" />
+    <result column="stockTaking_commodityName" jdbcType="VARCHAR" property="stocktakingCommodityname" />
+    <result column="stockTaking_sellingPrice" jdbcType="DOUBLE" property="stocktakingSellingprice" />
+    <result column="stockTaking_number" jdbcType="VARCHAR" property="stocktakingNumber" />
+    <result column="stockTaking_quantity" jdbcType="INTEGER" property="stocktakingQuantity" />
+    <result column="stockTaking_existingInventory" jdbcType="INTEGER" property="stocktakingExistinginventory" />
+    <result column="stockTaking_netReceipts" jdbcType="INTEGER" property="stocktakingNetreceipts" />
+    <result column="inventoryDetails_profitAndLoss" jdbcType="DOUBLE" property="inventorydetailsProfitandloss" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    stockTaking_id, stockTaking_historyid, stockTaking_code, stockTaking_commodityName, 
+    stockTaking_sellingPrice, stockTaking_number, stockTaking_quantity, stockTaking_existingInventory, 
+    stockTaking_netReceipts, inventoryDetails_profitAndLoss
+  </sql>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreStocktakingExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_stocktaking
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zomore_stocktaking
+    where stockTaking_id = #{stocktakingId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from zomore_stocktaking
+    where stockTaking_id = #{stocktakingId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreStocktakingExample">
+    delete from zomore_stocktaking
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreStocktaking">
+    insert into zomore_stocktaking (stockTaking_id, stockTaking_historyid, 
+      stockTaking_code, stockTaking_commodityName, 
+      stockTaking_sellingPrice, stockTaking_number, 
+      stockTaking_quantity, stockTaking_existingInventory, 
+      stockTaking_netReceipts, inventoryDetails_profitAndLoss
+      )
+    values (#{stocktakingId,jdbcType=INTEGER}, #{stocktakingHistoryid,jdbcType=VARCHAR}, 
+      #{stocktakingCode,jdbcType=VARCHAR}, #{stocktakingCommodityname,jdbcType=VARCHAR}, 
+      #{stocktakingSellingprice,jdbcType=DOUBLE}, #{stocktakingNumber,jdbcType=VARCHAR}, 
+      #{stocktakingQuantity,jdbcType=INTEGER}, #{stocktakingExistinginventory,jdbcType=INTEGER}, 
+      #{stocktakingNetreceipts,jdbcType=INTEGER}, #{inventorydetailsProfitandloss,jdbcType=DOUBLE}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreStocktaking">
+    insert into zomore_stocktaking
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="stocktakingId != null">
+        stockTaking_id,
+      </if>
+      <if test="stocktakingHistoryid != null">
+        stockTaking_historyid,
+      </if>
+      <if test="stocktakingCode != null">
+        stockTaking_code,
+      </if>
+      <if test="stocktakingCommodityname != null">
+        stockTaking_commodityName,
+      </if>
+      <if test="stocktakingSellingprice != null">
+        stockTaking_sellingPrice,
+      </if>
+      <if test="stocktakingNumber != null">
+        stockTaking_number,
+      </if>
+      <if test="stocktakingQuantity != null">
+        stockTaking_quantity,
+      </if>
+      <if test="stocktakingExistinginventory != null">
+        stockTaking_existingInventory,
+      </if>
+      <if test="stocktakingNetreceipts != null">
+        stockTaking_netReceipts,
+      </if>
+      <if test="inventorydetailsProfitandloss != null">
+        inventoryDetails_profitAndLoss,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="stocktakingId != null">
+        #{stocktakingId,jdbcType=INTEGER},
+      </if>
+      <if test="stocktakingHistoryid != null">
+        #{stocktakingHistoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="stocktakingCode != null">
+        #{stocktakingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="stocktakingCommodityname != null">
+        #{stocktakingCommodityname,jdbcType=VARCHAR},
+      </if>
+      <if test="stocktakingSellingprice != null">
+        #{stocktakingSellingprice,jdbcType=DOUBLE},
+      </if>
+      <if test="stocktakingNumber != null">
+        #{stocktakingNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="stocktakingQuantity != null">
+        #{stocktakingQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="stocktakingExistinginventory != null">
+        #{stocktakingExistinginventory,jdbcType=INTEGER},
+      </if>
+      <if test="stocktakingNetreceipts != null">
+        #{stocktakingNetreceipts,jdbcType=INTEGER},
+      </if>
+      <if test="inventorydetailsProfitandloss != null">
+        #{inventorydetailsProfitandloss,jdbcType=DOUBLE},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreStocktakingExample" resultType="java.lang.Long">
+    select count(*) from zomore_stocktaking
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_stocktaking
+    <set>
+      <if test="record.stocktakingId != null">
+        stockTaking_id = #{record.stocktakingId,jdbcType=INTEGER},
+      </if>
+      <if test="record.stocktakingHistoryid != null">
+        stockTaking_historyid = #{record.stocktakingHistoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stocktakingCode != null">
+        stockTaking_code = #{record.stocktakingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stocktakingCommodityname != null">
+        stockTaking_commodityName = #{record.stocktakingCommodityname,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stocktakingSellingprice != null">
+        stockTaking_sellingPrice = #{record.stocktakingSellingprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.stocktakingNumber != null">
+        stockTaking_number = #{record.stocktakingNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.stocktakingQuantity != null">
+        stockTaking_quantity = #{record.stocktakingQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="record.stocktakingExistinginventory != null">
+        stockTaking_existingInventory = #{record.stocktakingExistinginventory,jdbcType=INTEGER},
+      </if>
+      <if test="record.stocktakingNetreceipts != null">
+        stockTaking_netReceipts = #{record.stocktakingNetreceipts,jdbcType=INTEGER},
+      </if>
+      <if test="record.inventorydetailsProfitandloss != null">
+        inventoryDetails_profitAndLoss = #{record.inventorydetailsProfitandloss,jdbcType=DOUBLE},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_stocktaking
+    set stockTaking_id = #{record.stocktakingId,jdbcType=INTEGER},
+      stockTaking_historyid = #{record.stocktakingHistoryid,jdbcType=VARCHAR},
+      stockTaking_code = #{record.stocktakingCode,jdbcType=VARCHAR},
+      stockTaking_commodityName = #{record.stocktakingCommodityname,jdbcType=VARCHAR},
+      stockTaking_sellingPrice = #{record.stocktakingSellingprice,jdbcType=DOUBLE},
+      stockTaking_number = #{record.stocktakingNumber,jdbcType=VARCHAR},
+      stockTaking_quantity = #{record.stocktakingQuantity,jdbcType=INTEGER},
+      stockTaking_existingInventory = #{record.stocktakingExistinginventory,jdbcType=INTEGER},
+      stockTaking_netReceipts = #{record.stocktakingNetreceipts,jdbcType=INTEGER},
+      inventoryDetails_profitAndLoss = #{record.inventorydetailsProfitandloss,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreStocktaking">
+    update zomore_stocktaking
+    <set>
+      <if test="stocktakingHistoryid != null">
+        stockTaking_historyid = #{stocktakingHistoryid,jdbcType=VARCHAR},
+      </if>
+      <if test="stocktakingCode != null">
+        stockTaking_code = #{stocktakingCode,jdbcType=VARCHAR},
+      </if>
+      <if test="stocktakingCommodityname != null">
+        stockTaking_commodityName = #{stocktakingCommodityname,jdbcType=VARCHAR},
+      </if>
+      <if test="stocktakingSellingprice != null">
+        stockTaking_sellingPrice = #{stocktakingSellingprice,jdbcType=DOUBLE},
+      </if>
+      <if test="stocktakingNumber != null">
+        stockTaking_number = #{stocktakingNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="stocktakingQuantity != null">
+        stockTaking_quantity = #{stocktakingQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="stocktakingExistinginventory != null">
+        stockTaking_existingInventory = #{stocktakingExistinginventory,jdbcType=INTEGER},
+      </if>
+      <if test="stocktakingNetreceipts != null">
+        stockTaking_netReceipts = #{stocktakingNetreceipts,jdbcType=INTEGER},
+      </if>
+      <if test="inventorydetailsProfitandloss != null">
+        inventoryDetails_profitAndLoss = #{inventorydetailsProfitandloss,jdbcType=DOUBLE},
+      </if>
+    </set>
+    where stockTaking_id = #{stocktakingId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreStocktaking">
+    update zomore_stocktaking
+    set stockTaking_historyid = #{stocktakingHistoryid,jdbcType=VARCHAR},
+      stockTaking_code = #{stocktakingCode,jdbcType=VARCHAR},
+      stockTaking_commodityName = #{stocktakingCommodityname,jdbcType=VARCHAR},
+      stockTaking_sellingPrice = #{stocktakingSellingprice,jdbcType=DOUBLE},
+      stockTaking_number = #{stocktakingNumber,jdbcType=VARCHAR},
+      stockTaking_quantity = #{stocktakingQuantity,jdbcType=INTEGER},
+      stockTaking_existingInventory = #{stocktakingExistinginventory,jdbcType=INTEGER},
+      stockTaking_netReceipts = #{stocktakingNetreceipts,jdbcType=INTEGER},
+      inventoryDetails_profitAndLoss = #{inventorydetailsProfitandloss,jdbcType=DOUBLE}
+    where stockTaking_id = #{stocktakingId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreRechargeMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreRecharge">
+    <id column="recharge_id" jdbcType="VARCHAR" property="rechargeId" />
+    <result column="store_name" jdbcType="VARCHAR" property="storeName" />
+    <result column="member_name" jdbcType="VARCHAR" property="memberName" />
+    <result column="recharge_project" jdbcType="VARCHAR" property="rechargeProject" />
+    <result column="recharge_money" jdbcType="VARCHAR" property="rechargeMoney" />
+    <result column="give_project" jdbcType="VARCHAR" property="giveProject" />
+    <result column="give_money" jdbcType="VARCHAR" property="giveMoney" />
+    <result column="is_upgrade" jdbcType="VARCHAR" property="isUpgrade" />
+    <result column="is_userone" jdbcType="INTEGER" property="isUserone" />
+    <result column="createtime" jdbcType="TIMESTAMP" property="createtime" />
+    <result column="endtime" jdbcType="TIMESTAMP" property="endtime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    recharge_id, store_name, member_name, recharge_project, recharge_money, give_project, 
+    give_money, is_upgrade, is_userone, createtime, endtime
+  </sql>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreRechargeExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_recharge
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from zomore_recharge
+    where recharge_id = #{rechargeId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from zomore_recharge
+    where recharge_id = #{rechargeId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreRechargeExample">
+    delete from zomore_recharge
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreRecharge">
+    insert into zomore_recharge (recharge_id, store_name, member_name, 
+      recharge_project, recharge_money, give_project, 
+      give_money, is_upgrade, is_userone, 
+      createtime, endtime)
+    values (#{rechargeId,jdbcType=VARCHAR}, #{storeName,jdbcType=VARCHAR}, #{memberName,jdbcType=VARCHAR}, 
+      #{rechargeProject,jdbcType=VARCHAR}, #{rechargeMoney,jdbcType=VARCHAR}, #{giveProject,jdbcType=VARCHAR}, 
+      #{giveMoney,jdbcType=VARCHAR}, #{isUpgrade,jdbcType=VARCHAR}, #{isUserone,jdbcType=INTEGER}, 
+      #{createtime,jdbcType=TIMESTAMP}, #{endtime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreRecharge">
+    insert into zomore_recharge
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rechargeId != null">
+        recharge_id,
+      </if>
+      <if test="storeName != null">
+        store_name,
+      </if>
+      <if test="memberName != null">
+        member_name,
+      </if>
+      <if test="rechargeProject != null">
+        recharge_project,
+      </if>
+      <if test="rechargeMoney != null">
+        recharge_money,
+      </if>
+      <if test="giveProject != null">
+        give_project,
+      </if>
+      <if test="giveMoney != null">
+        give_money,
+      </if>
+      <if test="isUpgrade != null">
+        is_upgrade,
+      </if>
+      <if test="isUserone != null">
+        is_userone,
+      </if>
+      <if test="createtime != null">
+        createtime,
+      </if>
+      <if test="endtime != null">
+        endtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rechargeId != null">
+        #{rechargeId,jdbcType=VARCHAR},
+      </if>
+      <if test="storeName != null">
+        #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberName != null">
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeProject != null">
+        #{rechargeProject,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeMoney != null">
+        #{rechargeMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="giveProject != null">
+        #{giveProject,jdbcType=VARCHAR},
+      </if>
+      <if test="giveMoney != null">
+        #{giveMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="isUpgrade != null">
+        #{isUpgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="isUserone != null">
+        #{isUserone,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        #{endtime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreRechargeExample" resultType="java.lang.Long">
+    select count(*) from zomore_recharge
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_recharge
+    <set>
+      <if test="record.rechargeId != null">
+        recharge_id = #{record.rechargeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.storeName != null">
+        store_name = #{record.storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberName != null">
+        member_name = #{record.memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rechargeProject != null">
+        recharge_project = #{record.rechargeProject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rechargeMoney != null">
+        recharge_money = #{record.rechargeMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.giveProject != null">
+        give_project = #{record.giveProject,jdbcType=VARCHAR},
+      </if>
+      <if test="record.giveMoney != null">
+        give_money = #{record.giveMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isUpgrade != null">
+        is_upgrade = #{record.isUpgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isUserone != null">
+        is_userone = #{record.isUserone,jdbcType=INTEGER},
+      </if>
+      <if test="record.createtime != null">
+        createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.endtime != null">
+        endtime = #{record.endtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_recharge
+    set recharge_id = #{record.rechargeId,jdbcType=VARCHAR},
+      store_name = #{record.storeName,jdbcType=VARCHAR},
+      member_name = #{record.memberName,jdbcType=VARCHAR},
+      recharge_project = #{record.rechargeProject,jdbcType=VARCHAR},
+      recharge_money = #{record.rechargeMoney,jdbcType=VARCHAR},
+      give_project = #{record.giveProject,jdbcType=VARCHAR},
+      give_money = #{record.giveMoney,jdbcType=VARCHAR},
+      is_upgrade = #{record.isUpgrade,jdbcType=VARCHAR},
+      is_userone = #{record.isUserone,jdbcType=INTEGER},
+      createtime = #{record.createtime,jdbcType=TIMESTAMP},
+      endtime = #{record.endtime,jdbcType=TIMESTAMP}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreRecharge">
+    update zomore_recharge
+    <set>
+      <if test="storeName != null">
+        store_name = #{storeName,jdbcType=VARCHAR},
+      </if>
+      <if test="memberName != null">
+        member_name = #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeProject != null">
+        recharge_project = #{rechargeProject,jdbcType=VARCHAR},
+      </if>
+      <if test="rechargeMoney != null">
+        recharge_money = #{rechargeMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="giveProject != null">
+        give_project = #{giveProject,jdbcType=VARCHAR},
+      </if>
+      <if test="giveMoney != null">
+        give_money = #{giveMoney,jdbcType=VARCHAR},
+      </if>
+      <if test="isUpgrade != null">
+        is_upgrade = #{isUpgrade,jdbcType=VARCHAR},
+      </if>
+      <if test="isUserone != null">
+        is_userone = #{isUserone,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null">
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endtime != null">
+        endtime = #{endtime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where recharge_id = #{rechargeId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreRecharge">
+    update zomore_recharge
+    set store_name = #{storeName,jdbcType=VARCHAR},
+      member_name = #{memberName,jdbcType=VARCHAR},
+      recharge_project = #{rechargeProject,jdbcType=VARCHAR},
+      recharge_money = #{rechargeMoney,jdbcType=VARCHAR},
+      give_project = #{giveProject,jdbcType=VARCHAR},
+      give_money = #{giveMoney,jdbcType=VARCHAR},
+      is_upgrade = #{isUpgrade,jdbcType=VARCHAR},
+      is_userone = #{isUserone,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      endtime = #{endtime,jdbcType=TIMESTAMP}
+    where recharge_id = #{rechargeId,jdbcType=VARCHAR}
+  </update>
+</mapper>

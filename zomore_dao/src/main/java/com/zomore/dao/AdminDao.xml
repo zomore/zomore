@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.AdminDao">
+  <resultMap id="headList" type="com.zomore.domain.HeadShop">
+    <result property="username" column="username"></result>
+    <result property="shopName" column="shopName"></result>
+    <result property="name" column="name"></result>
+    <result property="contact" column="contact"></result>
+    <result property="phoneNumber" column="phoneNumber"></result>
+    <result property="address" column="address"></result>
+    <result property="registrationTime" column="registrationTime"></result>
+    <result property="activeDay" column="activeDay"></result>
+    <result property="remark" column="remark"></result>
+    <association property="multiple" javaType="com.zomore.domain.Multiple">
+          <result property="multiplename" column="multiplename"></result>
+    </association>
+  </resultMap>
+  <select id="findAllHead" resultMap="headList">
+  select h.username,h.shopName,h.name,h.contact,h.phoneNumber,h.address,h.registrationTime,
+  h.activeDay,h.remark,m.multiplename from zomore_head h left join multiple m on h.multipleId=m.multipleId
+  </select>
+
+  <resultMap id="headList2" type="com.zomore.domain.HeadShop">
+    <result property="username" column="username"></result>
+    <result property="shopName" column="shopName"></result>
+    <result property="name" column="name"></result>
+    <result property="contact" column="contact"></result>
+    <result property="phoneNumber" column="phoneNumber"></result>
+    <result property="address" column="address"></result>
+    <result property="registrationTime" column="registrationTime"></result>
+    <result property="activeDay" column="activeDay"></result>
+    <result property="remark" column="remark"></result>
+    <association property="multiple" javaType="com.zomore.domain.Multiple">
+      <result property="multiplename" column="multiplename"></result>
+    </association>
+  </resultMap>
+  <select id="findAllHeadByAdminAccount" resultMap="headList2">
+  select h.username,h.shopName,h.name,h.contact,h.phoneNumber,h.address,h.registrationTime,
+  h.activeDay,h.remark,m.multiplename from zomore_head h left join multiple m on h.multipleId=m.multipleId where h.adminAccount =#{adminAccount}
+  </select>
+
+</mapper>

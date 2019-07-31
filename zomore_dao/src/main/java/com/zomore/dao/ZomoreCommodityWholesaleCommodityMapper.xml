@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.ZomoreCommodityWholesaleCommodityMapper">
+  <resultMap id="BaseResultMap" type="com.zomore.domain.ZomoreCommodityWholesaleCommodity">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="zomore_commodity_wholesale_id" jdbcType="VARCHAR" property="zomoreCommodityWholesaleId" />
+    <result column="zomore_commodity_wholesale_commoditycode" jdbcType="VARCHAR" property="zomoreCommodityWholesaleCommoditycode" />
+    <result column="zomore_commodity_wholesale_commodity_num" jdbcType="INTEGER" property="zomoreCommodityWholesaleCommodityNum" />
+    <result column="zomore_commodity_wholesale_commodity_givenum" jdbcType="INTEGER" property="zomoreCommodityWholesaleCommodityGivenum" />
+    <result column="zomore_commodity_wholesale_commodity_oneprice" jdbcType="DOUBLE" property="zomoreCommodityWholesaleCommodityOneprice" />
+    <result column="zomore_commodity_wholesale_commodity_allprice" jdbcType="DOUBLE" property="zomoreCommodityWholesaleCommodityAllprice" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.zomore.domain.ZomoreCommodityWholesaleCommodity">
+    <result column="zomore_commodity_wholesale_commodity_meno" jdbcType="LONGVARCHAR" property="zomoreCommodityWholesaleCommodityMeno" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, zomore_commodity_wholesale_id, zomore_commodity_wholesale_commoditycode, zomore_commodity_wholesale_commodity_num, 
+    zomore_commodity_wholesale_commodity_givenum, zomore_commodity_wholesale_commodity_oneprice, 
+    zomore_commodity_wholesale_commodity_allprice
+  </sql>
+  <sql id="Blob_Column_List">
+    zomore_commodity_wholesale_commodity_meno
+  </sql>
+  <select id="selectByExampleWithBLOBs" parameterType="com.zomore.domain.ZomoreCommodityWholesaleCommodityExample" resultMap="ResultMapWithBLOBs">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zomore_commodity_wholesale_commodity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" parameterType="com.zomore.domain.ZomoreCommodityWholesaleCommodityExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from zomore_commodity_wholesale_commodity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from zomore_commodity_wholesale_commodity
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from zomore_commodity_wholesale_commodity
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zomore.domain.ZomoreCommodityWholesaleCommodityExample">
+    delete from zomore_commodity_wholesale_commodity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zomore.domain.ZomoreCommodityWholesaleCommodity">
+    insert into zomore_commodity_wholesale_commodity (id, zomore_commodity_wholesale_id, zomore_commodity_wholesale_commoditycode, 
+      zomore_commodity_wholesale_commodity_num, zomore_commodity_wholesale_commodity_givenum, 
+      zomore_commodity_wholesale_commodity_oneprice, zomore_commodity_wholesale_commodity_allprice, 
+      zomore_commodity_wholesale_commodity_meno)
+    values (#{id,jdbcType=INTEGER}, #{zomoreCommodityWholesaleId,jdbcType=VARCHAR}, #{zomoreCommodityWholesaleCommoditycode,jdbcType=VARCHAR}, 
+      #{zomoreCommodityWholesaleCommodityNum,jdbcType=INTEGER}, #{zomoreCommodityWholesaleCommodityGivenum,jdbcType=INTEGER}, 
+      #{zomoreCommodityWholesaleCommodityOneprice,jdbcType=DOUBLE}, #{zomoreCommodityWholesaleCommodityAllprice,jdbcType=DOUBLE}, 
+      #{zomoreCommodityWholesaleCommodityMeno,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zomore.domain.ZomoreCommodityWholesaleCommodity">
+    insert into zomore_commodity_wholesale_commodity
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="zomoreCommodityWholesaleId != null">
+        zomore_commodity_wholesale_id,
+      </if>
+      <if test="zomoreCommodityWholesaleCommoditycode != null">
+        zomore_commodity_wholesale_commoditycode,
+      </if>
+      <if test="zomoreCommodityWholesaleCommodityNum != null">
+        zomore_commodity_wholesale_commodity_num,
+      </if>
+      <if test="zomoreCommodityWholesaleCommodityGivenum != null">
+        zomore_commodity_wholesale_commodity_givenum,
+      </if>
+      <if test="zomoreCommodityWholesaleCommodityOneprice != null">
+        zomore_commodity_wholesale_commodity_oneprice,
+      </if>
+      <if test="zomoreCommodityWholesaleCommodityAllprice != null">
+        zomore_commodity_wholesale_commodity_allprice,
+      </if>
+      <if test="zomoreCommodityWholesaleCommodityMeno != null">
+        zomore_commodity_wholesale_commodity_meno,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityWholesaleId != null">
+        #{zomoreCommodityWholesaleId,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityWholesaleCommoditycode != null">
+        #{zomoreCommodityWholesaleCommoditycode,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityWholesaleCommodityNum != null">
+        #{zomoreCommodityWholesaleCommodityNum,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityWholesaleCommodityGivenum != null">
+        #{zomoreCommodityWholesaleCommodityGivenum,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityWholesaleCommodityOneprice != null">
+        #{zomoreCommodityWholesaleCommodityOneprice,jdbcType=DOUBLE},
+      </if>
+      <if test="zomoreCommodityWholesaleCommodityAllprice != null">
+        #{zomoreCommodityWholesaleCommodityAllprice,jdbcType=DOUBLE},
+      </if>
+      <if test="zomoreCommodityWholesaleCommodityMeno != null">
+        #{zomoreCommodityWholesaleCommodityMeno,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zomore.domain.ZomoreCommodityWholesaleCommodityExample" resultType="java.lang.Long">
+    select count(*) from zomore_commodity_wholesale_commodity
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update zomore_commodity_wholesale_commodity
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommodityWholesaleId != null">
+        zomore_commodity_wholesale_id = #{record.zomoreCommodityWholesaleId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityWholesaleCommoditycode != null">
+        zomore_commodity_wholesale_commoditycode = #{record.zomoreCommodityWholesaleCommoditycode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.zomoreCommodityWholesaleCommodityNum != null">
+        zomore_commodity_wholesale_commodity_num = #{record.zomoreCommodityWholesaleCommodityNum,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommodityWholesaleCommodityGivenum != null">
+        zomore_commodity_wholesale_commodity_givenum = #{record.zomoreCommodityWholesaleCommodityGivenum,jdbcType=INTEGER},
+      </if>
+      <if test="record.zomoreCommodityWholesaleCommodityOneprice != null">
+        zomore_commodity_wholesale_commodity_oneprice = #{record.zomoreCommodityWholesaleCommodityOneprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.zomoreCommodityWholesaleCommodityAllprice != null">
+        zomore_commodity_wholesale_commodity_allprice = #{record.zomoreCommodityWholesaleCommodityAllprice,jdbcType=DOUBLE},
+      </if>
+      <if test="record.zomoreCommodityWholesaleCommodityMeno != null">
+        zomore_commodity_wholesale_commodity_meno = #{record.zomoreCommodityWholesaleCommodityMeno,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map">
+    update zomore_commodity_wholesale_commodity
+    set id = #{record.id,jdbcType=INTEGER},
+      zomore_commodity_wholesale_id = #{record.zomoreCommodityWholesaleId,jdbcType=VARCHAR},
+      zomore_commodity_wholesale_commoditycode = #{record.zomoreCommodityWholesaleCommoditycode,jdbcType=VARCHAR},
+      zomore_commodity_wholesale_commodity_num = #{record.zomoreCommodityWholesaleCommodityNum,jdbcType=INTEGER},
+      zomore_commodity_wholesale_commodity_givenum = #{record.zomoreCommodityWholesaleCommodityGivenum,jdbcType=INTEGER},
+      zomore_commodity_wholesale_commodity_oneprice = #{record.zomoreCommodityWholesaleCommodityOneprice,jdbcType=DOUBLE},
+      zomore_commodity_wholesale_commodity_allprice = #{record.zomoreCommodityWholesaleCommodityAllprice,jdbcType=DOUBLE},
+      zomore_commodity_wholesale_commodity_meno = #{record.zomoreCommodityWholesaleCommodityMeno,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update zomore_commodity_wholesale_commodity
+    set id = #{record.id,jdbcType=INTEGER},
+      zomore_commodity_wholesale_id = #{record.zomoreCommodityWholesaleId,jdbcType=VARCHAR},
+      zomore_commodity_wholesale_commoditycode = #{record.zomoreCommodityWholesaleCommoditycode,jdbcType=VARCHAR},
+      zomore_commodity_wholesale_commodity_num = #{record.zomoreCommodityWholesaleCommodityNum,jdbcType=INTEGER},
+      zomore_commodity_wholesale_commodity_givenum = #{record.zomoreCommodityWholesaleCommodityGivenum,jdbcType=INTEGER},
+      zomore_commodity_wholesale_commodity_oneprice = #{record.zomoreCommodityWholesaleCommodityOneprice,jdbcType=DOUBLE},
+      zomore_commodity_wholesale_commodity_allprice = #{record.zomoreCommodityWholesaleCommodityAllprice,jdbcType=DOUBLE}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zomore.domain.ZomoreCommodityWholesaleCommodity">
+    update zomore_commodity_wholesale_commodity
+    <set>
+      <if test="zomoreCommodityWholesaleId != null">
+        zomore_commodity_wholesale_id = #{zomoreCommodityWholesaleId,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityWholesaleCommoditycode != null">
+        zomore_commodity_wholesale_commoditycode = #{zomoreCommodityWholesaleCommoditycode,jdbcType=VARCHAR},
+      </if>
+      <if test="zomoreCommodityWholesaleCommodityNum != null">
+        zomore_commodity_wholesale_commodity_num = #{zomoreCommodityWholesaleCommodityNum,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityWholesaleCommodityGivenum != null">
+        zomore_commodity_wholesale_commodity_givenum = #{zomoreCommodityWholesaleCommodityGivenum,jdbcType=INTEGER},
+      </if>
+      <if test="zomoreCommodityWholesaleCommodityOneprice != null">
+        zomore_commodity_wholesale_commodity_oneprice = #{zomoreCommodityWholesaleCommodityOneprice,jdbcType=DOUBLE},
+      </if>
+      <if test="zomoreCommodityWholesaleCommodityAllprice != null">
+        zomore_commodity_wholesale_commodity_allprice = #{zomoreCommodityWholesaleCommodityAllprice,jdbcType=DOUBLE},
+      </if>
+      <if test="zomoreCommodityWholesaleCommodityMeno != null">
+        zomore_commodity_wholesale_commodity_meno = #{zomoreCommodityWholesaleCommodityMeno,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.zomore.domain.ZomoreCommodityWholesaleCommodity">
+    update zomore_commodity_wholesale_commodity
+    set zomore_commodity_wholesale_id = #{zomoreCommodityWholesaleId,jdbcType=VARCHAR},
+      zomore_commodity_wholesale_commoditycode = #{zomoreCommodityWholesaleCommoditycode,jdbcType=VARCHAR},
+      zomore_commodity_wholesale_commodity_num = #{zomoreCommodityWholesaleCommodityNum,jdbcType=INTEGER},
+      zomore_commodity_wholesale_commodity_givenum = #{zomoreCommodityWholesaleCommodityGivenum,jdbcType=INTEGER},
+      zomore_commodity_wholesale_commodity_oneprice = #{zomoreCommodityWholesaleCommodityOneprice,jdbcType=DOUBLE},
+      zomore_commodity_wholesale_commodity_allprice = #{zomoreCommodityWholesaleCommodityAllprice,jdbcType=DOUBLE},
+      zomore_commodity_wholesale_commodity_meno = #{zomoreCommodityWholesaleCommodityMeno,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zomore.domain.ZomoreCommodityWholesaleCommodity">
+    update zomore_commodity_wholesale_commodity
+    set zomore_commodity_wholesale_id = #{zomoreCommodityWholesaleId,jdbcType=VARCHAR},
+      zomore_commodity_wholesale_commoditycode = #{zomoreCommodityWholesaleCommoditycode,jdbcType=VARCHAR},
+      zomore_commodity_wholesale_commodity_num = #{zomoreCommodityWholesaleCommodityNum,jdbcType=INTEGER},
+      zomore_commodity_wholesale_commodity_givenum = #{zomoreCommodityWholesaleCommodityGivenum,jdbcType=INTEGER},
+      zomore_commodity_wholesale_commodity_oneprice = #{zomoreCommodityWholesaleCommodityOneprice,jdbcType=DOUBLE},
+      zomore_commodity_wholesale_commodity_allprice = #{zomoreCommodityWholesaleCommodityAllprice,jdbcType=DOUBLE}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

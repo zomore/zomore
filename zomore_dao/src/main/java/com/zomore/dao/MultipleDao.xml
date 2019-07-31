@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zomore.dao.MultipleDao">
+
+    <select id="selectHeadshopByMultipleId" parameterType="java.lang.String" resultType="com.zomore.domain.HeadShop">
+      select * from zomore_head where multipleId=#{multipleId}
+    </select>
+
+    <!--查询连锁的分店multipleId一定不会为空,加盟、直营所有分店-->
+    <select id="selectAllHeadshopBYNameAndNum" parameterType="java.util.Map" resultType="com.zomore.domain.HeadShop">
+        select * from zomore_head
+        where multipleId=#{multipleId}
+        <if test="shopName!=null">
+            and shopName like concat(concat('%',#{shopName}),'%')
+        </if>
+        <if test="shopNum!=null">
+            and username like concat(concat('%',#{shopNum}),'%')
+        </if>
+        and role !=1
+    </select>
+
+    <!--查询连锁的分店multipleId一定不会为空,加盟、直营所有分店并且回员共享分组id为空或空字符串-->
+    <select id="selectAllHeadshopBYSharedmemberId" parameterType="java.util.Map" resultType="com.zomore.domain.HeadShop">
+        select * from zomore_head
+        where multipleId=#{multipleId}
+        <if test="shopName!=null">
+            and shopName like concat(concat('%',#{shopName}),'%')
+        </if>
+        <if test="shopNum!=null">
+            and username like concat(concat('%',#{shopNum}),'%')
+        </if>
+        and (sharedmemberid is null or sharedmemberid='')
+        and role!=1
+    </select>
+
+<!--查询连锁的分店multipleId一定不会为空,直营组-->
+    <select id="selectAllshopBYNameAndNum" parameterType="java.util.Map" resultType="com.zomore.domain.HeadShop">
+      select * from zomore_head
+      where multipleId=#{multipleId}
+        and role =#{role}
+    </select>
+
+    <select id="selectAllshopBySharedMemberId" parameterType="java.lang.String" resultType="com.zomore.domain.HeadShop">
+       select * from zomore_head
+       where sharedmemberid=#{id}
+       and role!=1
+    </select>
+
+    <update id="updateHeadshopSharedMember" parameterType="com.zomore.domain.HeadShop">
+        update zomore_head
+        <set>
+            <if test="sharedmemberid!=null">
+                sharedmemberid=#{sharedmemberid},
+            </if>
+        </set>
+        where headId=#{headId}
+    </update>
+
+</mapper>
