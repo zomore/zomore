@@ -1,0 +1,234 @@
+{
+    "header": [
+        {
+            "text": "{companyName}",
+            "size": 12,
+            "font": "宋体",
+            "bold": true,
+            "line": true,
+            "x": "35",
+            "y": ""
+        },
+        {
+            "text": "订单号:{orderNo}",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": true,
+            "x": "0",
+            "y": ""
+        },
+        {
+            "text": "收银台:{cashierNo}",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": false,
+            "x": "0",
+            "y": ""
+        },
+        {
+            "text": "导购员:{guideName}",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": true,
+            "x": "65",
+            "y": ""
+        },
+        {
+            "text": "下单时间:{orderDate}",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": true,
+            "x": "0",
+            "y": ""
+        }
+
+    ],
+    "gooods": [
+        {
+            "text": "名称",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": false,
+            "x": "0",
+            "y": ""
+        },
+        {
+            "text": "单价",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": false,
+            "x": "55",
+            "y": ""
+        },
+        {
+            "text": "数量",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": false,
+            "x": "85",
+            "y": ""
+        },
+        {
+            "text": "小计",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": false,
+            "x": "115",
+            "y": ""
+        }
+    ],
+    "footer": [
+        {
+            "text": "应收:{totalMoney}元",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": true,
+            "x": "0",
+            "y": ""
+        },
+        {
+            "text": "总计:{actualMoney}元",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": true,
+            "x": "0",
+            "y": ""
+        },
+        {
+            "text": "实收:{actualMoney}元",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": true,
+            "x": "0",
+            "y": ""
+        },
+        {
+            "text": "找零:{changeMoney}元",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": true,
+            "x": "0",
+            "y": ""
+        },
+        {
+            "text": "支付方式:{payType}:",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": false,
+            "x": "0",
+            "y": ""
+        },
+        {
+            "text": "{actualMoney}元",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": true,
+            "x": "62",
+            "y": ""
+        },
+        {
+            "text": "本单为您节省:{saveMoney}元",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": true,
+            "x": "0",
+            "y": ""
+        },
+        {
+            "text": "- - - - - - - - - - - - - - - - --",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": true,
+            "x": "0",
+            "y": ""
+        },
+        {
+            "text": "会员号:{memberNo}",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": false,
+            "x": "0",
+            "y": ""
+        },
+        {
+            "text": "姓名:{memberName}",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": true,
+            "x": "85",
+            "y": ""
+        },
+        {
+            "text":"余额:{memberBalance}",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": true,
+            "x": "0",
+            "y": ""
+        },
+        {
+            "text":"本单积分:{integral}",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": true,
+            "x": "0",
+            "y": ""
+        },
+        {
+            "text":"总积分:{countIntegral}",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": true,
+            "x": "0",
+            "y": ""
+        },
+        {
+            "text": "- - - - - - - - - - - - - - - - --",
+            "size": 8,
+            "font": "宋体",
+            "bold": false,
+            "line": true,
+            "x": "0",
+            "y": ""
+        },
+        {
+            "text":"{address}",
+            "size": 9,
+            "font": "",
+            "bold": true,
+            "line": true,
+            "x": "0",
+            "y": ""
+        },
+        {
+            "text": "感谢您的光临！",
+            "size": 10,
+            "font": "宋体",
+            "bold": true,
+            "line": true,
+            "x": "35",
+            "y": ""
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+package com.zomore.controller.example_quickIn;
+
+import com.zomore.controller.constant.ComConstant_QuickIn;
+import com.zomore.utils.SignUtil_QuickIn;
+
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * 门店信息下载
+ * Created by LVHUIHUI on 2018-8-6
+ *
+ */
+public class SIMerchantList {
+	
+	public static Map getReqparas(){
+    	Map<String, String> paras = new HashMap<String, String>();
+    	paras.put("appId", ComConstant_QuickIn.APPID);//合作方标识
+    	paras.put("random", "liantuo123");//随机数
+    	paras.put("sign", SignUtil_QuickIn.createSign(paras,ComConstant_QuickIn.PARTER_KEY ,ComConstant_QuickIn.INPUT_CHARSET));
+	    return paras;
+   }
+	
+	public static void main(String[] args)  { 
+		System.out.println("门店信息下载===服务器端返回res====="+Main_QuickIn.requestAsPost(SIMerchantList.getReqparas(),ComConstant_QuickIn.SERVICEURL_NEWSI_MERCHANT_LIST));
+	}
+}
